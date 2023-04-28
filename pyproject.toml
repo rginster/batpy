@@ -1,16 +1,33 @@
 [tool.poetry]
 name = "batpy"
 version = "0.0.1"
-description = "A python package to read, write and calculate batteries in the BatPaC tool."
-authors = ["Raphael Ginster"]
+description = "A python package to read, write, and calculate batteries in the BatPaC tool."
+authors = ["Raphael Ginster <r.ginster@tu-braunschweig.de>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+xlwings = "^0.30.4"
+pathlib = "^1.0.1"
+toml = "^0.10.2"
+prettytable = "^3.7.0"
+tqdm = "^4.65.0"
+semantic-version = "^2.10.0"
 
 [tool.poetry.dev-dependencies]
+black = "^23.3.0"
+flake8 = "^6.0.0"
+pytest = "^7.3.1"
+pytest-cov = "^4.0.0"
+python-semantic-release = "^7.33.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report term-missing"
+
+[tool.semantic_release]
+version_variable = "pyproject.toml:version"
