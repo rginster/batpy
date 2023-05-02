@@ -5,6 +5,8 @@ description = "A python package to read, write, and calculate batteries in the B
 authors = ["Raphael Ginster <r.ginster@tu-braunschweig.de>"]
 license = "MIT"
 readme = "README.md"
+documentation = "https://rginster.github.io/batpy/"
+repository = "https://github.com/rginster/batpy"
 
 [tool.poetry.dependencies]
 python = "^3.9"
