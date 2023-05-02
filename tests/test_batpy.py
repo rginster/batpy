@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from batpy.batpy import BatPaC_battery, BatPaC_tool, is_version_compatible
+from batpy import BatPaC_battery, BatPaC_tool, is_version_compatible
 import xlwings as xw
 import toml
 import pytest
