@@ -6,7 +6,7 @@ from pathlib import Path
 from tqdm import tqdm
 import logging
 import semantic_version
-from typing import Type
+# from typing import Type
 import warnings
 
 logger = logging.getLogger(__name__)
