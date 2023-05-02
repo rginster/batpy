@@ -4,9 +4,14 @@
 
 ## Installation
 
+`batpy` is available from [PyPI](https://pypi.org/project/batpy/), and currently requires Python 3.9 or newer. It can be installed with:
 ```bash
 $ pip install batpy
 ```
+
+## Documentation
+
+Documentation for `batpy` is available at [GitHub Pages](https://rginster.github.io/batpy/), including an example and documentation on all the modules and functions.
 
 ## Usage
 
