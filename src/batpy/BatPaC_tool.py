@@ -6,8 +6,8 @@ from pathlib import Path
 from tqdm import tqdm
 import logging
 import semantic_version
-from batpy import BatPaC_battery, is_version_compatible
-from typing import Type
+from batpy.BatPaC_battery import BatPaC_battery
+from batpy.is_version_compatible import is_version_compatible
 import warnings
 
 logger = logging.getLogger(__name__)
@@ -141,14 +141,14 @@ class BatPaC_tool:
         logging.info(f"[+] Loaded BatPaC file from {path_to_batpac_file}")
         logging.debug(f"[ ] BatPaC properties {self.properties}")
 
-    def add_battery(self, batteries: list[Type(BatPaC_battery)]) -> None:
+    def add_battery(self, batteries: list[BatPaC_battery]) -> None:
         """Add battery object to BatPaC object
 
         Add multiple battery objects to the BatPaC object.
 
         Parameters
         ----------
-        batteries : list[Type(BatPaC_battery)]
+        batteries : list[BatPaC_battery]
             List of BatPaC_battery objects to include in the BatPaC object.
         """
         for battery in batteries:
@@ -182,7 +182,7 @@ class BatPaC_tool:
             self.properties.update({sheet: {name: value}})
 
     def load_batteries_file(
-        self, path_to_batteries_file: Path, batteries: list[Type(BatPaC_battery)]
+        self, path_to_batteries_file: Path, batteries: list[BatPaC_battery]
     ) -> None:
         """Load batteries configuration
 
@@ -193,7 +193,7 @@ class BatPaC_tool:
         ----------
         path_to_batteries_file : Path
             Path to the TOML batteries configuration file.
-        batteries : list[Type(BatPaC_battery)]
+        batteries : list[BatPaC_battery]
             List of BatPaC_battery objects to load battery properties from file and add to BatPaC object.
         """
         logging.info(f"[ ] Load batteries from file {path_to_batteries_file}")
