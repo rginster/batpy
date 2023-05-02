@@ -6,7 +6,8 @@ from pathlib import Path
 from tqdm import tqdm
 import logging
 import semantic_version
-# from typing import Type
+from batpy import BatPaC_battery, is_version_compatible
+from typing import Type
 import warnings
 
 logger = logging.getLogger(__name__)
@@ -16,195 +17,6 @@ logging.basicConfig(
     filemode="w",
     level=logging.INFO,
 )
-
-
-def is_version_compatible(
-    self_version: semantic_version.Version,
-    version_to_check: semantic_version.Version,
-    include_minor: bool = False,
-) -> bool:
-    """Check for version compatibility
-
-    Check if two versions (major.minor.patch) are compatible. Thereby a version is compatible if major is equal.
-    If minor should also be included a version is compatible if major is equal and minor is greater or equal.
-
-    Parameters
-    ----------
-    self_version : semantic_version.Version
-        Version
-    version_to_check : semantic_version.Version
-        Version to be checked against self_version.
-    include_minor : bool, optional
-        Check if minor version of version_to_check is greater or equal to self_version's minor, by default False.
-
-    Returns
-    -------
-    bool
-        True, if version is compatible.
-
-    Raises
-    ------
-    ValueError
-        If version is not compatible a ValueError will occur.
-    """
-    if include_minor:
-        min_minor = self_version.minor
-    else:
-        min_minor = 0
-
-    min_version = semantic_version.Version(
-        major=self_version.major, minor=min_minor, patch=0
-    )
-
-    if min_version <= version_to_check < min_version.next_major():
-        logging.info(
-            f"[+] Version {version_to_check} is compatible: {min_version} <= {version_to_check} < {min_version.next_major()}"
-        )
-        return True
-    else:
-        logging.warning(
-            f"[!] Version {version_to_check} should be {min_version} <= {version_to_check} < {min_version.next_major()}"
-        )
-        raise ValueError(
-            f"[!] Version {version_to_check} should be {min_version} <= {version_to_check} < {min_version.next_major()}"
-        )
-
-
-class BatPaC_battery:
-    """Battery class for interaction with BatPaC
-
-    This battery class is used to interact with BatPaC and stores battery parameters in the dictionary properties.
-    """
-
-    def __init__(self, name: str = "Battery") -> None:
-        """Initialize battery
-
-        Initialize the battery object.
-
-        Parameters
-        ----------
-        name : str, optional
-            Name of the battery, by default "Battery"
-
-        Examples
-        --------
-        >>> battery1 = BatPaC_battery("NCM811 - G")
-        >>> print(battery1.name)
-        "NCM811 - G"
-
-        >>> battery2 = BatPaC_battery()
-        >>> print(battery2.name)
-        "Battery"
-        """
-        self.name = name
-        logging.info(f"[ ] Create battery {self.name}")
-        self.properties = {}
-        logging.info(f"[+] Battery {self.name} created")
-        logging.debug(f"[ ] Properties of battery {self.name}: {self.properties}")
-
-    def load_battery_file(
-        self, path_to_battery_file: Path, battery_name: str = "Battery"
-    ) -> bool:
-        """Load a battery configuration file
-
-        Load the properties for a battery from a TOML battery configuration file.
-
-        Parameters
-        ----------
-        path_to_battery_file : Path
-            Path to the TOML battery configuration file.
-        battery_name : str, optional
-            Name of the table in the TOML file from which to load the battery properties.
-            Thereby, the battery_name, by default "Battery", does not have to be equal to self.name.
-
-        Returns
-        -------
-        bool
-            True, if battery_name exists in the TOML file and the properties were loaded.
-            False, if battery_name does not exist in the TOML file and the properties could not be loaded.
-
-        Examples
-        --------
-        battery_config.toml contains a table with the name ["NCM"].
-        All key - value pairs are to be loaded for the battery "NCM811 - G".
-
-        >>> battery1 = BatPaC_battery("NCM811 - G")
-        >>> battery1.load_battery_file("./battery_config.toml", "NCM")
-        """
-        logging.info(
-            f"[ ] Load battery config for {battery_name} from {path_to_battery_file}"
-        )
-        config = toml.load(path_to_battery_file)
-        loaded = False
-        if battery_name in config:
-            config = config[battery_name]
-            for sheet in config:
-                for key in config[sheet]:
-                    self.set_new_property(sheet, key, config[sheet][key])
-            logging.info(
-                f"[+] Battery config for {battery_name} from {path_to_battery_file} loaded"
-            )
-            loaded = True
-        else:
-            logging.warning(
-                f"[!] No battery config for {battery_name} in {path_to_battery_file} found"
-            )
-        logging.debug(f"[ ] Battery properties for {self.name}: {self.properties}")
-        return loaded
-
-    def set_property(self, sheet: str, name: str, value: any) -> None:
-        """Set an existing property of the battery
-
-        Set an existing property of the battery in the format {"sheet" : {"name" : value} }.
-
-        Parameters
-        ----------
-        sheet : str
-            Name of the BatPaC Excel sheet.
-        name : str
-            Name of the BatPaC Excel cell description.
-        value : any
-            Value of the BatPaC Excel cell.
-        """
-        self.properties[sheet][name] = value
-
-    def get_property(self, sheet: str, name: str) -> any:
-        """Get property of the battery
-
-        Get an existing property of the battery.
-
-        Parameters
-        ----------
-        sheet : str
-            Name of the BatPaC Excel sheet.
-        name : str
-            Name of the BatPaC Excel cell description.
-
-        Returns
-        -------
-        any
-            Value of the stored property.
-        """
-        return self.properties[sheet][name]
-
-    def set_new_property(self, sheet: str, name: str, value: any) -> None:
-        """Set a new property of the battery
-
-        Set an existing property of the battery or create a new one in the format {"sheet" : {"name" : value} }.
-
-        Parameters
-        ----------
-        sheet : str
-            Name of the BatPaC Excel sheet.
-        name : str
-            Name of the BatPaC Excel cell description.
-        value : any
-            Value of the BatPaC Excel cell.
-        """
-        try:
-            self.properties[sheet][name] = value
-        except:
-            self.properties.update({sheet: {name: value}})
 
 
 class BatPaC_tool:
@@ -329,14 +141,14 @@ class BatPaC_tool:
         logging.info(f"[+] Loaded BatPaC file from {path_to_batpac_file}")
         logging.debug(f"[ ] BatPaC properties {self.properties}")
 
-    def add_battery(self, batteries: list[BatPaC_battery]) -> None:
+    def add_battery(self, batteries: list[Type(BatPaC_battery)]) -> None:
         """Add battery object to BatPaC object
 
         Add multiple battery objects to the BatPaC object.
 
         Parameters
         ----------
-        batteries : list[BatPaC_battery]
+        batteries : list[Type(BatPaC_battery)]
             List of BatPaC_battery objects to include in the BatPaC object.
         """
         for battery in batteries:
@@ -370,7 +182,7 @@ class BatPaC_tool:
             self.properties.update({sheet: {name: value}})
 
     def load_batteries_file(
-        self, path_to_batteries_file: Path, batteries: list[BatPaC_battery]
+        self, path_to_batteries_file: Path, batteries: list[Type(BatPaC_battery)]
     ) -> None:
         """Load batteries configuration
 
@@ -381,7 +193,7 @@ class BatPaC_tool:
         ----------
         path_to_batteries_file : Path
             Path to the TOML batteries configuration file.
-        batteries : list[BatPaC_battery]
+        batteries : list[Type(BatPaC_battery)]
             List of BatPaC_battery objects to load battery properties from file and add to BatPaC object.
         """
         logging.info(f"[ ] Load batteries from file {path_to_batteries_file}")
