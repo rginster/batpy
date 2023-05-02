@@ -1,0 +1,486 @@
+["Dashboard"]
+'Electrode Couple' = 'NMC811-G (Energy)'
+'Positive active material specific capacity, mAh/g' = 200.0
+'Void volume fraction, % of positive electrode' = 20.0
+'Positive foil thickness, mm' = 10.0
+'Maximum positive electrode thickness, µm' = 110.0
+# 'Restart (0/1)' = 1.0
+# 'Negative active material specific capacity, mAh/g' = None
+# 'N/P capacity ratio after formation' = None
+# 'Void volume fraction, % of negative electrode' = None
+# 'Negative current collector thickness, µm' = None
+# 'Separator thickness, µm' = None
+'Vehicle Type' = 'EV'
+'Calculate Charging Requirements?' = 'Yes'
+# 'OEM Upper Cuttoff SOC' = None
+# 'OEM Lower Cutoff SOC' = None
+'Use default power requirements for vehicle' = 'Yes'
+# 'Al foil, $/m²' = None
+# 'Cu foil, $/m²' = None
+# 'Separator, $/m²' = None
+# 'Electrolyte, $/L' = None
+'Method to calculate plant utilization' = 'Method 1: Ignore utilization'
+'Cell yield, % of built cells that pass inspection' = 95.0
+'Method for manufacturing pack' = 'All manufacturing in-house (Default)'
+'Option for pack cost' = 'Cost to consumer - includes pack profit/warranty (Default)'
+'Unit' = 'Absolute'
+'X =' = 'Battery system rated power, kW'
+'Y1 =' = 'Positive electrode thickness, µm'
+'Y2 =' = 'Cell cost, $/kWh'
+# 'Positive Electrode, $/kg, Active material, $/kg' = None
+# 'Positive Electrode, $/kg, Carbon additive, $/kg' = None
+# 'Positive Electrode, $/kg, Binder, $/kg' = None
+# 'Positive Electrode, $/kg, Solvent (NMP), $/kg' = None
+# 'Negative electrode, $/kg, Active material, $/kg' = None
+# 'Negative electrode, $/kg, Carbon additive, $/kg' = None
+# 'Negative electrode, $/kg, Binder, $/kg' = None
+# 'Negative electrode, $/kg, Solvent (Water), $/kg' = None
+
+["Chem"]
+# 'Couple Name' = None
+'Positive Electrode Active Material' = 'NMC911'
+# 'Positive electrode active material capacity, mAh/g:' = None
+# 'Positive electrode active material weight %' = None
+# 'Positive electrode carbon addtive weight %' = None
+# 'Positive electrode binder weight %' = None
+# 'Binder solvent for positive electrode' = None
+# 'Positive electrode active material density, g/cm³' = None
+# 'Positive electrode carbon additive density, g/cm³' = None
+# 'Positive electrode binder density, g/cm³' = None
+# 'Positive electrode porosity, volume % of void space' = None
+# 'Positive electrode specific particle area "a", cm²/cm³' = None
+# 'Positive electrode active material exchange current, i0, mA/cm2' = None
+# 'Maximum thickness limit for positive electrode, mm' = None
+# 'Minimum thickness limit for positive electrode, mm' = None
+# 'Positive foil material' = None
+# 'Positive foil thickness, µm' = None
+# 'Add 5% silicon to negative electrode?' = None
+# 'Negative Electrode Active Material' = None
+# 'Negative-to-positive capacity ratio after formation' = None
+# 'Negative electrode active material capacity, mAh/g:' = None
+# 'Negative electrode active weight %' = None
+# 'Negative electrode carbon addtive weight %' = None
+# 'Negative electrode binder weight %' = None
+# 'Binder solvent for negative electrode' = None
+# 'Negative electrode active material density, g/cm³' = None
+# 'Negative electrode carbon additive density, g/cm³' = None
+# 'Negative electrode binder density, g/cm³' = None
+# 'Negative electrode porosity, volume % of void space' = None
+# 'Negative electrode specific area "a", cm²/cm³' = None
+# 'Negative electrode active material exchange current, i0, mA/cm2' = None
+# 'Negative foil material' = None
+# 'Negative foil thickness, µm' = None
+# 'Separator thickness, µm' = None
+# 'Separator porosity, volume % of void space' = None
+# 'Separator density, g/cm³' = None
+# 'Electrolyte density, g/cm³' = None
+# 'Electrolyte (1.2M LiPF6), g Li/L electrolyte' = None
+# 'Limiting current for ionic diffuison' = None
+# 'Additive for the positive electrode, Additive name' = None
+# 'Additive for the positive electrode, Additive weight percentage, % of total positive electrode material mass' = None
+# 'Additive for the positive electrode, Lithium mass fraction in additive, %' = None
+# 'Additive for the positive electrode, Price of additive, $/kg' = None
+# 'Additive for the negative electrode, Additive name' = None
+# 'Additive for the negative electrode, Additive weight percentage, % of total negative electrode material mass' = None
+# 'Additive for the negative electrode, Lithium mass fraction in additive, %' = None
+# 'Additive for the negative electrode, Price of additive, $/kg' = None
+# 'Additive for the Electrolyte, Additive name' = None
+# 'Additive for the Electrolyte, Additive weight percentage, % of total electrolyte mass' = None
+# 'Additive for the Electrolyte, Lithium mass fraction in additive, %' = None
+# 'Additive for the Electrolyte, Price of additive, $/kg' = None
+# 'Maximum charging current density, mA/cm²' = None
+# 'Open circuit voltage at 0% SOC, V' = None
+# 'Open circuit voltage at 10% SOC, V' = None
+# 'Open circuit voltage at 20% SOC, V' = None
+# 'Open circuit voltage at 30% SOC, V' = None
+# 'Open circuit voltage at 40% SOC, V' = None
+# 'Open circuit voltage at 50% SOC, V' = None
+# 'Open circuit voltage at 60% SOC, V' = None
+# 'Open circuit voltage at 70% SOC, V' = None
+# 'Open circuit voltage at 80% SOC, V' = None
+# 'Open circuit voltage at 90% SOC, V' = None
+# 'Open circuit voltage at 100% SOC, V' = None
+# 'Area specific impedance at 2-sec burst, 0% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 10% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 20% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 30% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 40% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 50% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 60% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 70% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 80% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 90% SOC, ohm-cm²' = None
+# 'Area specific impedance at 2-sec burst, 100% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 0% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 10% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 20% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 30% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 40% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 50% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 60% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 70% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 80% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 90% SOC, ohm-cm²' = None
+# 'Area specific impedance at 10-sec burst, 100% SOC, ohm-cm²' = None
+# 'Positive electrode capacity at default ASI, mAh/cm2' = None
+# 'Positive electrode thickness at default ASI, µm' = None
+# 'Negative electrode thickness at default ASI, µm' = None
+# 'Pulse C-rate at default ASI, A/Ah' = None
+# 'ASI associated with positive interfacial effects, ohm-cm²' = None
+# 'ASI associated with negative interfacial effects, ohm-cm²' = None
+# 'Solid state diffusion limiting C-rate (10-s), A/Ah' = None
+# 'Effective activation energy for ASI calculations (kJ/mole)' = None
+# 'Cost of active material for positive electrode, $/kg' = None
+# 'Cost of carbon additive for positive electrode, $/kg' = None
+# 'Cost of binder for positive electrode $/kg' = None
+# 'Cost of solvent of positive electrode $/kg' = None
+# 'Cost of active material for negative electrode, $/kg' = None
+# 'Cost of carbon additive for negative electrode, $/kg' = None
+# 'Cost of binder for negative electrode $/kg' = None
+# 'Cost of solvent of negative electrode $/kg' = None
+# 'Positive current collector foil, $/m²' = None
+# 'Negative current collector foil, $/m²' = None
+# 'Separators, $/m²' = None
+# 'Electrolyte, $/L' = None
+
+["BMS"]
+'p-factor for most electronic components' = 0.9
+
+["Cost Input"]
+'Effective Yield Across All Steps, Binder (NMP) solvent recovery, %' = 99.5
+'Mixing, Positive electrode material, dry (default = 99, 95, 99, 99, -), %' = 99.0
+'Mixing, Negative electrode material, dry (defulat = 99, 95, 99, 99, -), %' = 99.0
+'Coating, Positive electrode material, dry (default = 99, 95, 99, 99, -), %' = 95.0
+'Coating, Negative electrode material, dry (defulat = 99, 95, 99, 99, -), %' = 95.0
+'Coating, Positive current collector foil (default = -, 95, 92, 99, -), %' = 95.0
+'Coating, Negative current collector foil (default = -, 95, 92, 99, -), %' = 95.0
+'Electrode Slitting, Positive electrode material, dry (default = 99, 95, 99, 99, -), %' = 99.0
+'Electrode Slitting, Negative electrode material, dry (defulat = 99, 95, 99, 99, -), %' = 99.0
+'Electrode Slitting, Positive current collector foil (default = -, 95, 92, 99, -), %' = 92.0
+'Electrode Slitting, Negative current collector foil (default = -, 95, 92, 99, -), %' = 92.0
+'Cell Stacking, Positive electrode material, dry (default = 99, 95, 99, 99, -), %' = 99.0
+'Cell Stacking, Negative electrode material, dry (defulat = 99, 95, 99, 99, -), %' = 99.0
+'Cell Stacking, Positive current collector foil (default = -, 95, 92, 99, -), %' = 99.0
+'Cell Stacking, Negative current collector foil (default = -, 95, 92, 99, -), %' = 99.0
+'Cell Stacking, Separators (default = -, -, -, 98, -), %' = 98.0
+'Electrolyte Filling, Electrolyte (default = -, -, -, -, 99), %' = 99.0
+'Positive Electrode, $/kg, Active material, $/kg' = 1.0
+'Positive Electrode, $/kg, Conductive additive, $/kg' = 1.0
+'Positive Electrode, $/kg, Binder, $/kg' = 1.0
+'Positive Electrode, $/kg, Binder solvent, $/kg' = 1.0
+'Negative electrode material, $/kg, Active material, $/kg' = 1.0
+'Negative electrode material, $/kg, Conductive additive, $/kg' = 1.0
+'Negative electrode material, $/kg, Binder, $/kg' = 1.0
+'Negative electrode material, $/kg, Binder solvent, $/kg' = 1.0
+'Additional Components, Positive current collector foil, $/m²' = 1.0
+'Additional Components, Negative current collector foil, $/m²' = 1.0
+'Additional Components, Separators, $/m²' = 1.0
+'Additional Components, Electrolyte, $/L' = 1.0
+'Cost per Mass, $/kg, Positive terminal, (default = 2.41, 0.08)' = 2.4050000000000002
+'Cost per Mass, $/kg, Negative terminal, (default = 8.64, 0.08)' = 8.64
+'Cost per Mass, $/kg, Cell Container (default = 3, 0.2)' = 3.0
+'Cost per Mass, $/kg, Heat conductor, (default = 2.41, 0.15)' = 2.4050000000000002
+'Plus Cost per Cell*, $, Positive terminal, (default = 2.41, 0.08)' = 0.08
+'Plus Cost per Cell*, $, Negative terminal, (default = 8.64, 0.08)' = 0.08
+'Plus Cost per Cell*, $, Cell Container (default = 3, 0.2)' = 0.2
+'Plus Cost per Cell*, $, Heat conductor, (default = 2.41, 0.15)' = 0.15
+'Plus Cost per Cell*, $, *Scale exponent for "plus cost," p (default = 0.85)' = 0.85
+'Cost per Parallel Unit, $, Module management system, MMS (default = 2, 0.03)' = 2.0
+'Cost per Module Capacity, $/Ah, Module management system, MMS (default = 2, 0.03)' = 0.03
+'Cost per Mass, $/kg, Cell interconnect (default = 8.72, 0.04)' = 8.72
+'Cost per Mass, $/kg, Interconnect panel (default = 2.3, 0.2)' = 2.3
+'Cost per Mass, $/kg, Module terminal (default = 8.64, 0.35)' = 8.64
+'Cost per Mass, $/kg, Module enclosure materials (default = 2.4, 0.5)' = 2.4
+'Cost per Mass, $/kg, Provision for gas release (default = 0, 0.5), $/module' = 0.0
+'Plus Cost per Item*, $, Cell interconnect (default = 8.72, 0.04)' = 0.04
+'Plus Cost per Item*, $, Interconnect panel (default = 2.3, 0.2)' = 0.2
+'Plus Cost per Item*, $, Module terminal (default = 8.64, 0.35)' = 0.18
+'Plus Cost per Item*, $, Module enclosure materials (default = 2.4, 0.5)' = 0.5
+'Plus Cost per Item*, $, Provision for gas release (default = 0, 0.5), $/module' = 0.5
+'Cost per Mass, $/kg, Row rack (default = 1.33, 1)' = 1.325
+'Cost per Mass, $/kg, Pads between modules (default = 1, 0.2)' = 1.0
+'Cost per Mass, $/kg, Module Interconnects and signal wiring (default = 8.52, 0.4)' = 8.84
+'Cost per Mass, $/kg, Bus bars (default = 8.36, 0.6)' = 8.68
+'Cost per Mass, $/kg, Cooling panels (default = 2.8, 0.5)' = 2.8000000000000003
+'Cost per Mass, $/kg, Coolant manifolds (default = 8, 1)' = 8.0
+'Cost per Mass, $/kg, Pack terminals and seals (default = 8.56, 0.75)' = 8.88
+'Cost per Mass, $/kg, Pack jacket steel (default = 1.4, 3)' = 1.4000000000000001
+'Cost per Mass, $/kg, Pack jacket aluminum (default = 2.81, 3)' = 2.805
+'Plus Cost per Item*, $, Row rack (default = 1.33, 1)' = 1.0
+'Plus Cost per Item*, $, Pads between modules (default = 1, 0.2)' = 0.2
+'Plus Cost per Item*, $, Module Interconnects and signal wiring (default = 8.52, 0.4)' = 0.4
+'Plus Cost per Item*, $, Bus bars (default = 8.36, 0.6)' = 0.6
+'Plus Cost per Item*, $, Cooling panels (default = 2.8, 0.5)' = 0.5
+'Plus Cost per Item*, $, Coolant manifolds (default = 8, 1)' = 1.0
+'Plus Cost per Item*, $, Pack terminals and seals (default = 8.56, 0.75)' = 0.75
+'Plus Cost per Item*, $, Pack jacket steel (default = 1.4, 3)' = 3.0
+'Plus Cost per Item*, $, Pack jacket aluminum (default = 2.81, 3)' = 3.0
+'Pack jacket insulation (default = 3), $/m²' = 3.0
+'*Scale exponent for "plus cost" (p) (default = 0.85)' = 0.85
+'Effective full days of operation per year (default = 320)' = 320.0
+'Cost of land and building (default = 3000), $/m²' = 3000.0
+'Launch cost rates, Percent of direct annual materials and purch. items cost (default = 5), %' = 5.0
+'Launch cost rates, Percent of direct labor plus variable overhead (default = 10), %' = 10.0
+'Working capital, percent of annual variable cost (default = 15), %' = 15.0
+'Direct labor rate (default = 25), $/hr' = 25.0
+'Variable overhead rate, % of direct labor (default = 40)' = 40.0
+'Variable overhead rate, % of depreciation (default = 20)' = 20.0
+'General, Sales, Administration rates, Percent of direct labor plus variable overhead (default = 25), %' = 25.0
+'General, Sales, Administration rates, Percent of depreciation (default = 25), %' = 25.0
+'Research and development rate (default = 40), % of depreciation' = 40.0
+'Depreciation rates, Lifetime of capital equipment for straight line depreciation (default = 10), years' = 10.0
+'Depreciation rates, Percent of building investment (default = 5), %' = 5.0
+'Cell profits (default = 5), % of investment' = 5.0
+'Cell warranty cost (default = 5.6), % of cell cost added to price' = 5.6
+'Module profits (default = 5), % of investment' = 5.0
+'Module warranty cost (default = 5.6), % of module cost added to price' = 5.6
+'Pack profits (default = 5), % of investment' = 5.0
+'Pack warranty costs (default = 5.6), % of pack cost added to price' = 5.6
+'Baseline Plant, Materials preparation and delivery to coating, Positive materials, Direct labor, hours/year' = 200000.0
+'Baseline Plant, Materials preparation and delivery to coating, Positive materials, Capital equipment, million$' = 200.0
+'Baseline Plant, Materials preparation and delivery to coating, Positive materials, Plant area, m²' = 8000.0
+'Baseline Plant, Materials preparation and delivery to coating, Negative materials, Direct labor, hours/year' = 270000.0
+'Baseline Plant, Materials preparation and delivery to coating, Negative materials, Capital equipment, million$' = 280.0
+'Baseline Plant, Materials preparation and delivery to coating, Negative materials, Plant area, m²' = 8800.0
+'Baseline Plant, Electrode coating, Positive materials, Solvent evaporated, kg/m²yr' = 0.11950458192929046
+'Baseline Plant, Electrode coating, Positive materials, Direct labor, hours/year' = 59000.0
+'Baseline Plant, Electrode coating, Positive materials, Capital equipment, million$' = 90.0
+'Baseline Plant, Electrode coating, Positive materials, Plant area, m²' = 16000.0
+'Baseline Plant, Electrode coating, Negative materials, Solvent evaporated, kg/m²yr' = 0.0793075777152315
+'Baseline Plant, Electrode coating, Negative materials, Direct labor, hours/year' = 59000.0
+'Baseline Plant, Electrode coating, Negative materials, Capital equipment, million$' = 78.0
+'Baseline Plant, Electrode coating, Negative materials, Plant area, m²' = 16000.0
+'Baseline Plant, Calendering, Positive materials, Direct labor, hours/year' = 61000.0
+'Baseline Plant, Calendering, Positive materials, Capital equipment, million$' = 25.0
+'Baseline Plant, Calendering, Positive materials, Plant area, m²' = 2100.0
+'Baseline Plant, Calendering, Negative materials, Direct labor, hours/year' = 69000.0
+'Baseline Plant, Calendering, Negative materials, Capital equipment, million$' = 25.0
+'Baseline Plant, Calendering, Negative materials, Plant area, m²' = 2100.0
+'Baseline Plant, Notching, Positive materials, Direct labor, hours/year' = 250000.0
+'Baseline Plant, Notching, Positive materials, Capital equipment, million$' = 29.0
+'Baseline Plant, Notching, Positive materials, Plant area, m²' = 3200.0
+'Baseline Plant, Notching, Negative materials, Direct labor, hours/year' = 250000.0
+'Baseline Plant, Notching, Negative materials, Capital equipment, million$' = 29.0
+'Baseline Plant, Notching, Negative materials, Plant area, m²' = 3200.0
+'Baseline Plant, Vacuum Drying of Electrodes, Positive materials, Direct labor, hours/year' = 41000.0
+'Baseline Plant, Vacuum Drying of Electrodes, Positive materials, Capital equipment, million$' = 14.0
+'Baseline Plant, Vacuum Drying of Electrodes, Positive materials, Plant area, m²' = 2000.0
+'Baseline Plant, Vacuum Drying of Electrodes, Negative materials, Direct labor, hours/year' = 35000.0
+'Baseline Plant, Vacuum Drying of Electrodes, Negative materials, Capital equipment, million$' = 11.0
+'Baseline Plant, Vacuum Drying of Electrodes, Negative materials, Plant area, m²' = 1600.0
+'Baseline Plant, Electrode Slitting (positive and negative), Direct labor, hours/year' = 260000.0
+'Baseline Plant, Electrode Slitting (positive and negative), Capital equipment, million$' = 30.0
+'Baseline Plant, Electrode Slitting (positive and negative), Plant area, m²' = 0.0
+'Baseline Plant, Cell stacking, Baseline Cell Capacity, Ah' = 68.0
+'Baseline Plant, Cell stacking, Direct labor, hours/year' = 700000.0
+'Baseline Plant, Cell stacking, Capital equipment, million$' = 170.0
+'Baseline Plant, Cell stacking, Plant area, m²' = 0.0
+'Baseline Plant, Current collector welding, Direct labor, hours/year' = 190000.0
+'Baseline Plant, Current collector welding, Capital equipment, million$' = 190.0
+'Baseline Plant, Current collector welding, Plant area, m²' = 0.0
+'Baseline Plant, X-ray inspection, Direct labor, hours/year' = 190000.0
+'Baseline Plant, X-ray inspection, Capital equipment, million$' = 14.0
+'Baseline Plant, X-ray inspection, Plant area, m²' = 0.0
+'Baseline Plant, Inserting cell in container, Direct labor, hours/year' = 49000.0
+'Baseline Plant, Inserting cell in container, Capital equipment, million$' = 11.0
+'Baseline Plant, Inserting cell in container, Plant area, m²' = 0.0
+'Baseline Plant, Electrolyte filling and cell sealing, Direct labor, hours/year' = 132000.0
+'Baseline Plant, Electrolyte filling and cell sealing, Capital equipment, million$' = 25.0
+'Baseline Plant, Electrolyte filling and cell sealing, Plant area, m²' = 0.0
+'Baseline Plant, Dry room (area included for all cell assembly steps), Direct labor, hours/year' = 8000.0
+'Baseline Plant, Dry room (area included for all cell assembly steps), Capital equipment, million$' = 7.3
+'Baseline Plant, Dry room (area included for all cell assembly steps), Plant area, m²' = 61000.0
+'Baseline Plant, Total formation process, Baseline Cell Capacity, Ah' = 68.0
+'Baseline Plant, Total formation process, Direct labor, hours/year' = 560000.0
+'Baseline Plant, Total formation process, Capital equipment, million$' = 830.0
+'Baseline Plant, Total formation process, Plant area, m²' = 110000.0
+'Baseline Plant, Module assembly, Direct labor, hours/year' = 170000.0
+'Baseline Plant, Module assembly, Capital equipment, million$' = 94.0
+'Baseline Plant, Module assembly, Plant area, m²' = 27000.0
+'Baseline Plant, Battery Pack Assembly and Testing, Number of modules per pack' = 20.0
+'Baseline Plant, Battery Pack Assembly and Testing, Direct labor, hours/year' = 150000.0
+'Baseline Plant, Battery Pack Assembly and Testing, Capital equipment, million$' = 94.0
+'Baseline Plant, Battery Pack Assembly and Testing, Plant area, m²' = 27000.0
+'Baseline Plant, Warehouse, Direct labor, hours/year' = 31000.0
+'Baseline Plant, Warehouse, Capital equipment, million$' = 200.0
+'Baseline Plant, Warehouse, Plant area, m²' = 10000.0
+'Baseline Plant, Building, Direct labor, hours/year' = 0.0
+'Baseline Plant, Building, Capital equipment, million$' = 1700.0
+'Baseline Plant, Building, Plant area, m²' = 0.0
+'Baseline Plant, Solvent recovery, Direct labor, hours/year' = 17000.0
+'Baseline Plant, Solvent recovery, Capital equipment, million$' = 36.0
+'Baseline Plant, Solvent recovery, Plant area, m²' = 1100.0
+'Baseline Plant, Rejected Cell and Scrap Recycle, Direct labor, hours/year' = 38000.0
+'Baseline Plant, Rejected Cell and Scrap Recycle, Capital equipment, million$' = 9.3
+'Baseline Plant, Rejected Cell and Scrap Recycle, Plant area, m²' = 3300.0
+'Baseline Plant, Control laboratory, Direct labor, hours/year' = 46000.0
+'Baseline Plant, Control laboratory, Capital equipment, million$' = 16.0
+'Baseline Plant, Control laboratory, Plant area, m²' = 1300.0
+'p, Materials preparation and delivery to coating, Positive materials, Direct labor, hours/year' = 0.9
+'p, Materials preparation and delivery to coating, Positive materials, Capital equipment, million$' = 0.9
+'p, Materials preparation and delivery to coating, Positive materials, Plant area, m²' = 0.95
+'p, Materials preparation and delivery to coating, Negative materials, Direct labor, hours/year' = 0.9
+'p, Materials preparation and delivery to coating, Negative materials, Capital equipment, million$' = 0.9
+'p, Materials preparation and delivery to coating, Negative materials, Plant area, m²' = 0.95
+'p, Electrode coating, Positive materials, Solvent evaporated, kg/m²yr' = 0.2
+'p, Electrode coating, Positive materials, Direct labor, hours/year' = 0.7
+'p, Electrode coating, Positive materials, Capital equipment, million$' = 0.9
+'p, Electrode coating, Positive materials, Plant area, m²' = 0.95
+'p, Electrode coating, Negative materials, Solvent evaporated, kg/m²yr' = 0.2
+'p, Electrode coating, Negative materials, Direct labor, hours/year' = 0.7
+'p, Electrode coating, Negative materials, Capital equipment, million$' = 0.9
+'p, Electrode coating, Negative materials, Plant area, m²' = 0.95
+'p, Calendering, Positive materials, Direct labor, hours/year' = 0.7
+'p, Calendering, Positive materials, Capital equipment, million$' = 0.9
+'p, Calendering, Positive materials, Plant area, m²' = 0.95
+'p, Calendering, Negative materials, Direct labor, hours/year' = 0.7
+'p, Calendering, Negative materials, Capital equipment, million$' = 0.9
+'p, Calendering, Negative materials, Plant area, m²' = 0.95
+'p, Notching, Positive materials, Direct labor, hours/year' = 0.7
+'p, Notching, Positive materials, Capital equipment, million$' = 0.9
+'p, Notching, Positive materials, Plant area, m²' = 0.95
+'p, Notching, Negative materials, Direct labor, hours/year' = 0.7
+'p, Notching, Negative materials, Capital equipment, million$' = 0.9
+'p, Notching, Negative materials, Plant area, m²' = 0.95
+'p, Vacuum Drying of Electrodes, Positive materials, Direct labor, hours/year' = 0.7
+'p, Vacuum Drying of Electrodes, Positive materials, Capital equipment, million$' = 0.9
+'p, Vacuum Drying of Electrodes, Positive materials, Plant area, m²' = 0.95
+'p, Vacuum Drying of Electrodes, Negative materials, Direct labor, hours/year' = 0.7
+'p, Vacuum Drying of Electrodes, Negative materials, Capital equipment, million$' = 0.9
+'p, Vacuum Drying of Electrodes, Negative materials, Plant area, m²' = 0.95
+'p, Electrode Slitting (positive and negative), Direct labor, hours/year' = 0.7
+'p, Electrode Slitting (positive and negative), Capital equipment, million$' = 0.9
+'p, Electrode Slitting (positive and negative), Plant area, m²' = 0.95
+'p, Cell stacking, Baseline Cell Capacity, Ah' = 0.95
+'p, Cell stacking, Direct labor, hours/year' = 0.9
+'p, Cell stacking, Capital equipment, million$' = 0.9
+'p, Cell stacking, Plant area, m²' = 0.95
+'p, Current collector welding, Direct labor, hours/year' = 0.9
+'p, Current collector welding, Capital equipment, million$' = 0.9
+'p, Current collector welding, Plant area, m²' = 0.95
+'p, X-ray inspection, Direct labor, hours/year' = 0.9
+'p, X-ray inspection, Capital equipment, million$' = 0.9
+'p, X-ray inspection, Plant area, m²' = 0.95
+'p, Inserting cell in container, Direct labor, hours/year' = 0.9
+'p, Inserting cell in container, Capital equipment, million$' = 0.9
+'p, Inserting cell in container, Plant area, m²' = 0.95
+'p, Electrolyte filling and cell sealing, Direct labor, hours/year' = 0.9
+'p, Electrolyte filling and cell sealing, Capital equipment, million$' = 0.9
+'p, Electrolyte filling and cell sealing, Plant area, m²' = 0.95
+'p, Dry room (area included for all cell assembly steps), Direct labor, hours/year' = 0.0
+'p, Dry room (area included for all cell assembly steps), Capital equipment, million$' = 0.9
+'p, Dry room (area included for all cell assembly steps), Plant area, m²' = 0.95
+'p, Total formation process, Baseline Cell Capacity, Ah' = 0.3
+'p, Total formation process, Direct labor, hours/year' = 0.7
+'p, Total formation process, Capital equipment, million$' = 0.95
+'p, Total formation process, Plant area, m²' = 0.95
+'p, Module assembly, Direct labor, hours/year' = 0.7
+'p, Module assembly, Capital equipment, million$' = 0.95
+'p, Module assembly, Plant area, m²' = 0.95
+'p, Battery Pack Assembly and Testing, Number of modules per pack' = 0.3
+'p, Battery Pack Assembly and Testing, Direct labor, hours/year' = 0.7
+'p, Battery Pack Assembly and Testing, Capital equipment, million$' = 0.95
+'p, Battery Pack Assembly and Testing, Plant area, m²' = 0.95
+'p, Warehouse, Direct labor, hours/year' = 0.5
+'p, Warehouse, Capital equipment, million$' = 0.95
+'p, Warehouse, Plant area, m²' = 0.95
+'p, Building, Direct labor, hours/year' = 0.7
+'p, Building, Capital equipment, million$' = 0.95
+'p, Building, Plant area, m²' = 0.95
+'p, Solvent recovery, Direct labor, hours/year' = 0.5
+'p, Solvent recovery, Capital equipment, million$' = 0.95
+'p, Solvent recovery, Plant area, m²' = 0.95
+'p, Rejected Cell and Scrap Recycle, Direct labor, hours/year' = 0.7
+'p, Rejected Cell and Scrap Recycle, Capital equipment, million$' = 0.9
+'p, Rejected Cell and Scrap Recycle, Plant area, m²' = 0.95
+'p, Control laboratory, Direct labor, hours/year' = 0.7
+'p, Control laboratory, Capital equipment, million$' = 0.95
+'p, Control laboratory, Plant area, m²' = 0.95
+'Baseline Manufacturing Rates, Effective full days of operation per year' = 320.0
+'Baseline Manufacturing Rates, Number of 8-hr shifts per day (2 for shipping and receiving)' = 3.0
+'Baseline Manufacturing Rates, Number of annual 8-h shifts' = 960.0
+'Baseline Manufacturing Rates, Energy, kWh per year' = 49999999.999999985
+'Baseline Manufacturing Rates, Number of battery packs manufactured per year' = 500000.0
+'Baseline Manufacturing Rates, Number of row racks per year' = 2000000.0
+'Baseline Manufacturing Rates, Number of modules per year' = 10000000.0
+'Baseline Manufacturing Rates, Number of cell interconnects per year' = 270000000.0
+'Baseline Manufacturing Rates, Number of accepted cells per year' = 200000000.0
+'Baseline Manufacturing Rates, Number of cells adjusted for yield' = 211000000.0
+'Baseline Manufacturing Rates, Positive electrode area, m² per year' = 303000000.0
+'Baseline Manufacturing Rates, Negative electrode area, m² per year' = 315000000.0
+'Baseline Manufacturing Rates, Positive active material, kg per year' = 72500000.0
+'Baseline Manufacturing Rates, Negative active material, kg per year' = 49100000.0
+'Baseline Manufacturing Rates, Positive binder solvent evaporated, kg per year' = 24200000.0
+'Baseline Manufacturing Rates, Negative binder solvent evaporated, kg per year' = 40100000.0
+
+["Recycle"]
+'Elements 1' = 'Ni'
+'Elements 2' = 'Co'
+'Elements 3' = 'Mn'
+'Elements 4' = 'P'
+
+["Thermal"]
+'Power for accessories (default = 0.5), kW' = 0.5
+'Power factor for rolling friction (default = 0.065), kW/mph' = 0.065
+'Power factor for aerodynamic drag (default = 4E-5, kW/(mph)³)' = 4e-05
+'Vehicle power efficiency factor (default = 0.833)' = 0.833
+# 'Designated constant speed at energy requirement, mph' = None
+'Coolant heat capacity (default = 3.264), J/g-°C' = 1.51
+'Coolant density (ρ, default = 1.07), g/mL' = 0.96
+'Coolant viscosity (µ, default = 0.055), poise (g/s-cm)' = 0.5
+'Coolant conductivity (k), W/cm-°C' = 0.00151
+'Adequacy of Cooling,' = 0.0
+'Adequacy of Cooling, Excellent' = 5.0
+'Adequacy of Cooling, Good' = 10.0
+'Adequacy of Cooling, Fair' = 15.0
+'Adequacy of Cooling, Poor' = 200.0
+'Refrig 0, Cooling Capacity, W' = 0.0
+'Refrig 0, Added Mass, kg' = 0.0
+'Refrig 0, Added Volume, L' = 0.0
+'Refrig 0, Performance Coefficient' = 0.0
+'Refrig 0, Baseline Cost, $/pack' = 0.0
+'Refrig 1, Cooling Capacity, W' = 500.0
+'Refrig 1, Added Mass, kg' = 2.0
+'Refrig 1, Added Volume, L' = 0.8
+'Refrig 1, Performance Coefficient' = 2.5
+'Refrig 1, Baseline Cost, $/pack' = 30.0
+'Refrig 2, Cooling Capacity, W' = 1000.0
+'Refrig 2, Added Mass, kg' = 3.0
+'Refrig 2, Added Volume, L' = 1.2
+'Refrig 2, Performance Coefficient' = 2.5
+'Refrig 2, Baseline Cost, $/pack' = 80.0
+'Refrig 3, Cooling Capacity, W' = 3000.0
+'Refrig 3, Added Mass, kg' = 5.0
+'Refrig 3, Added Volume, L' = 2.0
+'Refrig 3, Performance Coefficient' = 2.5
+'Refrig 3, Baseline Cost, $/pack' = 120.0
+'Refrig 4, Cooling Capacity, W' = 6000.0
+'Refrig 4, Added Mass, kg' = 7.0
+'Refrig 4, Added Volume, L' = 2.8
+'Refrig 4, Performance Coefficient' = 2.5
+'Refrig 4, Baseline Cost, $/pack' = 200.0
+
+["Tool-Generate Chem Couple"]
+'Select Method' = 'Create New Couple'
+'Positive, Select chemistries' = 'NMC811'
+'Negative, Select chemistries' = 'LTO'
+'Positive half-cell losses during formation, %' = 0.05
+'Negative half-cell losses during formation, %' = 0.01
+'Lithium inventory loss from SEI formation, mAh per g of negative' = 20.0
+'Negative half-cell cutoff voltage during formation, V vs. Li/Li+' = 0.01
+'Target N:P ratio after formation' = 1.1
+'Upper cutoff voltage at 100% SOC' = 4.25
+# 'SOC, 0' = None
+# 'SOC, 10' = None
+# 'SOC, 20' = None
+# 'SOC, 30' = None
+# 'SOC, 40' = None
+# 'SOC, 50' = None
+# 'SOC, 60' = None
+# 'SOC, 70' = None
+# 'SOC, 80' = None
+# 'SOC, 90' = None
+# 'SOC, 100' = None
+'Chemistry Couple as Template' = 'NMC811-G (Power)'
+'New Couple Name' = 'NMC911'
+

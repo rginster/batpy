@@ -15,7 +15,8 @@ $ pip install batpy
 
 
 ```python
-from batpy.batpy import import BatPaC_battery, BatPaC_tool
+from batpy.BatPaC_battery import BatPaC_battery
+from batpy.BatPaC_tool import BatPaC_tool
 
 # Create batteries
 bat1 = BatPaC_battery("Battery 1")
@@ -59,7 +60,7 @@ battery_calculation.add_battery(
 
 # b) Create new batteries from configuration file (will overwrite all batteries)
 battery_calculation.load_batteries_file(
-    "./saved_batteries_config.toml",
+    "./batteries_config.toml",
     [
         bat1,
         bat2,
