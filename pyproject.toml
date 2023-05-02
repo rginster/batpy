@@ -39,3 +39,4 @@ addopts = "--cov --cov-report term-missing"
 
 [tool.semantic_release]
 version_variable = "pyproject.toml:version"
+version_source = "tag"
