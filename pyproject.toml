@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "batpy"
-version = "0.0.3"
+version = "0.0.4"
 description = "A python package to read, write, and calculate batteries in the BatPaC tool."
 authors = ["Raphael Ginster <r.ginster@tu-braunschweig.de>"]
 license = "MIT"
