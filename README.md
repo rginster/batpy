@@ -1,3 +1,7 @@
+[![ci-cd](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml)
+[![PyPI version](https://badge.fury.io/py/batpy.svg)](https://badge.fury.io/py/batpy)
+
+
 # batpy
 
 `batpy` is a Python wrapper for [Argonne National Laboratory's](https://www.anl.gov) Microsoft Excel-based [software modeling tool BatPaC](https://www.anl.gov/partnerships/batpac-battery-manufacturing-cost-estimation).
