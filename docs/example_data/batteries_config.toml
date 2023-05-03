@@ -788,4 +788,3 @@
 'Battery temperature at startup (default = -15), °C' = -15.0
 'Battery temperature after heating (default = 5), °C' = 5.0
 'Power of heating elements, W' = 1000.0
-

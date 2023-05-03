@@ -1,10 +1,14 @@
 # -*- coding: UTF-8 -*-
+"""Module, which includes the function is_version_compatible
+"""
 import logging
+
 import semantic_version
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
-    format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t%(lineno)s\t- %(message)s",
+    format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t\
+        %(lineno)s\t- %(message)s",
     filename="batpy.log",
     filemode="w",
     level=logging.INFO,
@@ -18,8 +22,9 @@ def is_version_compatible(
 ) -> bool:
     """Check for version compatibility
 
-    Check if two versions (major.minor.patch) are compatible. Thereby a version is compatible if major is equal.
-    If minor should also be included a version is compatible if major is equal and minor is greater or equal.
+    Check if two versions (major.minor.patch) are compatible. Thereby a version
+    is compatible if major is equal. If minor should also be included a version
+    is compatible if major is equal and minor is greater or equal.
 
     Parameters
     ----------
@@ -28,7 +33,8 @@ def is_version_compatible(
     version_to_check : semantic_version.Version
         Version to be checked against self_version.
     include_minor : bool, optional
-        Check if minor version of version_to_check is greater or equal to self_version's minor, by default False.
+        Check if minor version of version_to_check is greater or equal to
+        self_version's minor, by default False.
 
     Returns
     -------
@@ -51,13 +57,22 @@ def is_version_compatible(
 
     if min_version <= version_to_check < min_version.next_major():
         logging.info(
-            f"[+] Version {version_to_check} is compatible: {min_version} <= {version_to_check} < {min_version.next_major()}"
+            "[+] Version %s is compatible: %s <= %s < %s",
+            version_to_check,
+            min_version,
+            version_to_check,
+            min_version.next_major(),
         )
         return True
-    else:
-        logging.warning(
-            f"[!] Version {version_to_check} should be {min_version} <= {version_to_check} < {min_version.next_major()}"
-        )
-        raise ValueError(
-            f"[!] Version {version_to_check} should be {min_version} <= {version_to_check} < {min_version.next_major()}"
-        )
+
+    logging.warning(
+        "[!] Version %s should be %s <= %s < %s",
+        version_to_check,
+        min_version,
+        version_to_check,
+        min_version.next_major(),
+    )
+    raise ValueError(
+        f"[!] Version {version_to_check} should be {min_version} <=\
+            {version_to_check} < {min_version.next_major()}"
+    )

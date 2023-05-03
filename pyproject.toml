@@ -29,6 +29,13 @@ jupyter = "^1.0.0"
 myst-nb = {version = "^0.17.2", python = "^3.9"}
 sphinx-autoapi = "^2.1.0"
 sphinx-rtd-theme = "^1.2.0"
+pre-commit = "^3.3.1"
+removestar = "^1.3.1"
+isort = "^5.12.0"
+mypy = "^1.2.0"
+dodgy = "^0.2.1"
+pylint = "^2.17.3"
+bandit = "^1.7.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -48,3 +55,6 @@ upload_to_release = true                    # auto-create GitHub release
 upload_to_pypi = false                      # don't auto-upload to PyPI
 remove_dist = false                         # don't remove dists
 patch_without_tag = true                    # patch release by default
+
+[tool.black]
+line-length = 79

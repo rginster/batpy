@@ -1,21 +1,26 @@
 # -*- coding: UTF-8 -*-
-import toml
-from pathlib import Path
+"""Module, which includes the class BatpacBattery
+"""
 import logging
+from pathlib import Path
+
+import toml
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
-    format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t%(lineno)s\t- %(message)s",
+    format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t\
+        %(lineno)s\t- %(message)s",
     filename="batpy.log",
     filemode="w",
     level=logging.INFO,
 )
 
 
-class BatPaC_battery:
+class BatpacBattery:
     """Battery class for interaction with BatPaC
 
-    This battery class is used to interact with BatPaC and stores battery parameters in the dictionary properties.
+    This battery class is used to interact with BatPaC and stores battery
+    parameters in the dictionary properties.
     """
 
     def __init__(self, name: str = "Battery") -> None:
@@ -39,31 +44,39 @@ class BatPaC_battery:
         "Battery"
         """
         self.name = name
-        logging.info(f"[ ] Create battery {self.name}")
+        logging.info("[ ] Create battery %s", self.name)
         self.properties = {}
-        logging.info(f"[+] Battery {self.name} created")
-        logging.debug(f"[ ] Properties of battery {self.name}: {self.properties}")
+        logging.info("[+] Battery %s created", self.name)
+        logging.debug(
+            "[ ] Properties of battery %s: %s",
+            self.name,
+            self.properties,
+        )
 
     def load_battery_file(
         self, path_to_battery_file: Path, battery_name: str = "Battery"
     ) -> bool:
         """Load a battery configuration file
 
-        Load the properties for a battery from a TOML battery configuration file.
+        Load the properties for a battery from a TOML battery configuration
+        file.
 
         Parameters
         ----------
         path_to_battery_file : Path
             Path to the TOML battery configuration file.
         battery_name : str, optional
-            Name of the table in the TOML file from which to load the battery properties.
-            Thereby, the battery_name, by default "Battery", does not have to be equal to self.name.
+            Name of the table in the TOML file from which to load the battery
+            properties. Thereby, the battery_name, by default "Battery", does
+            not have to be equal to self.name.
 
         Returns
         -------
         bool
-            True, if battery_name exists in the TOML file and the properties were loaded.
-            False, if battery_name does not exist in the TOML file and the properties could not be loaded.
+            True, if battery_name exists in the TOML file and the properties
+            were loaded.
+            False, if battery_name does not exist in the TOML file and the
+            properties could not be loaded.
 
         Examples
         --------
@@ -74,7 +87,9 @@ class BatPaC_battery:
         >>> battery1.load_battery_file("./battery_config.toml", "NCM")
         """
         logging.info(
-            f"[ ] Load battery config for {battery_name} from {path_to_battery_file}"
+            "[ ] Load battery config for %s from %s",
+            battery_name,
+            path_to_battery_file,
         )
         config = toml.load(path_to_battery_file)
         loaded = False
@@ -84,20 +99,27 @@ class BatPaC_battery:
                 for key in config[sheet]:
                     self.set_new_property(sheet, key, config[sheet][key])
             logging.info(
-                f"[+] Battery config for {battery_name} from {path_to_battery_file} loaded"
+                "[+] Battery config for %s from %s loaded",
+                battery_name,
+                path_to_battery_file,
             )
             loaded = True
         else:
             logging.warning(
-                f"[!] No battery config for {battery_name} in {path_to_battery_file} found"
+                "[!] No battery config for %s in %s found",
+                battery_name,
+                path_to_battery_file,
             )
-        logging.debug(f"[ ] Battery properties for {self.name}: {self.properties}")
+        logging.debug(
+            "[ ] Battery properties for %s: %s", self.name, self.properties
+        )
         return loaded
 
     def set_property(self, sheet: str, name: str, value: any) -> None:
         """Set an existing property of the battery
 
-        Set an existing property of the battery in the format {"sheet" : {"name" : value} }.
+        Set an existing property of the battery in the format
+        {"sheet" : {"name" : value} }.
 
         Parameters
         ----------
@@ -132,7 +154,8 @@ class BatPaC_battery:
     def set_new_property(self, sheet: str, name: str, value: any) -> None:
         """Set a new property of the battery
 
-        Set an existing property of the battery or create a new one in the format {"sheet" : {"name" : value} }.
+        Set an existing property of the battery or create a new one in the
+        format {"sheet" : {"name" : value} }.
 
         Parameters
         ----------
@@ -145,5 +168,5 @@ class BatPaC_battery:
         """
         try:
             self.properties[sheet][name] = value
-        except:
+        except KeyError:
             self.properties.update({sheet: {name: value}})

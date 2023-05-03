@@ -1,3 +1,4 @@
+# pylint: skip-file
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -6,9 +7,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"batpy"
-copyright = u"2023, Raphael Ginster"
-author = u"Raphael Ginster"
+project = "batpy"
+copyright = "2023, Raphael Ginster"
+author = "Raphael Ginster"
 
 # -- General configuration ---------------------------------------------------
 
