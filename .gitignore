@@ -73,7 +73,7 @@ instance/
 docs/_build/
 
 # batpac
-batpac.xlsm
+*batpac.xlsm
 
 # PyBuilder
 target/

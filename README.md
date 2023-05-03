@@ -23,6 +23,18 @@ Documentation for `batpy` is available at [GitHub Pages](https://rginster.github
 from batpy.batpac_battery import BatpacBattery
 from batpy.batpac_tool import BatpacTool
 
+# Constants
+BATPY_BATPAC_EXCEL = "./BatPaC 5.0 2022-07-22.xlsm"
+
+BATPY_BATPAC_BATTERY_CONFIG = "./batpy_batteries_config.toml"
+BATPY_BATPAC_USER_INPUT_CONFIG = "./batpy_batpac_user_input_cells.toml"
+BATPY_BATPAC_TOOL_CONFIG = "./batpy_batpac_config.toml"
+
+BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG = (
+    "./batpy_batpac_calculation_and_validation_results.toml"
+)
+
+
 # Create batteries
 bat1 = BatpacBattery("Battery 1")
 bat2 = BatpacBattery("Battery 2")
@@ -34,7 +46,7 @@ bat7 = BatpacBattery("Battery 7")
 
 # Change battery properties
 # a) Write individual properties for created batteries
-bat1.set_new_property("Dashboard", "Number of modules in parallel", 100)
+bat1.set_new_property("Dashboard", "Number of modules in parallel", 10)
 
 # b) Load individiual battery configuration from file
 bat2.load_battery_file(
@@ -43,9 +55,9 @@ bat2.load_battery_file(
 
 # Create BatPaC instance
 battery_calculation = BatpacTool(
-    "./BatPaC 5.0 2022-07-22.xlsm",
-    "./BatPaC_user_input_cells.toml",
-    "./BatPaC_calculation_and_validation_results.toml",
+    BATPY_BATPAC_EXCEL,
+    BATPY_BATPAC_USER_INPUT_CONFIG,
+    BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG,
     excel_visible=True
 )
 
@@ -65,7 +77,7 @@ battery_calculation.add_battery(
 
 # b) Create new batteries from configuration file (will overwrite all batteries)
 battery_calculation.load_batteries_file(
-    "./batteries_config.toml",
+    BATPY_BATPAC_BATTERY_CONFIG,
     [
         bat1,
         bat2,
@@ -78,7 +90,7 @@ battery_calculation.load_batteries_file(
 )
 
 # Load configuration file for BatPaC instance
-battery_calculation.load_batpac_file("./BatPaC_config.toml")
+battery_calculation.load_batpac_file(BATPY_BATPAC_TOOL_CONFIG)
 
 # Write configuration in Excel file and calculate batteries
 battery_calculation.calculate()
