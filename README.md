@@ -20,17 +20,17 @@ Documentation for `batpy` is available at [GitHub Pages](https://rginster.github
 
 
 ```python
-from batpy.BatPaC_battery import BatPaC_battery
-from batpy.BatPaC_tool import BatPaC_tool
+from batpy.batpac_battery import BatpacBattery
+from batpy.batpac_tool import BatpacTool
 
 # Create batteries
-bat1 = BatPaC_battery("Battery 1")
-bat2 = BatPaC_battery("Battery 2")
-bat3 = BatPaC_battery("Battery 3")
-bat4 = BatPaC_battery("Battery 4")
-bat5 = BatPaC_battery("Battery 5")
-bat6 = BatPaC_battery("Battery 6")
-bat7 = BatPaC_battery("Battery 7")
+bat1 = BatpacBattery("Battery 1")
+bat2 = BatpacBattery("Battery 2")
+bat3 = BatpacBattery("Battery 3")
+bat4 = BatpacBattery("Battery 4")
+bat5 = BatpacBattery("Battery 5")
+bat6 = BatpacBattery("Battery 6")
+bat7 = BatpacBattery("Battery 7")
 
 # Change battery properties
 # a) Write individual properties for created batteries
@@ -42,7 +42,7 @@ bat2.load_battery_file(
 )
 
 # Create BatPaC instance
-battery_calculation = BatPaC_tool(
+battery_calculation = BatpacTool(
     "./BatPaC 5.0 2022-07-22.xlsm",
     "./BatPaC_user_input_cells.toml",
     "./BatPaC_calculation_and_validation_results.toml",
