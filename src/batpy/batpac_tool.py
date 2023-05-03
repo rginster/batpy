@@ -521,9 +521,8 @@ class BatpacTool:
         warnings.warn("This function is not implemented.")
         if user_read_file.is_file():
             return True
-        else:
-            logging.warning("[!] %s is not a valid file", user_read_file)
-            raise ValueError(f"{user_read_file} is not a valid file")
+        logging.warning("[!] %s is not a valid file", user_read_file)
+        raise ValueError(f"{user_read_file} is not a valid file")
 
     def read_calculation_and_validation_results(
         self, toml_file_calculation_validation_results: Path = None
@@ -702,7 +701,7 @@ class BatpacTool:
         self.wb.save(path)
         self.wb = xw.Book(path)
         self.app = self.wb.app
-        logging.info(f"[+] Saved workbook in {path}")
+        logging.info("[+] Saved workbook in %s", path)
 
     def close(self) -> bool:
         """Close BatPaC Excel tool
@@ -719,10 +718,9 @@ class BatpacTool:
             self.wb.app.quit()
             logging.info("[+] Workbook and Excel closed")
             return True
-        else:
-            self.wb.close()
-            logging.info("[+] Workbook closed")
-            return True
+        self.wb.close()
+        logging.info("[+] Workbook closed")
+        return True
 
     def save_config(
         self, batpac_path: Path = None, battery_path: Path = None
