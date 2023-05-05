@@ -92,3 +92,6 @@ def test_get_available_batpy_dataset_names():
         "0.0.0"
     ):
         assert dataset_name in AVAILABLE_DATASETS_0_0_0
+    assert batpac_datasets.get_available_batpy_dataset_names("")
+    with pytest.raises(ValueError):
+        assert batpac_datasets.get_available_batpy_dataset_names("42.42.42")

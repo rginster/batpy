@@ -24,7 +24,7 @@ jobs:
       run: poetry install
 
     - name: Test with pytest
-      run: poetry run pytest tests/test_function_is_version_compatible.py tests/test_batpac_battery.py --cov=pycounts --cov-report=xml -vv
+      run: poetry run pytest tests/ --ignore=tests/local/ --cov=pycounts --cov-report=xml -vv
 
     - name: Use Codecov to track coverage
       uses: codecov/codecov-action@v3

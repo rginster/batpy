@@ -10,11 +10,6 @@ import semantic_version
 
 from batpy import data
 
-# from data import get_versions
-
-# __versions__ =
-# [f.name for f in os.scandir(__name__.__path__[0]) if f.is_dir()]
-
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t\
@@ -123,7 +118,6 @@ def get_available_batpy_dataset_names(
     ValueError
         If 'dataset_version' is not available.
     """
-    # import data
 
     batpy_dataset_names = []
     data_dir = data.__path__[0] + "/"
@@ -148,12 +142,14 @@ def get_available_batpy_dataset_names(
             + "/"
         )
 
-    print(data_dir)
-
     if dataset_version in get_available_batpy_dataset_versions():
-        batpy_dataset_names = next(os.walk(data_dir), (None, None, []))[
-            2
-        ]  # [] if no file
+        batpy_dataset_names = next(os.walk(data_dir), (None, None, []))[2]
+        batpy_dataset_names = [
+            dataset_name
+            for dataset_name in batpy_dataset_names
+            if dataset_name.endswith(".toml")
+        ]
+
     else:
         raise ValueError(f"dataset version {dataset_version} is not available")
 
