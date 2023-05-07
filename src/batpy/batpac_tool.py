@@ -2,7 +2,6 @@
 """Module, which includes the class BatpacTool
 """
 import logging
-import warnings
 from pathlib import Path
 
 import semantic_version
@@ -27,8 +26,8 @@ class BatpacTool:
     def __init__(
         self,
         batpac_workbook_path: Path,
-        cell_definition_user_input_toml_path: Path,
-        cell_definition_calculation_and_validation_results: Path = None,
+        cell_definition_user_input_toml_path: Path | str,
+        cell_definition_calculation_validation_results: Path | str = None,
         # cell_definition_additional_user_input_toml_path: Path = None,
         # cell_definition_additional_user_results_toml_path: Path = None,
         excel_visible: bool = False,
@@ -41,14 +40,14 @@ class BatpacTool:
         ----------
         batpac_workbook_path : Path
             Path to the BatPaC Excel tool (*.xlsm).
-        cell_definition_user_input_toml_path : Path
-            Path to the TOML file, which contains the configuration for the
-            standard user input cells (defined by Argonne National Laboratory)
-            in the BatPaC Excel tool.
-        cell_definition_calculation_and_validation_results : Path, optional
-            Path to the TOML file, which contains the configuration for the
-            calculation and validation results
-            in the BatPaC Excel tool, by default None.
+        cell_definition_user_input_toml_path : Path | str
+            Path to the TOML file or string (default dataset), which contains
+            the configuration for the standard user input cells (defined by
+            Argonne National Laboratory) in the BatPaC Excel tool.
+        cell_definition_calculation_validation_results : Path | str, optional
+            Path to the TOML file or string (default dataset), which contains
+            the configuration for the calculation and validation results in the
+            BatPaC Excel tool, by default None.
         cell_definition_additional_user_input_toml_path : Path, optional
             Path to the TOML file, which contains additional cells for user
             input, that are not included in the standard user inputs in the
@@ -67,18 +66,14 @@ class BatpacTool:
             cell_definition_user_input_toml_path,
         )
         self.version = semantic_version.Version(batpy.__version__)
-        self.toml_calculation_validation_results_path = (
-            cell_definition_calculation_and_validation_results
-        )
-        config = toml.load(cell_definition_user_input_toml_path)
-        config_metadata = config.pop("batpy")
 
-        is_version_compatible(
-            self.version,
-            semantic_version.Version(config_metadata["BatPaC SemVer"]),
+        self.excel_cells = self.load_user_file(
+            cell_definition_user_input_toml_path
         )
-
-        self.excel_cells = config
+        if cell_definition_calculation_validation_results:
+            self.toml_calculation_validation_results = self.load_user_file(
+                cell_definition_calculation_validation_results
+            )
         self.batteries = []
         self.workbook = xw.Book(batpac_workbook_path)
         # self.app = self.workbook.app
@@ -86,10 +81,8 @@ class BatpacTool:
         self.max_batteries = 7
         self.properties = {}
         logging.info(
-            "[+] Created BatPaC version %s (SemVer: %s) from %s and load \
+            "[+] Created BatPaC from %s and load \
                     cell references from %s",
-            config_metadata["BatPaC version"],
-            config_metadata["BatPaC SemVer"],
             batpac_workbook_path,
             cell_definition_user_input_toml_path,
         )
@@ -142,6 +135,36 @@ class BatpacTool:
         return is_version_compatible(
             self.version, version_to_check, include_minor
         )
+
+    def load_user_file(self, path_to_user_file: Path | str) -> dict:
+        """Load user file configuration
+
+        Load the user configuration from a TOML user file.
+
+        Parameters
+        ----------
+        path_to_user_file : Path | str
+            Path to the TOML user file or string (default dataset).
+
+        Returns
+        -------
+        dict
+            Returns dictionary representation of read TOML file.
+        """
+        logging.info("[ ] Load BatPaC file from %s", path_to_user_file)
+
+        try:
+            Path.exists(Path(path_to_user_file))
+            config = toml.load(path_to_user_file)
+        except (AttributeError, OSError):
+            config = toml.loads(path_to_user_file)
+        config_metadata = config.pop("batpy")
+        self.is_version_compatible(
+            semantic_version.Version(config_metadata["BatPaC SemVer"])
+        )
+        logging.info("[+] Loaded user file from %s", path_to_user_file)
+        logging.debug("[ ] Config properties %s", config)
+        return config
 
     def load_batpac_file(self, path_to_batpac_file: Path | str) -> None:
         """Load BatPaC configuration
@@ -246,7 +269,7 @@ class BatpacTool:
             "[+] Batteries from file %s loaded", path_to_batteries_file
         )
 
-    def write_value_direct(
+    def _write_value_direct(
         self, worksheet: str, cell_range: str, value: any
     ) -> None:
         """Write value in BatPaC Excel tool
@@ -264,7 +287,7 @@ class BatpacTool:
         """
         self.workbook.sheets[worksheet][cell_range].value = value
 
-    def read_value_direct(self, worksheet: str, cell_range: str) -> any:
+    def _read_value_direct(self, worksheet: str, cell_range: str) -> any:
         """Read value from BatPaC Excel tool
 
         Read a value directly from the BatPaC Excel tool.
@@ -295,12 +318,12 @@ class BatpacTool:
             logging.warning("[!] Key %s , %s not found", worksheet, cell_range)
             raise KeyError from error
 
-    def wb_helper_range(
+    def _wb_helper_range(
         self,
         worksheet: str,
         name: str,
         battery: BatpacBattery = None,
-        additional_cell_config: Path | dict = None,
+        additional_cell_config: Path | dict | str = None,
     ) -> str:
         """Helper function for workbook range
 
@@ -315,9 +338,10 @@ class BatpacTool:
         battery : BatPaC_battery, optional
             BatPaC_battery object, if the returned cell is battery specific, by
             default None.
-        additional_cell_config : Path | dict, optional
-            Path to TOML file or dictionary, which contains additional cell
-            configuration to consider, by default None.
+        additional_cell_config : Path | dict | str, optional
+            Path to TOML file or dictionary or str (default dataset), which
+            contains additional cell configuration to consider,
+            by default None.
 
         Returns
         -------
@@ -332,9 +356,10 @@ class BatpacTool:
         """
         try:
             if additional_cell_config is not None:
-                if isinstance(additional_cell_config, Path):
-                    additional_cell_config = toml.load(additional_cell_config)
-                range_dict = additional_cell_config
+                if isinstance(additional_cell_config, dict):
+                    range_dict = additional_cell_config
+                else:
+                    range_dict = self.load_user_file(additional_cell_config)
             else:
                 range_dict = self.excel_cells
 
@@ -364,13 +389,13 @@ class BatpacTool:
         value : any
             Value to write in the BatPaC Excel tool.
         """
-        self.write_value_direct(
-            worksheet, self.wb_helper_range(worksheet, name), value
+        self._write_value_direct(
+            worksheet, self._wb_helper_range(worksheet, name), value
         )
         logging.debug(
             "[ ] Write in %s %s (%s) = %s",
             worksheet,
-            self.wb_helper_range(worksheet, name),
+            self._wb_helper_range(worksheet, name),
             name,
             value,
         )
@@ -379,7 +404,7 @@ class BatpacTool:
         self,
         worksheet: str,
         name: str,
-        additional_cell_config: Path | dict = None,
+        additional_cell_config: Path | dict | str = None,
     ) -> any:
         """Read value from BatPaC Excel tool
 
@@ -391,18 +416,19 @@ class BatpacTool:
             Name of the BatPaC Excel tool worksheet.
         name : str
             Name of the BatPaC Excel cell description.
-        additional_cell_config : Path | dict, optional
-            Path to TOML file or dictionary, which contains additional cell
-            configuration to consider, by default None.
+        additional_cell_config : Path | dict | str, optional
+            Path to TOML file or dictionary or string (default dataset), which
+            contains additional cell configuration to consider,
+            by default None.
 
         Returns
         -------
         any
             Value of the BatPaC Excel tool cell.
         """
-        return self.read_value_direct(
+        return self._read_value_direct(
             worksheet,
-            self.wb_helper_range(
+            self._wb_helper_range(
                 worksheet,
                 name,
                 battery=None,
@@ -415,7 +441,7 @@ class BatpacTool:
         worksheet: str,
         name: str,
         battery: BatpacBattery,
-        additional_cell_config: Path | dict = None,
+        additional_cell_config: Path | dict | str = None,
     ) -> any:
         """Read battery specific value from BatPaC Excel tool
 
@@ -432,17 +458,18 @@ class BatpacTool:
             BatPaC_battery object, if the returned cell is battery specific, by
             default None.
         additional_cell_config : Path | dict, optional
-            Path to TOML file or dictionary, which contains additional cell
-            configuration to consider, by default None.
+            Path to TOML file or dictionary or string (default dataset), which
+            contains additional cell configuration to consider,
+            by default None.
 
         Returns
         -------
         any
             Value of the BatPaC Excel tool cell.
         """
-        return self.read_value_direct(
+        return self._read_value_direct(
             worksheet,
-            self.wb_helper_range(
+            self._wb_helper_range(
                 worksheet, name, battery, additional_cell_config
             ),
         )
@@ -467,14 +494,14 @@ class BatpacTool:
         value : any
             Value to write in the BatPaC Excel tool.
         """
-        self.write_value_direct(
-            worksheet, self.wb_helper_range(worksheet, name, battery), value
+        self._write_value_direct(
+            worksheet, self._wb_helper_range(worksheet, name, battery), value
         )
         logging.debug(
             "[ ] Write for %s in %s %s (%s) = %s",
             battery.name,
             worksheet,
-            self.wb_helper_range(worksheet, name, battery),
+            self._wb_helper_range(worksheet, name, battery),
             name,
             value,
         )
@@ -496,7 +523,7 @@ class BatpacTool:
         self.workbook.app.calculation = "automatic"
         self.workbook.app.screen_updating = True
 
-    def read_from_user_input(self, user_read_file: Path) -> dict:
+    def read_from_user_input(self, user_read_file: Path | str) -> dict:
         """Read user specified input from BatPaC Excel tool
 
         Read additional cell values from BatPaC Excel tool specified by user
@@ -504,58 +531,74 @@ class BatpacTool:
 
         Parameters
         ----------
-        user_read_file : Path
-            Path to the TOML file containing additional cell ranges from which
-            values are to be read.
+        user_read_file : Path | str
+            Path to the TOML file or string (default dataset) containing
+            additional cell ranges from which values are to be read.
 
         Returns
         -------
         dict
             Dictionary in the format {"sheet" : {"name" : value} }
-
-        Raises
-        ------
-        ValueError
-            Raises ValueError, if the user input is not valid.
         """
-        warnings.warn("This function is not implemented.")
-        if user_read_file.is_file():
-            return True
-        logging.warning("[!] %s is not a valid file", user_read_file)
-        raise ValueError(f"{user_read_file} is not a valid file")
+
+        additional_cells = self.load_user_file(user_read_file)
+        values_dict = additional_cells
+        for sheet_name, sheet_key in additional_cells.items():
+            for batpac_key, batpac_cell_range in sheet_key.items():
+                if isinstance(batpac_cell_range, dict):
+                    for (
+                        battery_key,
+                        battery_cell_range,
+                    ) in batpac_cell_range.items():
+                        values_dict[sheet_name][batpac_key][
+                            battery_key
+                        ] = self._read_value_direct(
+                            sheet_name, battery_cell_range
+                        )
+                else:
+                    values_dict[sheet_name][
+                        batpac_key
+                    ] = self._read_value_direct(sheet_name, batpac_cell_range)
+
+        return values_dict
 
     def read_calculation_and_validation_results(
-        self, toml_file_calculation_validation_results: Path = None
-    ) -> dict | bool:
+        self, toml_file_calculation_validation_results: Path | str = None
+    ) -> dict:
         """Read calculation and validation results
 
         Read the calculation and validation results from the BatPaC Excel tool.
 
         Parameters
         ----------
-        toml_file_calculation_validation_results : Path, optional
-            Path to the TOML file containing the specified cell ranges of the
-            calculation and validation results, by default None.
+        toml_file_calculation_validation_results : Path | str, optional
+            Path to the TOML file or string (default dataset), containing the
+            specified cell ranges of the calculation and validation results,
+            by default None.
 
         Returns
         -------
-        dict | bool
-            Returns a dictionary if a TOML file is specified, otherwise False.
+        dict
+            Returns a dictionary of the calculation and validation results.
+
+        Raises
+        ------
+        KeyError
+            If no configuration for calculation and validation found.
         """
+
         if toml_file_calculation_validation_results is None:
-            if self.toml_calculation_validation_results_path is None:
+            if self.toml_calculation_validation_results is None:
                 logging.warning(
-                    "[!] No toml file for calculation and validation found"
+                    "[!] No toml file for calculation and validation found."
                 )
-                return False
+                raise KeyError(
+                    "No configuration for calculation and validation found."
+                )
         else:
-            self.toml_calculation_validation_results_path = (
+            self.toml_calculation_validation_results = self.load_user_file(
                 toml_file_calculation_validation_results
             )
-
-        additional_cell_config = toml.load(
-            self.toml_calculation_validation_results_path
-        )
 
         config_errors = ["Configuration Errors (see table to right)"]
         config_warnings = ["Configuration Warnings (see table  to right)"]
@@ -570,7 +613,7 @@ class BatpacTool:
                     "Dashboard",
                     "Configuration Errors (see table to right)",
                     battery,
-                    additional_cell_config,
+                    self.toml_calculation_validation_results,
                 )
             )
             config_warnings.append(
@@ -578,7 +621,7 @@ class BatpacTool:
                     "Dashboard",
                     "Configuration Warnings (see table  to right)",
                     battery,
-                    additional_cell_config,
+                    self.toml_calculation_validation_results,
                 )
             )
             plant_size.append(
@@ -586,7 +629,7 @@ class BatpacTool:
                     "Dashboard",
                     "Plant Size, GWh",
                     battery,
-                    additional_cell_config,
+                    self.toml_calculation_validation_results,
                 )
             )
             power_to_energy.append(
@@ -594,7 +637,7 @@ class BatpacTool:
                     "Dashboard",
                     "Power-to-energy ratio",
                     battery,
-                    additional_cell_config,
+                    self.toml_calculation_validation_results,
                 )
             )
             adequacy_cooling.append(
@@ -602,7 +645,7 @@ class BatpacTool:
                     "Dashboard",
                     "Adequacy of cooling",
                     battery,
-                    additional_cell_config,
+                    self.toml_calculation_validation_results,
                 )
             )
             cathode_thickness.append(
@@ -610,7 +653,7 @@ class BatpacTool:
                     "Dashboard",
                     "Cathode thickness limited by",
                     battery,
-                    additional_cell_config,
+                    self.toml_calculation_validation_results,
                 )
             )
             table_columns.append(battery.name)
@@ -720,27 +763,6 @@ class BatpacTool:
         logging.info("[+] Workbook closed")
         return True
 
-    def save_config(
-        self, batpac_path: Path = None, battery_path: Path = None
-    ) -> None:
-        """Save BatPaC_tool configuration
-
-        Read all BatPaC_tool properties and its included [BatPaC_battery]
-        properties from the BatPaC Excel tool, save these properties in the
-        BatPaC_tool and [BatPaC_battery] objects, and write them as TOML file.
-
-        Parameters
-        ----------
-        batpac_path : Path, optional
-            If specified, storage path to the TOML file for BatPaC_tool
-            properties, by default None.
-        battery_path : Path, optional
-            If specified, storage path to the TOML file for [BatPaC_battery]
-            properties, by default None.
-        """
-        self._save_batpac_config(batpac_path)
-        self._save_battery_config(battery_path)
-
     def _save_batpac_config(self, batpac_path: Path = None) -> None:
         """Save BatPaC_tool configuration
 
@@ -796,7 +818,9 @@ class BatpacTool:
                         self.batteries[battery_number].set_new_property(
                             sheet,
                             battery_key,
-                            self.read_value_direct(sheet, battery_value_range),
+                            self._read_value_direct(
+                                sheet, battery_value_range
+                            ),
                         )
                 else:
                     continue
@@ -817,3 +841,24 @@ class BatpacTool:
                             else:
                                 toml_file.write(f"'{key}' = {value}\n")
                     toml_file.write("\n")
+
+    def save_config(
+        self, batpac_path: Path = None, battery_path: Path = None
+    ) -> None:
+        """Save BatPaC_tool configuration
+
+        Read all BatPaC_tool properties and its included [BatPaC_battery]
+        properties from the BatPaC Excel tool, save these properties in the
+        BatPaC_tool and [BatPaC_battery] objects, and write them as TOML file.
+
+        Parameters
+        ----------
+        batpac_path : Path, optional
+            If specified, storage path to the TOML file for BatPaC_tool
+            properties, by default None.
+        battery_path : Path, optional
+            If specified, storage path to the TOML file for [BatPaC_battery]
+            properties, by default None.
+        """
+        self._save_batpac_config(batpac_path)
+        self._save_battery_config(battery_path)

@@ -1,3 +1,7 @@
+["batpy"]
+"BatPaC version" = "BatPaC 5.0 2022-07-22"
+"BatPaC SemVer" = "0.0.0"
+
 ["Dashboard"]
 'Electrode Couple' = 'NMC811-G (Energy)'
 'Positive active material specific capacity, mAh/g' = 200.0

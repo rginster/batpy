@@ -1,4 +1,4 @@
-# pylint: disable=W0621, W0613, W0611, E0401
+# pylint: disable=W0621, W0613, W0611, E0401, W0212
 # -*- coding: UTF-8 -*-
 """Tests for module batpac_tool
 """
@@ -248,12 +248,12 @@ def test_write_read_value_direct():
         BATPY_BATPAC_EXCEL,
         BATPY_BATPAC_USER_INPUT_CONFIG_PATH,
     )
-    test_batpac.write_value_direct("Dashboard", "A1", True)
-    assert test_batpac.read_value_direct("Dashboard", "A1")
-    test_batpac.write_value_direct("Dashboard", "A1", None)
-    assert test_batpac.read_value_direct("Dashboard", "A1") is None
+    test_batpac._write_value_direct("Dashboard", "A1", True)
+    assert test_batpac._read_value_direct("Dashboard", "A1")
+    test_batpac._write_value_direct("Dashboard", "A1", None)
+    assert test_batpac._read_value_direct("Dashboard", "A1") is None
     with pytest.raises(KeyError):
-        assert test_batpac.read_value_direct("no sheet", "no name")
+        assert test_batpac._read_value_direct("no sheet", "no name")
 
 
 def test_wb_helper_range():
@@ -264,9 +264,9 @@ def test_wb_helper_range():
     )
     test_bat1 = BatpacBattery("Battery 1")
     test_batpac.add_battery([test_bat1])
-    assert test_batpac.wb_helper_range("Dashboard", "Restart (0/1)") == "D6"
+    assert test_batpac._wb_helper_range("Dashboard", "Restart (0/1)") == "D6"
     assert (
-        test_batpac.wb_helper_range(
+        test_batpac._wb_helper_range(
             "Dashboard", "Target rated peak power of pack, kW", test_bat1
         )
         == "D38"
@@ -276,7 +276,7 @@ def test_wb_helper_range():
             BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG_PATH,
         )
 
-        assert test_batpac.wb_helper_range(
+        assert test_batpac._wb_helper_range(
             "no sheet",
             "no name",
             battery=None,
@@ -507,16 +507,16 @@ def test_read_calculation_and_validation_results():
     test_batpac.calculate()
 
     validation_1 = test_batpac.read_calculation_and_validation_results()
-    assert validation_1 != {}
+    assert validation_1
 
-    test_batpac.toml_calculation_validation_results_path = None
-    validation_2 = test_batpac.read_calculation_and_validation_results()
-    assert not validation_2
+    test_batpac.toml_calculation_validation_results = None
+    with pytest.raises(KeyError):
+        assert test_batpac.read_calculation_and_validation_results()
 
     validation_3 = test_batpac.read_calculation_and_validation_results(
         BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG_PATH
     )
-    assert validation_3 != {}
+    assert validation_3
     assert validation_1 == validation_3
 
     test_batpac = BatpacTool(
@@ -548,16 +548,16 @@ def test_read_calculation_and_validation_results():
     test_batpac.calculate()
 
     validation_1 = test_batpac.read_calculation_and_validation_results()
-    assert validation_1 != {}
+    assert validation_1
 
-    test_batpac.toml_calculation_validation_results_path = None
-    validation_2 = test_batpac.read_calculation_and_validation_results()
-    assert not validation_2
+    test_batpac.toml_calculation_validation_results = None
+    with pytest.raises(KeyError):
+        assert test_batpac.read_calculation_and_validation_results()
 
     validation_3 = test_batpac.read_calculation_and_validation_results(
         BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG
     )
-    assert validation_3 != {}
+    assert validation_3
     assert validation_1 == validation_3
 
 

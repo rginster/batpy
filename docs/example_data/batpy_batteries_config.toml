@@ -1,3 +1,7 @@
+["batpy"]
+"BatPaC version" = "BatPaC 5.0 2022-07-22"
+"BatPaC SemVer" = "0.0.0"
+
 ["Battery 1"."Dashboard"]
 'Number of modules in parallel' = 10000.0
 'Target rated peak power of pack, kW' = 100.0
