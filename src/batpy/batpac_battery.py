@@ -4,16 +4,11 @@
 import logging
 from pathlib import Path
 
+import semantic_version
 import toml
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t\
-        %(lineno)s\t- %(message)s",
-    filename="batpy.log",
-    filemode="w",
-    level=logging.INFO,
-)
+import batpy
+from batpy.is_version_compatible import is_version_compatible
 
 
 class BatpacBattery:
@@ -44,6 +39,7 @@ class BatpacBattery:
         "Battery"
         """
         self.name = name
+        self.version = semantic_version.Version(batpy.__version__)
         logging.info("[ ] Create battery %s", self.name)
         self.properties = {}
         logging.info("[+] Battery %s created", self.name)
@@ -54,7 +50,7 @@ class BatpacBattery:
         )
 
     def load_battery_file(
-        self, path_to_battery_file: Path, battery_name: str = "Battery"
+        self, path_to_battery_file: Path | str, battery_name: str = "Battery"
     ) -> bool:
         """Load a battery configuration file
 
@@ -63,8 +59,9 @@ class BatpacBattery:
 
         Parameters
         ----------
-        path_to_battery_file : Path
-            Path to the TOML battery configuration file.
+        path_to_battery_file : Path | str
+            Path to the TOML battery configuration file. It is also possible to
+            load the included batpy datasets.
         battery_name : str, optional
             Name of the table in the TOML file from which to load the battery
             properties. Thereby, the battery_name, by default "Battery", does
@@ -85,34 +82,48 @@ class BatpacBattery:
 
         >>> battery1 = BatPaC_battery("NCM811 - G")
         >>> battery1.load_battery_file("./battery_config.toml", "NCM")
+        >>> from batpy import batpac_datasets
+        >>> battery1.load_battery_file(
+                batpac_datasets.get_batpy_dataset("batpy_batteries_config"),
+                "Battery 1"
+            )
         """
         logging.info(
             "[ ] Load battery config for %s from %s",
             battery_name,
             path_to_battery_file,
         )
-        config = toml.load(path_to_battery_file)
-        loaded = False
-        if battery_name in config:
-            config = config[battery_name]
-            for sheet in config:
-                for key in config[sheet]:
-                    self.set_new_property(sheet, key, config[sheet][key])
-            logging.info(
-                "[+] Battery config for %s from %s loaded",
-                battery_name,
-                path_to_battery_file,
+        try:
+            Path.exists(Path(path_to_battery_file))
+            config = toml.load(path_to_battery_file)
+        except (AttributeError, OSError):
+            config = toml.loads(path_to_battery_file)
+        config_metadata = config.pop("batpy")
+        if is_version_compatible(
+            self.version,
+            semantic_version.Version(config_metadata["BatPaC SemVer"]),
+        ):
+            loaded = False
+            if battery_name in config:
+                config = config[battery_name]
+                for sheet in config:
+                    for key in config[sheet]:
+                        self.set_new_property(sheet, key, config[sheet][key])
+                logging.info(
+                    "[+] Battery config for %s from %s loaded",
+                    battery_name,
+                    path_to_battery_file,
+                )
+                loaded = True
+            else:
+                logging.warning(
+                    "[!] No battery config for %s in %s found",
+                    battery_name,
+                    path_to_battery_file,
+                )
+            logging.debug(
+                "[ ] Battery properties for %s: %s", self.name, self.properties
             )
-            loaded = True
-        else:
-            logging.warning(
-                "[!] No battery config for %s in %s found",
-                battery_name,
-                path_to_battery_file,
-            )
-        logging.debug(
-            "[ ] Battery properties for %s: %s", self.name, self.properties
-        )
         return loaded
 
     def set_property(self, sheet: str, name: str, value: any) -> None:

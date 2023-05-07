@@ -1,7 +1,10 @@
 # -*- coding: UTF-8 -*-
 """Package to interact with BatPaC
 """
-# read version from installed package
+import logging
 from importlib.metadata import version
+from logging import NullHandler
 
 __version__ = version("batpy")
+
+logging.getLogger(__name__).addHandler(NullHandler())

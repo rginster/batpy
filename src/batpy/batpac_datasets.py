@@ -2,22 +2,13 @@
 """Module, to load default batpy datasets
 """
 
-import logging
+# import logging
 import os
 from pkgutil import get_data
 
 import semantic_version
 
 from batpy import data
-
-logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t\
-        %(lineno)s\t- %(message)s",
-    filename="batpy.log",
-    filemode="w",
-    level=logging.INFO,
-)
 
 
 def get_batpy_dataset(
@@ -85,9 +76,7 @@ def get_available_batpy_dataset_versions() -> list[semantic_version.Version]:
     list[semantic_version.Version]
         List of available batpy dataset versions
     """
-    # __versions__ =
-    # [f.name for f in os.scandir(f"{data.__path__[0]}") if f.is_dir()]
-    # __versions__ = [f.name for f in os.scandir("./data/") if f.is_dir()]
+
     available_versions = []
     for version_dir in data.__versions__:
         try:

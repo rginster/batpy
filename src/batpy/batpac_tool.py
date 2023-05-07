@@ -11,17 +11,9 @@ import xlwings as xw
 from prettytable import PrettyTable
 from tqdm import tqdm
 
+import batpy
 from batpy.batpac_battery import BatpacBattery
 from batpy.is_version_compatible import is_version_compatible
-
-logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t\
-        %(lineno)s\t- %(message)s",
-    filename="batpy.log",
-    filemode="w",
-    level=logging.INFO,
-)
 
 
 class BatpacTool:
@@ -37,8 +29,8 @@ class BatpacTool:
         batpac_workbook_path: Path,
         cell_definition_user_input_toml_path: Path,
         cell_definition_calculation_and_validation_results: Path = None,
-        cell_definition_additional_user_input_toml_path: Path = None,
-        cell_definition_additional_user_results_toml_path: Path = None,
+        # cell_definition_additional_user_input_toml_path: Path = None,
+        # cell_definition_additional_user_results_toml_path: Path = None,
         excel_visible: bool = False,
     ) -> None:
         """Initialize BatPaC
@@ -74,37 +66,32 @@ class BatpacTool:
             batpac_workbook_path,
             cell_definition_user_input_toml_path,
         )
-        self.version = semantic_version.Version("0.1.0")
-        self.workbook_path = batpac_workbook_path
-        self.toml_path = cell_definition_user_input_toml_path
+        self.version = semantic_version.Version(batpy.__version__)
         self.toml_calculation_validation_results_path = (
             cell_definition_calculation_and_validation_results
         )
-        config = toml.load(self.toml_path)
+        config = toml.load(cell_definition_user_input_toml_path)
         config_metadata = config.pop("batpy")
-        self.batpac_version = config_metadata["BatPaC version"]
-        if is_version_compatible(
+
+        is_version_compatible(
             self.version,
             semantic_version.Version(config_metadata["BatPaC SemVer"]),
-        ):
-            self.batpac_semver = semantic_version.Version(
-                config_metadata["BatPaC SemVer"]
-            )
+        )
 
         self.excel_cells = config
         self.batteries = []
-        self.wb = xw.Book(batpac_workbook_path)
-        self.app = self.wb.app
-        self.app.visible = excel_visible
+        self.workbook = xw.Book(batpac_workbook_path)
+        # self.app = self.workbook.app
+        self.workbook.app.visible = excel_visible
         self.max_batteries = 7
         self.properties = {}
         logging.info(
             "[+] Created BatPaC version %s (SemVer: %s) from %s and load \
                     cell references from %s",
-            self.batpac_version,
-            self.batpac_semver,
-            self.workbook_path,
-            self.toml_path,
+            config_metadata["BatPaC version"],
+            config_metadata["BatPaC SemVer"],
+            batpac_workbook_path,
+            cell_definition_user_input_toml_path,
         )
 
     def __del__(self) -> None:
@@ -114,10 +101,13 @@ class BatpacTool:
         "screen_updating" to True after object destruction.
         """
         try:
-            self.wb.app.calculation = "automatic"
-            self.wb.app.screen_updating = True
+            self.workbook.app.calculation = "automatic"
+            self.workbook.app.screen_updating = True
         except BaseException as error:
             logging.error("An exception occurred: %s", error)
+            raise KeyError(
+                "Could not access the workbook (may already be closed)."
+            ) from error
 
     def is_version_compatible(
         self,
@@ -153,7 +143,7 @@ class BatpacTool:
             self.version, version_to_check, include_minor
         )
 
-    def load_batpac_file(self, path_to_batpac_file: Path) -> None:
+    def load_batpac_file(self, path_to_batpac_file: Path | str) -> None:
         """Load BatPaC configuration
 
         Load the properties for the BatPaC object from a TOML battery
@@ -161,13 +151,23 @@ class BatpacTool:
 
         Parameters
         ----------
-        path_to_batpac_file : Path
+        path_to_batpac_file : Path | str
             Path to the TOML BatPaC configuration file.
         """
         logging.info("[ ] Load BatPaC file from %s", path_to_batpac_file)
-        self.properties = toml.load(path_to_batpac_file)
-        logging.info("[+] Loaded BatPaC file from %s", path_to_batpac_file)
-        logging.debug("[ ] BatPaC properties %s", self.properties)
+
+        try:
+            Path.exists(Path(path_to_batpac_file))
+            config = toml.load(path_to_batpac_file)
+        except (AttributeError, OSError):
+            config = toml.loads(path_to_batpac_file)
+        config_metadata = config.pop("batpy")
+        if self.is_version_compatible(
+            semantic_version.Version(config_metadata["BatPaC SemVer"])
+        ):
+            self.properties = config
+            logging.info("[+] Loaded BatPaC file from %s", path_to_batpac_file)
+            logging.debug("[ ] BatPaC properties %s", self.properties)
 
     def add_battery(self, batteries: list[BatpacBattery]) -> None:
         """Add battery object to BatPaC object
@@ -247,7 +247,7 @@ class BatpacTool:
         )
 
     def write_value_direct(
-        self, worksheet: str, range: str, value: any
+        self, worksheet: str, cell_range: str, value: any
     ) -> None:
         """Write value in BatPaC Excel tool
 
@@ -257,14 +257,14 @@ class BatpacTool:
         ----------
         worksheet : str
             Name of the BatPaC Excel tool worksheet.
-        range : str
+        cell_range : str
             Cell range of the BatPaC Excel tool.
         value : any
             Value to write in the BatPaC Excel tool.
         """
-        self.wb.sheets[worksheet][range].value = value
+        self.workbook.sheets[worksheet][cell_range].value = value
 
-    def read_value_direct(self, worksheet: str, range: str) -> any:
+    def read_value_direct(self, worksheet: str, cell_range: str) -> any:
         """Read value from BatPaC Excel tool
 
         Read a value directly from the BatPaC Excel tool.
@@ -273,7 +273,7 @@ class BatpacTool:
         ----------
         worksheet : str
             Name of the BatPaC Excel tool worksheet.
-        range : str
+        cell_range : str
             Cell range of the BatPaC Excel tool.
 
         Returns
@@ -288,12 +288,12 @@ class BatpacTool:
             found.
         """
         try:
-            value = self.wb.sheets[worksheet][range].value
+            value = self.workbook.sheets[worksheet][cell_range].value
             return value
         except BaseException as error:
             logging.error("An exception occurred: %s", error)
-            logging.warning("[!] Key %s , %s not found", worksheet, range)
-            raise KeyError
+            logging.warning("[!] Key %s , %s not found", worksheet, cell_range)
+            raise KeyError from error
 
     def wb_helper_range(
         self,
@@ -332,23 +332,23 @@ class BatpacTool:
         """
         try:
             if additional_cell_config is not None:
-                if type(additional_cell_config) is Path:
+                if isinstance(additional_cell_config, Path):
                     additional_cell_config = toml.load(additional_cell_config)
                 range_dict = additional_cell_config
             else:
                 range_dict = self.excel_cells
 
             if battery is None:
-                range = range_dict[worksheet][name]
+                cell_range = range_dict[worksheet][name]
             else:
-                range = range_dict[worksheet][
+                cell_range = range_dict[worksheet][
                     "Battery " + str(self.batteries.index(battery) + 1)
                 ][name]
-            return range
+            return cell_range
         except BaseException as error:
             logging.error("An exception occurred: %s", error)
             logging.warning("[!] Key %s , %s not found", worksheet, name)
-            raise KeyError
+            raise KeyError from error
 
     def write_value(self, worksheet: str, name: str, value: any) -> None:
         """Write value in BatPaC Excel tool
@@ -484,17 +484,17 @@ class BatpacTool:
         Stop the automatic Excel and BatPaC calculation.
         """
         self.write_value("Dashboard", "Restart (0/1)", 0)
-        self.wb.app.calculation = "manual"
-        self.wb.app.screen_updating = False
+        self.workbook.app.calculation = "manual"
+        self.workbook.app.screen_updating = False
 
     def start_automatic_calculation(self) -> None:
         """Start automatic Excel calculation
         Start the automatic Excel and BatPaC calculation.
         """
-        reset_macro = self.wb.macro("Module1.Reset")
+        reset_macro = self.workbook.macro("Module1.Reset")
         reset_macro()
-        self.wb.app.calculation = "automatic"
-        self.wb.app.screen_updating = True
+        self.workbook.app.calculation = "automatic"
+        self.workbook.app.screen_updating = True
 
     def read_from_user_input(self, user_read_file: Path) -> dict:
         """Read user specified input from BatPaC Excel tool
@@ -696,11 +696,9 @@ class BatpacTool:
             tool.
         """
         logging.info("[ ] Save workbook")
-        if path is None:
-            path = self.workbook_path
-        self.wb.save(path)
-        self.wb = xw.Book(path)
-        self.app = self.wb.app
+        self.workbook.save(path)
+        self.workbook = xw.Book(path)
+        # self.app = self.workbook.app
         logging.info("[+] Saved workbook in %s", path)
 
     def close(self) -> bool:
@@ -714,11 +712,11 @@ class BatpacTool:
         bool
             True, if BatPaC Excel tool is closed.
         """
-        if len(self.wb.app.books) == 1:
-            self.wb.app.quit()
+        if len(self.workbook.app.books) == 1:
+            self.workbook.app.quit()
             logging.info("[+] Workbook and Excel closed")
             return True
-        self.wb.close()
+        self.workbook.close()
         logging.info("[+] Workbook closed")
         return True
 
@@ -740,23 +738,30 @@ class BatpacTool:
             If specified, storage path to the TOML file for [BatPaC_battery]
             properties, by default None.
         """
+        self._save_batpac_config(batpac_path)
+        self._save_battery_config(battery_path)
+
+    def _save_batpac_config(self, batpac_path: Path = None) -> None:
+        """Save BatPaC_tool configuration
+
+        Read all BatPaC_tool properties from the BatPaC Excel tool, save
+        these properties in the BatPaC_tool object, and write them as TOML
+        file.
+
+        Parameters
+        ----------
+        batpac_path : Path, optional
+            If specified, storage path to the TOML file for BatPaC_tool
+            properties, by default None.
+        """
         for sheet in self.excel_cells:
             for key, value in self.excel_cells[sheet].items():
                 if isinstance(value, dict):
-                    battery_number = int(key.replace("Battery ", "")) - 1
-                    for battery_key, battery_value_range in value.items():
-                        self.batteries[battery_number].set_new_property(
-                            sheet,
-                            battery_key,
-                            self.read_value_direct(sheet, battery_value_range),
-                        )
-                else:
-                    self.set_new_property(
-                        sheet, key, self.read_value(sheet, key)
-                    )
+                    continue
+                self.set_new_property(sheet, key, self.read_value(sheet, key))
 
         if batpac_path is not None:
-            with open(batpac_path, "w") as toml_file:
+            with open(batpac_path, "w", encoding="utf-8") as toml_file:
                 for sheet in tqdm(
                     self.properties, "Saving BatPaC config from each sheet"
                 ):
@@ -770,8 +775,34 @@ class BatpacTool:
                             toml_file.write(f"'{key}' = {value}\n")
                     toml_file.write("\n")
 
+    def _save_battery_config(self, battery_path: Path = None) -> None:
+        """Save [BatPaC_battery] configuration
+
+        Read all BatPaC_tool included [BatPaC_battery] properties from the
+        BatPaC Excel tool, save these properties in the [BatPaC_battery]
+        objects, and write them as TOML file.
+
+        Parameters
+        ----------
+        battery_path : Path, optional
+            If specified, storage path to the TOML file for [BatPaC_battery]
+            properties, by default None.
+        """
+        for sheet in self.excel_cells:
+            for key, value in self.excel_cells[sheet].items():
+                if isinstance(value, dict):
+                    battery_number = int(key.replace("Battery ", "")) - 1
+                    for battery_key, battery_value_range in value.items():
+                        self.batteries[battery_number].set_new_property(
+                            sheet,
+                            battery_key,
+                            self.read_value_direct(sheet, battery_value_range),
+                        )
+                else:
+                    continue
+
         if battery_path is not None:
-            with open(battery_path, "w") as toml_file:
+            with open(battery_path, "w", encoding="utf-8") as toml_file:
                 for battery in tqdm(
                     self.batteries,
                     "Saving battery configuration for each battery",

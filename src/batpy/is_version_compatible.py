@@ -5,15 +5,6 @@ import logging
 
 import semantic_version
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format="%(asctime)s [%(levelname)s]: \t%(filename)s\t%(funcName)s\t\
-        %(lineno)s\t- %(message)s",
-    filename="batpy.log",
-    filemode="w",
-    level=logging.INFO,
-)
-
 
 def is_version_compatible(
     self_version: semantic_version.Version,

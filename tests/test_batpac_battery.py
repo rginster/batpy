@@ -3,12 +3,20 @@
 """Tests for module batpac_battery
 """
 
-import pytest
-from data.batpy_test_data import example_battery_data  # noqa: F401
+from pathlib import Path
 
+import pytest
+from data.batpy_test_data_battery import example_battery_data  # noqa: F401
+
+from batpy import batpac_datasets
 from batpy.batpac_battery import BatpacBattery
 
-BATPY_BATPAC_BATTERY_CONFIG = "./src/batpy/data/batpy_batteries_config.toml"
+BATPY_BATPAC_BATTERY_CONFIG_PATH = Path(
+    "./src/batpy/data/0.0.0/batpy_batteries_config.toml"
+)
+BATPY_BATPAC_BATTERY_CONFIG = batpac_datasets.get_batpy_dataset(
+    "batpy_batteries_config", "0.0.0"
+)
 
 
 @pytest.mark.parametrize(
@@ -52,6 +60,13 @@ def test_load_battery_from_valid_file(example_battery_data):  # noqa: F811
     test_battery = BatpacBattery("Battery 2")
     assert test_battery.load_battery_file(
         BATPY_BATPAC_BATTERY_CONFIG, test_battery.name
+    )
+    properties = example_battery_data
+    assert properties == test_battery.properties
+
+    test_battery = BatpacBattery("Battery 2")
+    assert test_battery.load_battery_file(
+        BATPY_BATPAC_BATTERY_CONFIG_PATH, test_battery.name
     )
     properties = example_battery_data
     assert properties == test_battery.properties
