@@ -12,7 +12,7 @@
 
 ## Installation
 
-`batpy` is available from [PyPI](https://pypi.org/project/batpy/), and currently requires Python 3.9 or newer. It can be installed with:
+`batpy` is available from [PyPI](https://pypi.org/project/batpy/), and currently requires Python 3.10 or newer. It can be installed with:
 ```bash
 $ pip install batpy
 ```
