@@ -11,6 +11,35 @@ import semantic_version
 from batpy import data
 
 
+def get_available_batpy_dataset_versions() -> list[semantic_version.Version]:
+    """Get available batpy dataset versions
+
+    Returns
+    -------
+    list[semantic_version.Version]
+        List of available batpy dataset versions
+    """
+
+    available_versions = []
+    for version_dir in data.__versions__:
+        try:
+            available_versions.append(semantic_version.Version(version_dir))
+        except ValueError:
+            continue
+    return available_versions
+
+
+def get_latest_batpy_dataset_version() -> semantic_version.Version:
+    """Get latest batpy dataset version
+
+    Returns
+    -------
+    semantic_version.Version
+        Latest batpy dataset version available
+    """
+    return max(get_available_batpy_dataset_versions())
+
+
 def get_batpy_dataset(
     dataset_name: str, dataset_version: semantic_version.Version | str = None
 ) -> str:
@@ -20,7 +49,7 @@ def get_batpy_dataset(
     ----------
     dataset_name : str
         Name of included batpy dataset.
-    dataset_version : semantic_version.Version, optional
+    dataset_version : semantic_version.Version | str, optional
         Specific version of the included batpy dataset, otherwise latest
         version available, by default None.
 
@@ -55,35 +84,6 @@ def get_batpy_dataset(
     filename = dataset_name
 
     return get_data(__name__, data_dir + filename).decode()
-
-
-def get_latest_batpy_dataset_version() -> semantic_version.Version:
-    """Get latest batpy dataset version
-
-    Returns
-    -------
-    semantic_version.Version
-        Latest batpy dataset version available
-    """
-    return max(get_available_batpy_dataset_versions())
-
-
-def get_available_batpy_dataset_versions() -> list[semantic_version.Version]:
-    """Get available batpy dataset versions
-
-    Returns
-    -------
-    list[semantic_version.Version]
-        List of available batpy dataset versions
-    """
-
-    available_versions = []
-    for version_dir in data.__versions__:
-        try:
-            available_versions.append(semantic_version.Version(version_dir))
-        except ValueError:
-            continue
-    return available_versions
 
 
 def get_available_batpy_dataset_names(

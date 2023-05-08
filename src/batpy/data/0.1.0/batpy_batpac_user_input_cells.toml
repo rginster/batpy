@@ -1,6 +1,6 @@
 ["batpy"]
 "BatPaC version" = "BatPaC 5.0 2022-07-22"
-"BatPaC SemVer" = "0.0.0"
+"BatPaC SemVer" = "0.1.0"
 
 ["Dashboard"]
 "Restart (0/1)" = "D6"

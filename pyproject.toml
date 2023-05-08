@@ -9,7 +9,7 @@ documentation = "https://rginster.github.io/batpy/"
 repository = "https://github.com/rginster/batpy"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 xlwings = "^0.30.4"
 pathlib = "^1.0.1"
 toml = "^0.10.2"
@@ -26,7 +26,7 @@ python-semantic-release = "^7.33.3"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
-myst-nb = {version = "^0.17.2", python = "^3.9"}
+myst-nb = {version = "^0.17.2", python = "^3.10"}
 sphinx-autoapi = "^2.1.0"
 sphinx-rtd-theme = "^1.2.0"
 pre-commit = "^3.3.1"

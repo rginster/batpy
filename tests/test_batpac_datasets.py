@@ -21,8 +21,10 @@ BATPY_BATPAC_TOOL_CONFIG_VERSION = (
 )
 
 AVAILABLE_DATASETS_0_0_0 = [
+    "batpy_batpac_battery_design.toml",
     "batpy_batpac_calculation_and_validation_results.toml",
     "batpy_batpac_config.toml",
+    "batpy_batpac_summary_of_results.toml",
     "batpy_batpac_user_input_cells.toml",
     "batpy_batteries_config.toml",
 ]
