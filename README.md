@@ -1,3 +1,5 @@
+![batpy_logo](./BatPy.svg)
+
 [![ci](https://github.com/rginster/batpy/actions/workflows/ci.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/ci.yaml)
 [![cd](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml)
 [![Docs](https://github.com/rginster/batpy/actions/workflows/documentation.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/documentation.yaml)

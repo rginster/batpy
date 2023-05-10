@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 376 202" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Batpy-Logo" serif:id="Batpy Logo">
+        <g transform="matrix(2.49197,1.24598,6.93313e-18,0.955804,-238.783,-171.924)">
+            <g id="Seitenansicht">
+                <rect x="106.55" y="105.181" width="21.535" height="62.774" style="fill:rgb(49,103,149);"/>
+            </g>
+        </g>
+        <g id="Vorderansicht" transform="matrix(1,0,0,1,-9.00517,4.81586)">
+            <g transform="matrix(0.830656,-0.415328,1.9671e-17,0.955804,18.7883,18.1606)">
+                <rect x="106.55" y="105.181" width="21.535" height="62.774" style="fill:rgb(194,165,55);"/>
+            </g>
+            <g transform="matrix(0.830656,-0.415328,-1.41622e-17,0.955804,36.6768,9.21634)">
+                <rect x="106.55" y="105.181" width="21.535" height="62.774" style="fill:rgb(39,82,119);"/>
+            </g>
+            <g transform="matrix(0.830656,-0.415328,-1.41622e-17,0.955804,0.89973,27.1049)">
+                <rect x="106.55" y="105.181" width="21.535" height="62.774" style="fill:rgb(39,82,119);"/>
+            </g>
+        </g>
+        <g id="SeitenansichtExcel">
+            <g id="Draufsicht">
+                <g transform="matrix(0.830656,-0.415328,0.854897,0.427449,-133.802,51.7168)">
+                    <rect x="106.55" y="105.181" width="21.535" height="62.774" style="fill:rgb(243,214,104);"/>
+                </g>
+                <g transform="matrix(0.830656,-0.415328,0.854897,0.427449,-115.913,42.7725)">
+                    <rect x="106.55" y="105.181" width="21.535" height="62.774" style="fill:rgb(88,131,168);"/>
+                </g>
+                <g transform="matrix(0.830656,-0.415328,0.854897,0.427449,-151.69,60.661)">
+                    <rect x="106.55" y="105.181" width="21.535" height="62.774" style="fill:rgb(88,131,168);"/>
+                </g>
+            </g>
+        </g>
+        <g id="DraufsichtExcel">
+            <path d="M80.401,148.2L26.735,121.368L26.735,61.368L80.401,34.535L80.401,148.2Z" style="fill:rgb(28,104,63);"/>
+            <g transform="matrix(1.3644,0.682199,8.30063e-17,1.50102,-22.8437,-47.5119)">
+                <g transform="matrix(44.6735,0,0,44.6735,69.7969,88)">
+                </g>
+                <text x="40px" y="88px" style="font-family:'Helvetica';font-size:44.673px;fill:white;">X</text>
+            </g>
+        </g>
+    </g>
+    <g id="Seperation" transform="matrix(1.78785e-06,-5.09845,-4.23516e-22,12.7248,80.4007,-762.31)">
+        <rect x="86.374" y="62.622" width="2.102" height="8.933" style="fill:white;"/>
+    </g>
+    <g transform="matrix(1.90431,0,0,2.68427,-195.615,-259.872)">
+        <g transform="matrix(0.973905,0,0,1,4.53038,0)">
+            <g transform="matrix(45.4521,0,0,45.4521,294.877,142.281)">
+            </g>
+            <text x="173.612px" y="142.281px" style="font-family:'Helvetica';font-size:45.452px;fill:rgb(100,100,100);">BatPy</text>
+        </g>
+    </g>
+    <g transform="matrix(0.134213,0,0,5.28922,75.3396,-818.76)">
+        <rect x="33.984" y="161.327" width="7.451" height="21.49" style="fill:white;"/>
+    </g>
+</svg>
