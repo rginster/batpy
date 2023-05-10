@@ -1,2 +1,2 @@
-```{include} ../CONDUCT.md
+```{include} ../CODE_OF_CONDUCT.md
 ```
