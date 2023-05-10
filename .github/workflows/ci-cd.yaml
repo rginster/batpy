@@ -1,5 +1,7 @@
 name: ci-cd
 
+on: workflow_dispatch
+
 jobs:
   ci:
     # Set up operating system
