@@ -1,7 +1,9 @@
-[![ci-cd](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml)
+[![ci](https://github.com/rginster/batpy/actions/workflows/ci.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/ci.yaml)
+[![cd](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml)
 [![Docs](https://github.com/rginster/batpy/actions/workflows/documentation.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/documentation.yaml)
 [![pages-build-deployment](https://github.com/rginster/batpy/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/rginster/batpy/actions/workflows/pages/pages-build-deployment)
 [![codecov](https://codecov.io/gh/rginster/batpy/branch/main/graph/badge.svg?token=JH8L3B14AW)](https://codecov.io/gh/rginster/batpy)
+
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/batpy)
 [![PyPi](https://img.shields.io/pypi/v/batpy.svg)](https://pypi.python.org/pypi/batpy)
 [![PyPi](https://img.shields.io/pypi/dm/batpy.svg)](https://pypi.python.org/pypi/batpy)
