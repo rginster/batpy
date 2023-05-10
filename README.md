@@ -1,4 +1,4 @@
-![BatPy](https://github.com/rginster/batpy/assets/28988895/36e9c9fe-9549-4431-a7fa-0903df84f45f)
+![BatPy](https://raw.githubusercontent.com/rginster/batpy/main/BatPy.svg)
 [![ci](https://github.com/rginster/batpy/actions/workflows/ci.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/ci.yaml)
 [![cd](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/ci-cd.yaml)
 [![Docs](https://github.com/rginster/batpy/actions/workflows/documentation.yaml/badge.svg)](https://github.com/rginster/batpy/actions/workflows/documentation.yaml)
