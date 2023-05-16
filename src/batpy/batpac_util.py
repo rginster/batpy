@@ -26,13 +26,13 @@ def load_configuration(configuration: Path | str | dict) -> dict:
     dict
         Returns dictionary representation of configuration.
     """
-
+    logging.info("[ ] Load configuration from %s", configuration)
     try:
         Path.exists(Path(configuration))
         config = toml.load(configuration)
     except (AttributeError, OSError):
         config = toml.loads(configuration)
-    logging.info("[+] Loaded user file from %s", configuration)
+    logging.info("[+] Loaded configuration from %s", configuration)
     logging.debug("[ ] Config properties %s", config)
     return config
 
