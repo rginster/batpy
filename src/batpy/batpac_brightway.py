@@ -11,7 +11,7 @@ import batpy
 from batpy.batpac_battery import BatpacBattery
 from batpy.batpac_tool import BatpacTool
 from batpy.batpac_util import load_configuration
-from batpy.formulas import evaluate_formula
+from batpy.formula_engine import evaluate_formula
 from batpy.is_version_compatible import is_version_compatible
 
 
@@ -217,7 +217,7 @@ class BrightwayConnector:
             chunk_to_write, batpac, battery, batpac_config
         )
         formula = "".join(data_chunk)
-        return evaluate_formula(formula, {})
+        return evaluate_formula(formula)
 
     def _write_value_direct(
         self, worksheet: str, cell_range: str, value: any
