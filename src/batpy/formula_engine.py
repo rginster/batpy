@@ -12,7 +12,7 @@ import operator
 MAX_FORMULA_LENGTH = 255
 
 
-def byte_offset_to_char_offset(source: str, byte_offset: int) -> int:
+def _byte_offset_to_char_offset(source: str, byte_offset: int) -> int:
     """Convert byte offset to char offset
 
     Cuts out all bytes before byte_offset mark and then attempts to count the
@@ -97,7 +97,7 @@ class FormulaSyntaxError(FormulaError):
         """
         lineno = node.lineno
         col_offset = node.col_offset
-        offset = byte_offset_to_char_offset(source, col_offset)
+        offset = _byte_offset_to_char_offset(source, col_offset)
         return cls(msg=msg, lineno=lineno, offset=offset + 1)
 
     @classmethod
@@ -143,7 +143,7 @@ class FormulaRuntimeError(FormulaError):
     """
 
 
-def eval_constant(
+def _eval_constant(
     source: str, node: ast.Constant, vars_val: dict[str, any]
 ) -> float:
     """Evaluate the value of the AST constant node
@@ -175,7 +175,7 @@ def eval_constant(
     )
 
 
-def eval_name(source: str, node: ast.Name, vars_val: dict[str, any]) -> float:
+def _eval_name(source: str, node: ast.Name, vars_val: dict[str, any]) -> float:
     """Evaluate the value of the variable (AST name node)
 
     Parameters
@@ -205,7 +205,7 @@ def eval_name(source: str, node: ast.Name, vars_val: dict[str, any]) -> float:
         ) from exc
 
 
-def eval_node(source: str, node: ast.AST, vars_val: dict[str, any]) -> float:
+def _eval_node(source: str, node: ast.AST, vars_val: dict[str, any]) -> float:
     """Evaluate supported AST node
 
     The eval_node function accepts supported AST nodes and passes the node to a
@@ -231,11 +231,11 @@ def eval_node(source: str, node: ast.AST, vars_val: dict[str, any]) -> float:
         Error, if AST node's formula syntax is wrong
     """
     supported_evaluators = {
-        ast.Expression: eval_expression,
-        ast.Constant: eval_constant,
-        ast.Name: eval_name,
-        ast.BinOp: eval_binop,
-        ast.UnaryOp: eval_unaryop,
+        ast.Expression: _eval_expression,
+        ast.Constant: _eval_constant,
+        ast.Name: _eval_name,
+        ast.BinOp: _eval_binop,
+        ast.UnaryOp: _eval_unaryop,
     }
 
     for ast_type, evaluator in supported_evaluators.items():
@@ -292,14 +292,14 @@ def evaluate_formula(formula: str, vars_val: dict[str, any] = None) -> float:
         raise FormulaSyntaxError.from_syntax_error(error, "Could not parse")
 
     try:
-        return eval_node(formula, node, vars_val)
+        return _eval_node(formula, node, vars_val)
     except FormulaSyntaxError:
         raise
     except Exception as error:
         raise FormulaRuntimeError(f"Evaluation failed: {error}") from error
 
 
-def eval_expression(
+def _eval_expression(
     source: str, node: ast.Expression, vars_val: dict[str, any]
 ) -> float:
     """Evaluate top level AST node
@@ -318,10 +318,10 @@ def eval_expression(
     float
         Result of the evaluated formula
     """
-    return eval_node(source, node.body, vars_val)
+    return _eval_node(source, node.body, vars_val)
 
 
-def eval_binop(
+def _eval_binop(
     source: str, node: ast.BinOp, vars_val: dict[str, any]
 ) -> float:
     """Evaluate binary operations from AST node
@@ -355,8 +355,8 @@ def eval_binop(
         ast.Div: operator.truediv,
     }
 
-    left_value = eval_node(source, node.left, vars_val)
-    right_value = eval_node(source, node.right, vars_val)
+    left_value = _eval_node(source, node.left, vars_val)
+    right_value = _eval_node(source, node.right, vars_val)
 
     try:
         apply = supported_operations[type(node.op)]
@@ -368,7 +368,7 @@ def eval_binop(
     return apply(left_value, right_value)
 
 
-def eval_unaryop(
+def _eval_unaryop(
     source: str, node: ast.UnaryOp, vars_val: dict[str, any]
 ) -> float:
     """Evaluate unary operations from AST node
@@ -396,7 +396,7 @@ def eval_unaryop(
         ast.USub: operator.neg,
     }
 
-    operand_value = eval_node(source, node.operand, vars_val)
+    operand_value = _eval_node(source, node.operand, vars_val)
 
     try:
         apply = supported_operations[type(node.op)]
