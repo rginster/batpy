@@ -365,11 +365,12 @@ def test_start_automatic_calculation():
     assert test_batpac.read_value("Dashboard", "Restart (0/1)") == 1
 
 
-def test_calculate():
-    """Test calculate"""
+def test_read_from_user_input(example_battery_data):  # noqa: F811
+    """Test from_user_input"""
     test_batpac = BatpacTool(
         BATPY_BATPAC_EXCEL,
-        BATPY_BATPAC_USER_INPUT_CONFIG_PATH,
+        BATPY_BATPAC_USER_INPUT_CONFIG,
+        BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG,
     )
     test_bat1 = BatpacBattery("Battery 1")
     test_bat2 = BatpacBattery("Battery 2")
@@ -391,13 +392,21 @@ def test_calculate():
             test_bat7,
         ],
     )
-    test_batpac.load_batpac_file(BATPY_BATPAC_TOOL_CONFIG_PATH)
+    test_batpac.load_batpac_file(BATPY_BATPAC_TOOL_CONFIG)
     test_batpac.calculate()
     for sheet in test_batpac.batteries[0].properties:
         for key, value in test_batpac.batteries[0].properties[sheet].items():
             assert (
                 test_batpac.read_value_battery(sheet, key, test_bat1) == value
             )
+
+    validation = test_batpac.read_from_user_input(
+        BATPY_BATPAC_USER_INPUT_CONFIG_PATH
+    )
+    validation_result = example_battery_data
+    assert (
+        validation_result["Dashboard"] == validation["Dashboard"]["Battery 2"]
+    )
 
 
 def test_save_config(example_battery_data):  # noqa: F811
@@ -469,11 +478,6 @@ def test_save_config(example_battery_data):  # noqa: F811
 
     pathlib.Path.unlink(path_saved_batpac)
     pathlib.Path.unlink(path_saved_batteries)
-
-
-def test_from_user_input():
-    """Test from_user_input"""
-    assert True
 
 
 def test_read_calculation_and_validation_results():
@@ -607,6 +611,5 @@ def test_close_batpac():
     )
     xw.Book()
     assert test_batpac.close()
-    # new_book.app.quit()
     for app in xw.apps:
         app.quit()
