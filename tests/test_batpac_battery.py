@@ -8,13 +8,13 @@ from pathlib import Path
 import pytest
 from data.batpy_test_data_battery import example_battery_data  # noqa: F401
 
-from batpy import batpac_datasets
+from batpy import datasets
 from batpy.batpac_battery import BatpacBattery
 
 BATPY_BATPAC_BATTERY_CONFIG_PATH = Path(
     "./src/batpy/data/0.0.0/batpy_batteries_config.toml"
 )
-BATPY_BATPAC_BATTERY_CONFIG = batpac_datasets.get_batpy_dataset(
+BATPY_BATPAC_BATTERY_CONFIG = datasets.get_batpy_dataset(
     "batpy_batteries_config", "0.0.0"
 )
 

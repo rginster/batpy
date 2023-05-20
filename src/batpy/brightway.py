@@ -10,9 +10,8 @@ import xlwings as xw
 import batpy
 from batpy.batpac_battery import BatpacBattery
 from batpy.batpac_tool import BatpacTool
-from batpy.batpac_util import load_configuration
 from batpy.formula_engine import evaluate_formula
-from batpy.is_version_compatible import is_version_compatible
+from batpy.utility_functions import is_version_compatible, load_configuration
 
 
 class BrightwayConnector:
@@ -96,24 +95,23 @@ class BrightwayConnector:
         )
 
     def _load_user_configuration(
-        self, path_to_user_file: Path | str | dict
+        self, path_to_configuration: Path | str
     ) -> dict:
         """Load configuration
 
-        Loads a single configuration from a TOML file, string or dictionary.
+        Loads a single configuration from a TOML file or string.
 
         Parameters
         ----------
-        configuration : Path | str | dict
-            Path to the TOML configuration file or configuration as string or
-            dictionary.
+        path_to_configuration : Path | str
+            Path to the TOML configuration file or configuration as string.
 
         Returns
         -------
         dict
             Returns dictionary representation of configuration.
         """
-        config = load_configuration(path_to_user_file)
+        config = load_configuration(path_to_configuration)
         config_metadata = config.pop("batpy")
         self.is_version_compatible(
             semantic_version.Version(config_metadata["BatPaC SemVer"])
@@ -121,7 +119,7 @@ class BrightwayConnector:
         return config
 
     def load_batpac_to_brightway_configuration(
-        self, path_batpac_to_brightway_file: Path | str | dict
+        self, path_batpac_to_brightway_file: Path | str
     ) -> None:
         """Load user file configuration
 
@@ -129,9 +127,8 @@ class BrightwayConnector:
 
         Parameters
         ----------
-        path_to_user_file : Path | str | dict
-            Path to the TOML configuration file or configuration as string or
-            dictionary.
+        path_to_user_file : Path | str
+            Path to the TOML configuration file or configuration as string.
         """
         self.properties = self._load_user_configuration(
             path_batpac_to_brightway_file

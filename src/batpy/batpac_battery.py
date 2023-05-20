@@ -5,10 +5,9 @@ import logging
 from pathlib import Path
 
 import semantic_version
-import toml
 
 import batpy
-from batpy.is_version_compatible import is_version_compatible
+from batpy.utility_functions import is_version_compatible, load_configuration
 
 
 class BatpacBattery:
@@ -93,11 +92,7 @@ class BatpacBattery:
             battery_name,
             path_to_battery_file,
         )
-        try:
-            Path.exists(Path(path_to_battery_file))
-            config = toml.load(path_to_battery_file)
-        except (AttributeError, OSError):
-            config = toml.loads(path_to_battery_file)
+        config = load_configuration(path_to_battery_file)
         config_metadata = config.pop("batpy")
         if is_version_compatible(
             self.version,

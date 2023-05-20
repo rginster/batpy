@@ -12,7 +12,7 @@ from tqdm import tqdm
 
 import batpy
 from batpy.batpac_battery import BatpacBattery
-from batpy.is_version_compatible import is_version_compatible
+from batpy.utility_functions import is_version_compatible, load_configuration
 
 
 class BatpacTool:
@@ -31,26 +31,18 @@ class BatpacTool:
         Parameters
         ----------
         path_to_user_file : Path | str
-            Path to the TOML user file or string (default dataset).
+            Path to the TOML user file or configuration as string.
 
         Returns
         -------
         dict
             Returns dictionary representation of read TOML file.
         """
-        logging.info("[ ] Load BatPaC file from %s", path_to_user_file)
-
-        try:
-            Path.exists(Path(path_to_user_file))
-            config = toml.load(path_to_user_file)
-        except (AttributeError, OSError):
-            config = toml.loads(path_to_user_file)
+        config = load_configuration(path_to_user_file)
         config_metadata = config.pop("batpy")
         self.is_version_compatible(
             semantic_version.Version(config_metadata["BatPaC SemVer"])
         )
-        logging.info("[+] Loaded user file from %s", path_to_user_file)
-        logging.debug("[ ] Config properties %s", config)
         return config
 
     def __init__(

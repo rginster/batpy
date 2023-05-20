@@ -11,11 +11,11 @@ import xlwings as xw
 from data.batpy_test_data_batpac_tool import example_batpac_data  # noqa: F401
 from data.batpy_test_data_battery import example_battery_data  # noqa: F401
 
-from batpy import batpac_datasets
+from batpy import datasets
 from batpy.batpac_battery import BatpacBattery
 from batpy.batpac_tool import BatpacTool
 
-BATPY_BATPAC_BATTERY_CONFIG = batpac_datasets.get_batpy_dataset(
+BATPY_BATPAC_BATTERY_CONFIG = datasets.get_batpy_dataset(
     "batpy_batteries_config", "0.0.0"
 )
 
@@ -23,7 +23,7 @@ BATPY_BATPAC_BATTERY_CONFIG_PATH = (
     "./src/batpy/data/0.0.0/batpy_batteries_config.toml"
 )
 
-BATPY_BATPAC_USER_INPUT_CONFIG = batpac_datasets.get_batpy_dataset(
+BATPY_BATPAC_USER_INPUT_CONFIG = datasets.get_batpy_dataset(
     "batpy_batpac_user_input_cells.toml", "0.0.0"
 )
 
@@ -31,7 +31,7 @@ BATPY_BATPAC_USER_INPUT_CONFIG_PATH = (
     "./src/batpy/data/0.0.0/batpy_batpac_user_input_cells.toml"
 )
 
-BATPY_BATPAC_TOOL_CONFIG = batpac_datasets.get_batpy_dataset(
+BATPY_BATPAC_TOOL_CONFIG = datasets.get_batpy_dataset(
     "batpy_batpac_config.toml", "0.0.0"
 )
 
@@ -39,10 +39,8 @@ BATPY_BATPAC_TOOL_CONFIG_PATH = (
     "./src/batpy/data/0.0.0/batpy_batpac_config.toml"
 )
 
-BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG = (
-    batpac_datasets.get_batpy_dataset(
-        "batpy_batpac_calculation_and_validation_results.toml", "0.0.0"
-    )
+BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG = datasets.get_batpy_dataset(
+    "batpy_batpac_calculation_and_validation_results.toml", "0.0.0"
 )
 
 BATPY_BATPAC_TOOL_CALCULATION_VALIDATION_CONFIG_PATH = pathlib.Path(
