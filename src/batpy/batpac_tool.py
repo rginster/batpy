@@ -23,6 +23,36 @@ class BatpacTool:
     parameters of the BatPaC Excel tool in the dictionary properties.
     """
 
+    def _load_user_file(self, path_to_user_file: Path | str) -> dict:
+        """Load user file configuration
+
+        Load the user configuration from a TOML user file.
+
+        Parameters
+        ----------
+        path_to_user_file : Path | str
+            Path to the TOML user file or string (default dataset).
+
+        Returns
+        -------
+        dict
+            Returns dictionary representation of read TOML file.
+        """
+        logging.info("[ ] Load BatPaC file from %s", path_to_user_file)
+
+        try:
+            Path.exists(Path(path_to_user_file))
+            config = toml.load(path_to_user_file)
+        except (AttributeError, OSError):
+            config = toml.loads(path_to_user_file)
+        config_metadata = config.pop("batpy")
+        self.is_version_compatible(
+            semantic_version.Version(config_metadata["BatPaC SemVer"])
+        )
+        logging.info("[+] Loaded user file from %s", path_to_user_file)
+        logging.debug("[ ] Config properties %s", config)
+        return config
+
     def __init__(
         self,
         batpac_workbook_path: Path,
@@ -67,11 +97,11 @@ class BatpacTool:
         )
         self.version = semantic_version.Version(batpy.__version__)
 
-        self.excel_cells = self.load_user_file(
+        self.excel_cells = self._load_user_file(
             cell_definition_user_input_toml_path
         )
         if cell_definition_calculation_validation_results:
-            self.toml_calculation_validation_results = self.load_user_file(
+            self.toml_calculation_validation_results = self._load_user_file(
                 cell_definition_calculation_validation_results
             )
         self.batteries = []
@@ -135,36 +165,6 @@ class BatpacTool:
         return is_version_compatible(
             self.version, version_to_check, include_minor
         )
-
-    def load_user_file(self, path_to_user_file: Path | str) -> dict:
-        """Load user file configuration
-
-        Load the user configuration from a TOML user file.
-
-        Parameters
-        ----------
-        path_to_user_file : Path | str
-            Path to the TOML user file or string (default dataset).
-
-        Returns
-        -------
-        dict
-            Returns dictionary representation of read TOML file.
-        """
-        logging.info("[ ] Load BatPaC file from %s", path_to_user_file)
-
-        try:
-            Path.exists(Path(path_to_user_file))
-            config = toml.load(path_to_user_file)
-        except (AttributeError, OSError):
-            config = toml.loads(path_to_user_file)
-        config_metadata = config.pop("batpy")
-        self.is_version_compatible(
-            semantic_version.Version(config_metadata["BatPaC SemVer"])
-        )
-        logging.info("[+] Loaded user file from %s", path_to_user_file)
-        logging.debug("[ ] Config properties %s", config)
-        return config
 
     def load_batpac_file(self, path_to_batpac_file: Path | str) -> None:
         """Load BatPaC configuration
@@ -359,7 +359,7 @@ class BatpacTool:
                 if isinstance(additional_cell_config, dict):
                     range_dict = additional_cell_config
                 else:
-                    range_dict = self.load_user_file(additional_cell_config)
+                    range_dict = self._load_user_file(additional_cell_config)
             else:
                 range_dict = self.excel_cells
 
@@ -541,7 +541,7 @@ class BatpacTool:
             Dictionary in the format {"sheet" : {"name" : value} }
         """
 
-        additional_cells = self.load_user_file(user_read_file)
+        additional_cells = self._load_user_file(user_read_file)
         values_dict = additional_cells
         for sheet_name, sheet_key in additional_cells.items():
             for batpac_key, batpac_cell_range in sheet_key.items():
@@ -596,7 +596,7 @@ class BatpacTool:
                     "No configuration for calculation and validation found."
                 )
         else:
-            self.toml_calculation_validation_results = self.load_user_file(
+            self.toml_calculation_validation_results = self._load_user_file(
                 toml_file_calculation_validation_results
             )
 
