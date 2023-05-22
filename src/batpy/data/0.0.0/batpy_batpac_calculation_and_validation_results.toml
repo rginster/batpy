@@ -1,66 +1,67 @@
 ["batpy"]
-"BatPaC version" = "BatPaC 5.0 2022-07-22"
-"BatPaC SemVer" = "0.0.0"
+    "BatPaC version" = "BatPaC 5.0 2022-07-22"
+    "BatPaC SemVer"  = "0.0.0"
+    "information"    = "Configuration for calculation and validation results in BatPaC Excel"
 
 ["Dashboard"."Battery 1"]
-## Calculation and Validation
-"Configuration Errors (see table to right)" = "D129"
-"Configuration Warnings (see table  to right)" = "D130"
-"Plant Size, GWh" = "D131"
-"Power-to-energy ratio" = "D132"
-"Adequacy of cooling" = "D133"
-"Cathode thickness limited by" = "D134"
+    ## Calculation and Validation
+    "Configuration Errors (see table to right)"    = "D129"
+    "Configuration Warnings (see table  to right)" = "D130"
+    "Plant Size, GWh"                              = "D131"
+    "Power-to-energy ratio"                        = "D132"
+    "Adequacy of cooling"                          = "D133"
+    "Cathode thickness limited by"                 = "D134"
 
 ["Dashboard"."Battery 2"]
-## Calculation and Validation
-"Configuration Errors (see table to right)" = "E129"
-"Configuration Warnings (see table  to right)" = "E130"
-"Plant Size, GWh" = "E131"
-"Power-to-energy ratio" = "E132"
-"Adequacy of cooling" = "E133"
-"Cathode thickness limited by" = "E134"
+    ## Calculation and Validation
+    "Configuration Errors (see table to right)"    = "E129"
+    "Configuration Warnings (see table  to right)" = "E130"
+    "Plant Size, GWh"                              = "E131"
+    "Power-to-energy ratio"                        = "E132"
+    "Adequacy of cooling"                          = "E133"
+    "Cathode thickness limited by"                 = "E134"
 
 ["Dashboard"."Battery 3"]
-## Calculation and Validation
-"Configuration Errors (see table to right)" = "F129"
-"Configuration Warnings (see table  to right)" = "F130"
-"Plant Size, GWh" = "F131"
-"Power-to-energy ratio" = "F132"
-"Adequacy of cooling" = "F133"
-"Cathode thickness limited by" = "F134"
+    ## Calculation and Validation
+    "Configuration Errors (see table to right)"    = "F129"
+    "Configuration Warnings (see table  to right)" = "F130"
+    "Plant Size, GWh"                              = "F131"
+    "Power-to-energy ratio"                        = "F132"
+    "Adequacy of cooling"                          = "F133"
+    "Cathode thickness limited by"                 = "F134"
 
 ["Dashboard"."Battery 4"]
-## Calculation and Validation
-"Configuration Errors (see table to right)" = "G129"
-"Configuration Warnings (see table  to right)" = "G130"
-"Plant Size, GWh" = "G131"
-"Power-to-energy ratio" = "G132"
-"Adequacy of cooling" = "G133"
-"Cathode thickness limited by" = "G134"
+    ## Calculation and Validation
+    "Configuration Errors (see table to right)"    = "G129"
+    "Configuration Warnings (see table  to right)" = "G130"
+    "Plant Size, GWh"                              = "G131"
+    "Power-to-energy ratio"                        = "G132"
+    "Adequacy of cooling"                          = "G133"
+    "Cathode thickness limited by"                 = "G134"
 
 ["Dashboard"."Battery 5"]
-## Calculation and Validation
-"Configuration Errors (see table to right)" = "H129"
-"Configuration Warnings (see table  to right)" = "H130"
-"Plant Size, GWh" = "H131"
-"Power-to-energy ratio" = "H132"
-"Adequacy of cooling" = "H133"
-"Cathode thickness limited by" = "H134"
+    ## Calculation and Validation
+    "Configuration Errors (see table to right)"    = "H129"
+    "Configuration Warnings (see table  to right)" = "H130"
+    "Plant Size, GWh"                              = "H131"
+    "Power-to-energy ratio"                        = "H132"
+    "Adequacy of cooling"                          = "H133"
+    "Cathode thickness limited by"                 = "H134"
 
 ["Dashboard"."Battery 6"]
-## Calculation and Validation
-"Configuration Errors (see table to right)" = "I129"
-"Configuration Warnings (see table  to right)" = "I130"
-"Plant Size, GWh" = "I131"
-"Power-to-energy ratio" = "I132"
-"Adequacy of cooling" = "I133"
-"Cathode thickness limited by" = "I134"
+    ## Calculation and Validation
+    "Configuration Errors (see table to right)"    = "I129"
+    "Configuration Warnings (see table  to right)" = "I130"
+    "Plant Size, GWh"                              = "I131"
+    "Power-to-energy ratio"                        = "I132"
+    "Adequacy of cooling"                          = "I133"
+    "Cathode thickness limited by"                 = "I134"
 
 ["Dashboard"."Battery 7"]
-## Calculation and Validation
-"Configuration Errors (see table to right)" = "J129"
-"Configuration Warnings (see table  to right)" = "J130"
-"Plant Size, GWh" = "J131"
-"Power-to-energy ratio" = "J132"
-"Adequacy of cooling" = "J133"
-"Cathode thickness limited by" = "J134"
+    ## Calculation and Validation
+    "Configuration Errors (see table to right)"    = "J129"
+    "Configuration Warnings (see table  to right)" = "J130"
+    "Plant Size, GWh"                              = "J131"
+    "Power-to-energy ratio"                        = "J132"
+    "Adequacy of cooling"                          = "J133"
+    "Cathode thickness limited by"                 = "J134"
