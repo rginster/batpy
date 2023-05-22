@@ -172,12 +172,18 @@ def get_dataset_information(dataset_stream: str) -> str:
 
 def get_available_batpy_datasets(
     dataset_version: semantic_version.Version | str = None,
-) -> dict[str:str]:
+) -> dict[str, str]:
     """Get available batpy datasets
+
+    Parameters
+    ----------
+    dataset_version : semantic_version.Version | str, optional
+        Specific version of the included batpy dataset, otherwise latest
+        version available, by default None.
 
     Returns
     -------
-    dict[str:str]
+    dict[str, str]
         Returns available batpy dataset names and their corresponding
         information.
     """
