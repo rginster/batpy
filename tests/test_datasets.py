@@ -10,7 +10,7 @@ from batpy import data, datasets
 
 # from data.batpy_test_data import example_battery_data  # noqa: F401
 
-LATEST_DATASET_VERSION = "0.1.0"
+LATEST_DATASET_VERSION = "0.3.0"
 
 
 BATPY_BATPAC_TOOL_CONFIG = (
@@ -28,6 +28,10 @@ AVAILABLE_DATASETS_0_0_0 = [
     "batpy_batpac_user_input_cells.toml",
     "batpy_batteries_config.toml",
 ]
+
+DATASET_INFORMATION = (
+    "Configuration for worksheet battery design in BatPaC Excel"
+)
 
 
 def test_get_batpy_dataset():
@@ -91,3 +95,20 @@ def test_get_available_batpy_dataset_names():
     assert datasets.get_available_batpy_dataset_names("")
     with pytest.raises(ValueError):
         assert datasets.get_available_batpy_dataset_names("42.42.42")
+
+
+def test_get_available_batpy_datasets():
+    """Test get_available_batpy_datasets"""
+    dataset_dict = datasets.get_available_batpy_datasets()
+    assert (
+        dataset_dict["batpy_batpac_battery_design.toml"] == DATASET_INFORMATION
+    )
+    with pytest.raises(KeyError):
+        dataset_dict = datasets.get_batpy_dataset(
+            "batpy_batpac_battery_design"
+        )
+        dataset_dict = dataset_dict.replace(
+            '"information"',
+            '"information_"',
+        )
+        assert datasets.get_dataset_information(dataset_dict)
