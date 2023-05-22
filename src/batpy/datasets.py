@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-"""Module, to load default batpy datasets
+"""Module to load default batpy datasets
 """
 
 # import logging
@@ -8,7 +8,7 @@ from pkgutil import get_data
 
 import semantic_version
 
-from batpy import data
+from batpy import data, utility_functions
 
 
 def get_available_batpy_dataset_versions() -> list[semantic_version.Version]:
@@ -143,6 +143,50 @@ def get_available_batpy_dataset_names(
         raise ValueError(f"dataset version {dataset_version} is not available")
 
     return batpy_dataset_names
+
+
+def get_dataset_information(dataset_stream: str) -> str:
+    """Get information of dataset
+
+    Parameters
+    ----------
+    dataset_stream : str
+        String representation of dataset.
+
+    Returns
+    -------
+    str
+        Available dataset information
+
+    Raises
+    ------
+    KeyError
+        If no information is specified
+    """
+    config = utility_functions.load_configuration(dataset_stream)
+    try:
+        return config["batpy"]["information"]
+    except KeyError as error:
+        raise KeyError("Information for dataset are not available") from error
+
+
+def get_available_batpy_datasets(
+    dataset_version: semantic_version.Version | str = None,
+) -> dict[str:str]:
+    """Get available batpy datasets
+
+    Returns
+    -------
+    dict[str:str]
+        Returns available batpy dataset names and their corresponding
+        information.
+    """
+    dataset_names = get_available_batpy_dataset_names(dataset_version)
+    dataset_names_information = {
+        name: get_dataset_information(get_batpy_dataset(name))
+        for name in dataset_names
+    }
+    return dataset_names_information
 
 
 # def main():
