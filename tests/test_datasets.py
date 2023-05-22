@@ -2,6 +2,8 @@
 """Tests for module batpac_datasets
 """
 
+from pathlib import Path
+
 import pytest
 import semantic_version
 import toml
@@ -32,6 +34,8 @@ AVAILABLE_DATASETS_0_0_0 = [
 DATASET_INFORMATION = (
     "Configuration for worksheet battery design in BatPaC Excel"
 )
+
+BATPY_BRIGHTWAY_EXCEL = Path("./tests/data/test_BatPaC-Brightway.xlsx")
 
 
 def test_get_batpy_dataset():
@@ -112,3 +116,11 @@ def test_get_available_batpy_datasets():
             '"information_"',
         )
         assert datasets.get_dataset_information(dataset_dict)
+
+
+def test_copy_integrated_brightway_workbook():
+    """Test copy_integrated_brightway_workbook"""
+    assert not BATPY_BRIGHTWAY_EXCEL.is_file()
+    datasets.copy_integrated_brightway_workbook(BATPY_BRIGHTWAY_EXCEL)
+    assert BATPY_BRIGHTWAY_EXCEL.is_file()
+    Path.unlink(BATPY_BRIGHTWAY_EXCEL)

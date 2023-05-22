@@ -1,0 +1,74 @@
+["batpy"]
+    "BatPaC version" = "BatPaC 5.0 2022-07-22"
+    "BatPaC SemVer" = "0.3.0"
+    "information"  = "Configuration for brightway2 export"
+
+# ["Worksheetname in BatPaC-Brightway.xlsx"]
+# "Name of row in BatPaC-Brightway.xlsx" = [
+#     ["Cellrange in BatPaC-Brightway.xlsx"],
+#     [
+#         "Worksheetname in BatPaC.xlsm", "Variable name in *.toml config", "additional mathematical operation",
+#         "","constant value", "additional mathematical operation",
+#         ...
+#     ]
+# ]
+["Module"]
+    "TEST_Calculation_Example_1" = [
+        ["B23"],
+        ["Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
+        "","5","*",
+        "","2"]
+    ]
+
+    "TEST_Calculation_Example_2" = [
+        ["B24"],
+        ["","(","",
+        "Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
+        "","5)","*",
+        "","2"]
+    ]
+
+    "Number of cells per module " = [
+        ["B14"],
+        ["Battery Design", "Battery Pack Parameters, Number of cells per module "]
+    ]
+
+    "Total mass of interconnects per module" = [
+        ["B15"],
+        ["Battery Design", "Cell Interconnects (Cu), Total mass of interconnects per module, g"]
+    ]
+
+    "Mass of both panels (2.1 g/cm3)" = [
+        ["B16"],
+        ["Battery Design", "Interconnect Panels, Front and Back (polymer), Mass of both panels (2.1 g/cm3), g"]
+    ]
+
+    "Mass of both tabs" = [
+        ["B17"],
+        ["Battery Design", "Tabs to Module Terminals, Mass of both tabs, g"]
+    ]
+
+    "Mass of both terminals (includes 20% additional weight for insulation and fastener)" = [
+        ["B18"],
+        ["Battery Design", "Module Terminals, Mass of both terminals (includes 20% additional weight for insulation and fastener), g"]
+    ]
+
+    "Total mass per module of aluminum heat conductors or thermal enclosures" = [
+        ["B19"],
+        ["Battery Design", "Module Conductors / Thermal Enclosure, Total mass per module of aluminum heat conductors or thermal enclosures, g"]
+    ]
+
+    "Module monitoring system" = [
+        ["B20"],
+        ["Battery Design", "Module Enclosure, Module monitoring system (MMS, 120-mm L x 12-mm W x 16-mm H, 2.0 g/cm3), g"]
+    ]
+
+    "Module enclosure" = [
+        ["B21"],
+        ["Battery Design", "Module Enclosure, Module enclosure, g"]
+    ]
+
+    "Provisions for gas release" = [
+        ["B22"],
+        ["Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g"]
+    ]

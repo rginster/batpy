@@ -294,18 +294,18 @@ def test_write_read_value():
     test_batpac.write_value("Dashboard", "Restart (0/1)", 0)
     assert test_batpac.read_value("Dashboard", "Restart (0/1)") == 0
 
-    test_batpac.write_value_battery(
-        "Dashboard", "Target rated peak power of pack, kW", test_bat1, True
+    test_batpac.write_value(
+        "Dashboard", "Target rated peak power of pack, kW", True, test_bat1
     )
-    assert test_batpac.read_value_battery(
+    assert test_batpac.read_value(
         "Dashboard", "Target rated peak power of pack, kW", test_bat1
     )
 
-    test_batpac.write_value_battery(
-        "Dashboard", "Target rated peak power of pack, kW", test_bat1, 100
+    test_batpac.write_value(
+        "Dashboard", "Target rated peak power of pack, kW", 100, test_bat1
     )
     assert (
-        test_batpac.read_value_battery(
+        test_batpac.read_value(
             "Dashboard", "Target rated peak power of pack, kW", test_bat1
         )
         == 100
@@ -394,9 +394,7 @@ def test_read_from_user_input(example_battery_data):  # noqa: F811
     test_batpac.calculate()
     for sheet in test_batpac.batteries[0].properties:
         for key, value in test_batpac.batteries[0].properties[sheet].items():
-            assert (
-                test_batpac.read_value_battery(sheet, key, test_bat1) == value
-            )
+            assert test_batpac.read_value(sheet, key, test_bat1) == value
 
     validation = test_batpac.read_from_user_input(
         BATPY_BATPAC_USER_INPUT_CONFIG_PATH

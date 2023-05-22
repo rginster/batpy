@@ -2,7 +2,7 @@
 """Tests for module batpac_brightway
 """
 
-import pathlib
+from pathlib import Path
 
 import pytest
 import xlwings as xw
@@ -13,7 +13,7 @@ from batpy.batpac_tool import BatpacTool
 from batpy.brightway import BrightwayConnector
 
 BATPY_BATPAC_EXCEL = "./tests/data/test_batpac.xlsm"
-BATPY_BRIGHTWAY_EXCEL = "./tests/data/test_BatPaC-Brightway.xlsx"
+BATPY_BRIGHTWAY_EXCEL = Path("./tests/data/test_BatPaC-Brightway.xlsx")
 BATPY_BRIGHTWAY_CONFIG = "./tests/data/test_batpy_batpac2brightway.toml"
 
 
@@ -39,7 +39,7 @@ def test_brightway_connector():
     battery_calculation = BatpacTool(
         BATPY_BATPAC_EXCEL,
         datasets.get_batpy_dataset("batpy_batpac_user_input_cells"),
-        excel_visible=True,
+        workbook_visible=True,
     )
 
     battery_calculation.add_battery(
@@ -54,6 +54,7 @@ def test_brightway_connector():
         ]
     )
 
+    datasets.copy_integrated_brightway_workbook(BATPY_BRIGHTWAY_EXCEL)
     brightway_connector = BrightwayConnector(BATPY_BRIGHTWAY_EXCEL, False)
     with pytest.raises(KeyError):
         brightway_connector.export_batpac_battery_to_brightway(
@@ -100,9 +101,7 @@ def test_brightway_connector():
             batpac_config=batpy_batpac_dataset,
         )
 
-    path_saved_brightway = pathlib.Path(
-        "./tests/saved_test_BatPaC-Brightway.xlsx"
-    )
+    path_saved_brightway = Path("./tests/saved_test_BatPaC-Brightway.xlsx")
     assert not path_saved_brightway.is_file()
 
     brightway_connector.save(path_saved_brightway)
@@ -110,7 +109,7 @@ def test_brightway_connector():
 
     battery_calculation.close()
     assert brightway_connector.close()
-    pathlib.Path.unlink(path_saved_brightway)
+    Path.unlink(path_saved_brightway)
 
     brightway_connector = BrightwayConnector(BATPY_BRIGHTWAY_EXCEL, False)
 
@@ -127,3 +126,5 @@ def test_brightway_connector():
     assert brightway_connector.close()
     for app in xw.apps:
         app.quit()
+
+    Path.unlink(BATPY_BRIGHTWAY_EXCEL)

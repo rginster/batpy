@@ -4,7 +4,10 @@
 
 # import logging
 import os
-from pkgutil import get_data
+import shutil
+from pathlib import Path
+from pkgutil import get_data, get_loader
+from types import ModuleType
 
 import semantic_version
 
@@ -195,12 +198,32 @@ def get_available_batpy_datasets(
     return dataset_names_information
 
 
-# def main():
-#     """main"""
-#     print(get_available_batpy_dataset_versions())
-#     print(get_latest_batpy_dataset_version())
-#     print(get_available_batpy_dataset_names("0.0.0"))
+def get_path(module_name: str | ModuleType) -> Path:
+    """Get module path
+
+    Parameters
+    ----------
+    module_name : str | ModuleType
+        Module name or class
+
+    Returns
+    -------
+    Path
+        Path of the module
+    """
+    return Path(get_loader(module_name).get_filename()).parent
 
 
-# if __name__ == "__main__":
-#     main()
+def copy_integrated_brightway_workbook(path_to_save_workbook: Path) -> None:
+    """Copy integrated brightway2 workbook to specified location
+
+    Parameters
+    ----------
+    path_to_save_workbook : Path
+        Path to save integrated brigthway2 workbook
+    """
+    brightway2_workbook = Path(
+        get_path(data) / "excel_workbooks" / "BatPaC-Brightway.xlsx"
+    )
+    excel_workbook_destination = Path(path_to_save_workbook)
+    shutil.copy(brightway2_workbook, excel_workbook_destination)

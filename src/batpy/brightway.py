@@ -1,20 +1,16 @@
 # -*- coding: UTF-8 -*-
 """Module, which connects batpac and brightway
 """
-import logging
+
 from pathlib import Path
 
-import semantic_version
-import xlwings as xw
-
-import batpy
 from batpy.batpac_battery import BatpacBattery
 from batpy.batpac_tool import BatpacTool
+from batpy.batpy_workbook import BatpyWorkbook
 from batpy.formula_engine import evaluate_formula
-from batpy.utility_functions import is_version_compatible, load_configuration
 
 
-class BrightwayConnector:
+class BrightwayConnector(BatpyWorkbook):
     """Connector for interaction with BatPaC and brightway2
 
     This class is used to connect BatPaC with brightway2.
@@ -23,7 +19,7 @@ class BrightwayConnector:
     def __init__(
         self,
         brightway_workbook_path: Path,
-        excel_visible: bool = False,
+        workbook_visible: bool = False,
     ) -> None:
         """Initialize brightway2
 
@@ -32,91 +28,13 @@ class BrightwayConnector:
         Parameters
         ----------
         brightway_workbook_path : Path
-            Path to the brightway2 Excel file (*.xlsx).
-        excel_visible : bool, optional
-            True, if Excel should be visible during operation, by default
+            Path to the brightway2 workbook file (*.xlsx).
+        workbook_visible : bool, optional
+            True, if workbook should be visible during operation, by default
             False.
         """
-        logging.info("[ ] Create brigthway2 from %s", brightway_workbook_path)
-        self.version = semantic_version.Version(batpy.__version__)
-        self.workbook = xw.Book(brightway_workbook_path)
-        self.workbook.app.visible = excel_visible
+        super().__init__(brightway_workbook_path, workbook_visible)
         self._chunk_length = 3
-        self.properties = {}
-        logging.info("[+] Created brightway2 from %s", brightway_workbook_path)
-
-    def __del__(self) -> None:
-        """Destructor of brightway2 workbook object
-
-        Set the Excel calculation method to "automatic" and the
-        "screen_updating" to True after object destruction.
-        """
-        try:
-            self.workbook.app.calculation = "automatic"
-            self.workbook.app.screen_updating = True
-        except BaseException as error:
-            logging.error("An exception occurred: %s", error)
-            raise KeyError(
-                "Could not access the workbook (may already be closed)."
-            ) from error
-
-    def is_version_compatible(
-        self,
-        version_to_check: semantic_version.Version,
-        include_minor: bool = False,
-    ) -> bool:
-        """Check for version compatibility
-
-        Check if two versions (major.minor.patch) are compatible. Thereby a
-        version is compatible if major is equal. If minor should also be
-        included a version is compatible if major is equal and minor is greater
-        or equal.
-
-        Parameters
-        ----------
-        version_to_check : semantic_version.Version
-            Version to be checked against self.version.
-        include_minor : bool, optional
-            Check if minor version of version_to_check is greater or equal to
-            self.version's minor, by default False.
-
-        Returns
-        -------
-        bool
-            True, if version is compatible.
-
-        Raises
-        ------
-        ValueError
-            If version is not compatible a ValueError will occur.
-        """
-        return is_version_compatible(
-            self.version, version_to_check, include_minor
-        )
-
-    def _load_user_configuration(
-        self, path_to_configuration: Path | str
-    ) -> dict:
-        """Load configuration
-
-        Loads a single configuration from a TOML file or string.
-
-        Parameters
-        ----------
-        path_to_configuration : Path | str
-            Path to the TOML configuration file or configuration as string.
-
-        Returns
-        -------
-        dict
-            Returns dictionary representation of configuration.
-        """
-        config = load_configuration(path_to_configuration)
-        config_metadata = config.pop("batpy")
-        self.is_version_compatible(
-            semantic_version.Version(config_metadata["BatPaC SemVer"])
-        )
-        return config
 
     def load_batpac_to_brightway_configuration(
         self, path_batpac_to_brightway_file: Path | str
@@ -169,7 +87,7 @@ class BrightwayConnector:
             else:
                 chunk_list.append(
                     str(
-                        batpac.read_value_battery(
+                        batpac.read_value(
                             sublist_in_chunk[0],
                             sublist_in_chunk[1],
                             battery,
@@ -215,24 +133,6 @@ class BrightwayConnector:
         )
         formula = "".join(data_chunk)
         return evaluate_formula(formula)
-
-    def _write_value_direct(
-        self, worksheet: str, cell_range: str, value: any
-    ) -> None:
-        """Write value in brightway Excel tool
-
-        Write a value directly in the brightway Excel tool.
-
-        Parameters
-        ----------
-        worksheet : str
-            Name of the brightway Excel tool worksheet.
-        cell_range : str
-            Cell range of the brightway Excel tool.
-        value : any
-            Value to write in the brightway Excel tool.
-        """
-        self.workbook.sheets[worksheet][cell_range].value = value
 
     def export_batpac_battery_to_brightway(
         self,
@@ -296,85 +196,3 @@ Use 'load_batpac_to_brightway_configuration'."
                 )
                 del brightway_sheet_item_key
         self.start_automatic_calculation()
-
-    def _read_value_direct(self, worksheet: str, cell_range: str) -> any:
-        """Read value from brightway Excel tool
-
-        Read a value directly from the brightway Excel tool.
-
-        Parameters
-        ----------
-        worksheet : str
-            Name of the brightway Excel tool worksheet.
-        cell_range : str
-            Cell range of the brightway Excel tool.
-
-        Returns
-        -------
-        any
-            Value of the brightway Excel tool cell.
-
-        Raises
-        ------
-        KeyError
-            Raises KeyError if the specified worksheet or range could not be
-            found.
-        """
-        try:
-            value = self.workbook.sheets[worksheet][cell_range].value
-            return value
-        except BaseException as error:
-            logging.error("An exception occurred: %s", error)
-            logging.warning("[!] Key %s , %s not found", worksheet, cell_range)
-            raise KeyError from error
-
-    def stop_automatic_calculation(self) -> None:
-        """Stop automatic Excel calculation
-        Stop the automatic Excel and BatPaC calculation.
-        """
-        self.workbook.app.calculation = "manual"
-        self.workbook.app.screen_updating = False
-
-    def start_automatic_calculation(self) -> None:
-        """Start automatic Excel calculation
-        Start the automatic Excel and BatPaC calculation.
-        """
-        self.workbook.app.calculation = "automatic"
-        self.workbook.app.screen_updating = True
-
-    def save(self, path: Path = None) -> None:
-        """Save brightway Excel tool
-
-        Save the brightway Excel tool or save the brightway Excel tool in
-        another path.
-
-        Parameters
-        ----------
-        path : Path, optional
-            If the path is specified, the brightway Excel tool will be saved
-            under the path, by default None will overwrite the current
-            brightway Excel tool.
-        """
-        logging.info("[ ] Save workbook")
-        self.workbook.save(path)
-        self.workbook = xw.Book(path)
-        logging.info("[+] Saved workbook in %s", path)
-
-    def close(self) -> bool:
-        """Close brightway Excel tool
-
-        Close the brightway Excel tool if other workbooks are open, otherwise
-        the Excel instance will be closed.
-
-        Returns
-        -------
-        bool
-            True, if brightway Excel tool is closed.
-        """
-        if len(self.workbook.app.books) == 1:
-            self.workbook.app.quit()
-            logging.info("[+] Workbook and Excel closed")
-            return True
-        self.workbook.close()
-        logging.info("[+] Workbook closed")
-        return True
