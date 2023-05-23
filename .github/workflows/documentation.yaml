@@ -11,7 +11,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: install office
-        run: choco install microsoft-office-deployment --params="'/Product:Excel2019Volume'" 
+        run: choco install microsoft-office-deployment --params="'/64bit /Product:Excel2019Volume'" 
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
