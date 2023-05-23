@@ -4,19 +4,12 @@ permissions:
     contents: write
 jobs:
   docs:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      # - name: install office
-      #   run: choco install microsoft-office-deployment --version=16.0.16327.20214 --params="'/64bit /Product:Excel2019Volume'"
-      # - name: Activate office
-      #   working-directory: C:\Program Files\Microsoft Office\Office16
-      #   run: cscript ospp.vbs /inpkey:$OFFICE_ACTIVATION_CODE
-      #   env:
-      #     OFFICE_ACTIVATION_CODE: ${{secrets.OFFICE_ACTIVATION_CODE}}
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
