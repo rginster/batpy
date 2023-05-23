@@ -11,7 +11,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: install office
-        run: choco install microsoft-office-deployment --params="'/Product:ExcelRetail'" 
+        run: choco install microsoft-office-deployment --params="'/Exclude:PowerPoint, Outlook, OneNote, Word'" 
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
