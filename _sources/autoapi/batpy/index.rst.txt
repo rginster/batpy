@@ -1,0 +1,42 @@
+:py:mod:`batpy`
+===============
+
+.. py:module:: batpy
+
+.. autoapi-nested-parse::
+
+   Package to interact with BatPaC
+
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   data/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   batpac_battery/index.rst
+   batpac_tool/index.rst
+   batpy_workbook/index.rst
+   brightway/index.rst
+   datasets/index.rst
+   formula_engine/index.rst
+   utility_functions/index.rst
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+
+   
+
