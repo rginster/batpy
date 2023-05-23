@@ -5,8 +5,8 @@
 :maxdepth: 1
 :hidden:
 
-example_batpac.ipynb
-example_batpac2brightway.ipynb
+example_batpac.html
+example_batpac2brightway.html
 changelog.md
 contributing.md
 conduct.md
