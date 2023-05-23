@@ -46,14 +46,14 @@ def test_load_configuration():
     dict_to_combine_1 = {
         "batpy": {
             "BatPaC version": "BatPaC 5.0 2022-07-22",
-            "BatPaC SemVer": "0.1.0",
+            "BatPaC SemVer": "0.0.0",
         },
         "Sheet 1": {"Cell name 1": "Cell range 1"},
     }
     dict_to_combine_2 = {
         "batpy": {
             "BatPaC version": "BatPaC 5.0 2022-07-22",
-            "BatPaC SemVer": "0.1.0",
+            "BatPaC SemVer": "0.0.0",
         },
         "Sheet 2": {"Cell name 2": "Cell range 2"},
     }

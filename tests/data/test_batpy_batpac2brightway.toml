@@ -1,6 +1,6 @@
 ["batpy"]
-"BatPaC version" = "BatPaC 5.0 2022-07-22"
-"BatPaC SemVer" = "0.1.0"
+    "BatPaC version" = "BatPaC 5.0 2022-07-22"
+    "BatPaC SemVer"  = "0.0.0"
 
 # ["Worksheetname in BatPaC-Brightway.xlsx"]
 # "Name of row in BatPaC-Brightway.xlsx" = [
@@ -12,17 +12,21 @@
 #     ]
 # ]
 ["Module"]
-"TEST_Calculation_Example_1" = [
-    ["B23"],
-    ["Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
-    "","5","*",
-    "","2"]
-]
+    "TEST_Calculation_Example_1" = [
+        ["B23",],
+        [
+            "Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
+            "", "5", "*",
+            "", "2",
+        ],
+    ]
 
-"TEST_Calculation_Example_2" = [
-    ["B24"],
-    ["","(","",
-    "Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
-    "","5)","*",
-    "","2"]
-]
+    "TEST_Calculation_Example_2" = [
+        ["B24",],
+        [
+            "", "(", "",
+            "Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
+            "", "5)", "*",
+            "", "2",
+        ],
+    ]

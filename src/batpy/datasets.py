@@ -227,3 +227,53 @@ def copy_integrated_brightway_workbook(path_to_save_workbook: Path) -> None:
     )
     excel_workbook_destination = Path(path_to_save_workbook)
     shutil.copy(brightway2_workbook, excel_workbook_destination)
+
+
+def copy_integrated_dataset(
+    dataset_to_export: str,
+    path_to_save_toml_file: Path,
+    dataset_version_to_export: semantic_version.Version | str = None,
+) -> None:
+    """Copy integrated dataset to specified location
+
+    Parameters
+    ----------
+    dataset_to_export : str
+        Name of the dataset to export
+    path_to_save_toml_file : Path
+        Path to save integrated dataset
+    dataset_version_to_export : semantic_version.Version | str, optional
+        Specific version of the included batpy dataset, otherwise latest
+        version available, by default None.
+    """
+    if isinstance(dataset_version_to_export, str):
+        if dataset_version_to_export == "":
+            dataset_version_to_export = None
+        else:
+            dataset_version_to_export = semantic_version.Version(
+                dataset_version_to_export
+            )
+
+    if dataset_version_to_export is None:
+        dataset_version_to_export = get_latest_batpy_dataset_version()
+
+    if dataset_version_to_export:
+        data_dir = (
+            str(dataset_version_to_export.major)
+            + "."
+            + str(dataset_version_to_export.minor)
+            + "."
+            + str(dataset_version_to_export.patch)
+            + "/"
+        )
+    if not dataset_to_export.endswith(".toml"):
+        dataset_to_export += ".toml"
+
+    if dataset_to_export in get_available_batpy_dataset_names(
+        dataset_version_to_export
+    ):
+        dataset_path = Path(get_path(data) / data_dir / dataset_to_export)
+        dataset_destination = Path(path_to_save_toml_file)
+        shutil.copy(dataset_path, dataset_destination)
+    else:
+        raise KeyError(f"Dataset {dataset_to_export} is not available.")

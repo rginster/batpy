@@ -37,6 +37,8 @@ DATASET_INFORMATION = (
 
 BATPY_BRIGHTWAY_EXCEL = Path("./tests/data/test_BatPaC-Brightway.xlsx")
 
+BATPY_BRIGHTWAY_CONFIG = Path("./tests/data/saved_batpy_batpac2brightway.toml")
+
 
 def test_get_batpy_dataset():
     """Test get_batpy_dataset"""
@@ -124,3 +126,25 @@ def test_copy_integrated_brightway_workbook():
     datasets.copy_integrated_brightway_workbook(BATPY_BRIGHTWAY_EXCEL)
     assert BATPY_BRIGHTWAY_EXCEL.is_file()
     Path.unlink(BATPY_BRIGHTWAY_EXCEL)
+
+
+def test_copy_integrated_dataset():
+    """Test copy_integrated_dataset"""
+    assert not BATPY_BRIGHTWAY_CONFIG.is_file()
+    datasets.copy_integrated_dataset(
+        "batpy_batpac2brightway", BATPY_BRIGHTWAY_CONFIG
+    )
+    assert BATPY_BRIGHTWAY_CONFIG.is_file()
+    Path.unlink(BATPY_BRIGHTWAY_CONFIG)
+
+    assert not BATPY_BRIGHTWAY_CONFIG.is_file()
+    datasets.copy_integrated_dataset(
+        "batpy_batpac2brightway", BATPY_BRIGHTWAY_CONFIG, ""
+    )
+    assert BATPY_BRIGHTWAY_CONFIG.is_file()
+    Path.unlink(BATPY_BRIGHTWAY_CONFIG)
+
+    with pytest.raises(KeyError):
+        datasets.copy_integrated_dataset(
+            "batpy_batpac2brightway", BATPY_BRIGHTWAY_CONFIG, "0.0.0"
+        )

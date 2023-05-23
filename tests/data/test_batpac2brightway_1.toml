@@ -1,6 +1,6 @@
 ["batpy"]
-"BatPaC version" = "BatPaC 5.0 2022-07-22"
-"BatPaC SemVer" = "0.1.0"
+    "BatPaC version" = "BatPaC 5.0 2022-07-22"
+    "BatPaC SemVer"  = "0.0.0"
 
 ["Sheet 1"]
-"Cell name 1" = "Cell range 1"
+    "Cell name 1" = "Cell range 1"
