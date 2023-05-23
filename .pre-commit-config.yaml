@@ -35,7 +35,7 @@ repos:
     rev: 1.5.0
     hooks:
     -   id: interrogate
-        args: [--quiet, --fail-under=95]
+        args: [--verbose, --fail-under=95]
 
 -   repo: https://github.com/PyCQA/flake8
     rev: 6.0.0

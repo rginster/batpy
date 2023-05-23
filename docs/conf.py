@@ -1,9 +1,12 @@
+# -*- coding: UTF-8 -*-
 # pylint: skip-file
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
+"""Configuration file for the Sphinx documentation builder
+This file only contains a selection of the most common options. For a full
+list see the documentation:
+https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+"""
+
 
 # -- Project information -----------------------------------------------------
 
@@ -22,6 +25,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
 ]
+nbsphinx_execute = "never"
 autoapi_dirs = ["../src"]
 
 # List of patterns, relative to source directory, that match files and

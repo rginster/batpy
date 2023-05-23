@@ -74,6 +74,7 @@ docs/_build/
 
 # batpac
 *batpac.xlsm
+*BatPaC.xlsm
 
 # PyBuilder
 target/
