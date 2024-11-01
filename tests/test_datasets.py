@@ -12,7 +12,7 @@ from batpy import data, datasets
 
 # from data.batpy_test_data import example_battery_data  # noqa: F401
 
-LATEST_DATASET_VERSION = "0.3.0"
+LATEST_DATASET_VERSION = "0.4.0"
 
 
 BATPY_BATPAC_TOOL_CONFIG = (
