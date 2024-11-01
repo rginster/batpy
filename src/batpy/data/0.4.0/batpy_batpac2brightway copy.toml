@@ -1,0 +1,888 @@
+["batpy"]
+    "BatPaC version" = "BatPaC 5.0 2022-07-22"
+    "BatPaC SemVer"  = "0.4.0"
+    "information"    = "Configuration for brightway2 export"
+
+# ["Worksheetname in BatPaC-Brightway.xlsx"]
+# "Name of row in BatPaC-Brightway.xlsx" = [
+#     ["Cellrange in BatPaC-Brightway.xlsx"],
+#     [
+#         "Worksheetname in BatPaC.xlsm", "Variable name in *.toml config", "additional mathematical operation",
+#         "","constant value", "additional mathematical operation",
+#         ...
+#     ]
+# ]
+# ["Module"]
+#     "TEST_Calculation_Example_1" = [
+#         ["B23"],
+#         ["Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
+#         "","5","*",
+#         "","2"]
+#     ]
+
+#     "TEST_Calculation_Example_2" = [
+#         ["B24"],
+#         ["","(","",
+#         "Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
+#         "","5)","*",
+#         "","2"]
+#     ]
+
+#########################################################################################################################
+
+["Battery Pack"]
+    "Pack battery management system (BMS)" = [
+        ["B16"],
+        ["", "1", ""]
+        #item
+    ]
+
+    "Battery jacket and hardware mass" = [
+        ["B17"],
+        ["", "1", ""]
+        #item
+    ]
+
+    "Mass of cooling system within pack" = [
+        ["B18"],
+        ["", "1", ""]
+        # ["Battery Design", "Liquid Cooling System, Mass of cooling system within pack,kg"]
+        #item
+    ]
+
+    "Number of modules per pack" = [
+        ["B19"],
+        ["Battery Design", "Battery Pack Parameters, Number of modules per pack"]
+    ]
+
+    "Number of rows of modules per pack" = [
+        ["B20"],
+        ["Battery Design", "Battery Pack Parameters, Number of rows of modules per pack"]
+    ]
+
+    "electricity, medium voltage" = [
+        ["B21"],
+        ["Battery Design", "Battery System Parameters, Total target battery system energy, kWh", "+",
+        "", "60"
+        ]
+    ]
+
+
+["Module"]
+    "Number of cells per module" = [
+        ["B14"],
+        ["Battery Design", "Battery Pack Parameters, Number of cells per module "]
+    ]
+
+    "Total mass of interconnects per module" = [
+        ["B15"],
+        ["Battery Design", "Cell Interconnects (Cu), Total mass of interconnects per module, g"]
+    ]
+
+    "Mass of both panels (2.1 g/cm3)" = [
+        ["B16"],
+        ["Battery Design", "Interconnect Panels, Front and Back (polymer), Mass of both panels (2.1 g/cm3), g"]
+    ]
+
+    "Mass of both tabs" = [
+        ["B17"],
+        ["Battery Design", "Tabs to Module Terminals, Mass of both tabs, g"]
+    ]
+
+    "Mass of both terminals (includes 20% additional weight for insulation and fastener)" = [
+        ["B18"],
+        ["Battery Design", "Module Terminals, Mass of both terminals (includes 20% additional weight for insulation and fastener), g"]
+    ]
+
+    "Total mass per module of aluminum heat conductors or thermal enclosures" = [
+        ["B19"],
+        ["Battery Design", "Module Conductors / Thermal Enclosure, Total mass per module of aluminum heat conductors or thermal enclosures, g"]
+    ]
+
+    "Module monitoring system" = [
+        ["B20"],
+        ["Battery Design", "Module Enclosure, Module monitoring system (MMS, 120-mm L x 12-mm W x 16-mm H, 2.0 g/cm3), g"]
+    ]
+
+    "Module enclosure" = [
+        ["B21"],
+        ["Battery Design", "Module Enclosure, Module enclosure, g"]
+    ]
+
+    "Provisions for gas release" = [
+        ["B22"],
+        ["Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g"]
+    ]
+
+
+["Cell"]
+    "Total positive electrode coating" = [
+        ["B14"],
+        ["Battery Design", "Positive Electrode, Total positive electrode coating, g/cell"]
+    ]
+
+    "Total negative electrode coating" = [
+        ["B15"],
+        ["Battery Design", "Negative Electrode, Total negative electrode coating, g/cell"]
+    ]
+
+    "Positive foil per cell" = [
+        ["B16"],
+        ["Battery Design", "Cell Components, Positive foil per cell, m²", "*",
+        "Battery Design", "Cell Components, Positive foil per cell, m², Thick., µm", "*",
+        "Battery Design", "Cell Components, Positive foil per cell, m², Density", ""
+        ]
+    ]
+
+    "Negative foil per cell" = [
+        ["B17"],
+        ["Battery Design", "Cell Components, Negative foil per cell, m²", "*",
+        "Battery Design", "Cell Components, Negative foil per cell, m², Thick., µm", "*",
+        "Battery Design", "Cell Components, Negative foil per cell, m², Density", ""
+        ]
+    ]
+
+    "Separator per cell" = [
+        ["B18"],
+        ["Battery Design", "Cell Components, Separator per cell, m²", "*",
+        "Battery Design", "Cell Components, Separator per cell, m², Thick., µm", "*",
+        "Battery Design", "Cell Components, Separator per cell, m², Density", ""
+        ]
+    ]
+
+    "Electrolyte per cell" = [
+        ["B19"],
+        ["Battery Design", "Cell Components, Electrolyte per cell, L", "*",
+        "Battery Design", "Cell Components, Electrolyte per cell, L, Density", "*1000"
+        ]
+    ]
+
+    "Positive terminal per cell" = [
+        ["B20"],
+        ["Battery Design", "Cell Components, Positive terminal per cell, g"]
+    ]
+
+    "Negative terminal per cell" = [
+        ["B21"],
+        ["Battery Design", "Cell Components, Negative terminal per cell, g"]
+    ]
+
+    "Mass of cell container (PET-Al-PP)" = [
+        ["B22"],
+        ["Battery Design", "Cell Components, Mass of cell container (PET-Al-PP), g"]
+    ]
+
+
+["Pos. Electrode coating"]
+    "Positive active material" = [
+        ["B14"],
+        ["Battery Design", "Positive Electrode, Positive active material, g/cell"]
+    ]
+
+    "Conductive additive for positive electrode" = [
+        ["B15"],
+        ["Battery Design", "Positive Electrode, Conductive additive for positive electrode, g/cell"]
+    ]
+
+    "Positive electrode binder" = [
+        ["B16"],
+        ["Battery Design", "Positive Electrode, Positive electrode binder, g/cell"]
+    ]
+
+
+["Pos. Active material"]
+    "Positive Active Material" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    # "Positive Active Material" = [
+    #     ["B14"],
+    #     ["Battery Design", "Positive Electrode, Positive active material, g/cell", "/1000"]
+    #     ist hier das gleiche "positive active material gemeint" wie oben?
+    #     muss das überhaupt verlinkt werden, oder wird von Ecoinvent übernommen?
+    # ]
+
+
+["Pos. conductive additive"]
+    "market for polyvinylfluoride" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+
+["Positive electrode binder"]
+    "market for carbon black" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+
+["Neg. Electrode coating"]
+    "Negative active material" = [
+        ["B14"],
+        ["Battery Design", "Negative Electrode, Negative active material per cell, g/cell",]
+    ]
+
+    "Conductive additive for negative electrode" = [
+        ["B15"],
+        ["Battery Design", "Negative Electrode, Conductive additive for negative electrode, g/cell"]
+    ]
+
+    "Negative electrode binder" = [
+        ["B16"],
+        ["Battery Design", "Negative Electrode, Negative electrode binder, g/cell"]
+    ]
+
+
+["Neg. Active material"]
+    "Negative Active Material" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+
+["Neg. conductive additive"]
+    "market for polyvinylfluoride" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Negative electrode binder"]
+    "market for carbon black" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Pos. foil"]
+# currently only aluminum possible
+    "Mass of aluminum" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Neg. foil"]
+# currently only copper possible
+    "Mass of copper" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Separator"]
+    "market for battery separator" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Electrolyte"]
+    "market for electrolyte, for Li-ion battery" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Pos. terminal"]
+    "Mass of aluminum" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Neg. terminal"]
+    "Mass of copper" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Cell container"]
+    "Thickness of cell container aluminum layer (default = 100), µm" = [
+        ["B14"],
+        ["Battery Design", "Cell Components, Thickness of cell container aluminum layer (default = 100), µm"]
+    ]
+    "Thickness of cell container PET layer (default = 30), µm" = [
+        ["B15"],
+        ["Battery Design", "Cell Components, Thickness of cell container PET layer (default = 30), µm"]
+    ]
+    "Thickness of cell container PP layer (default = 20), µm" = [
+        ["B16"],
+        ["Battery Design", "Cell Components, Thickness of cell container PP layer (default = 20), µm"]
+    ]
+
+["Cell container Al"]
+    "Mass of aluminum" = [
+        ["B14"],
+        ["", "((","",
+        "Battery Design", "Cell Dimensions, Width of cell, mm", "+ 2 *",
+        "Battery Design", "Cell Components, Cell thickness, mm", "+",
+        "Battery Design", "Cell Components, Width of buffer region for container sealing (default = 6), mm", ") * (",
+        "Battery Design", "Cell Dimensions, Length of cell, mm", "- 2 *",
+        "Battery Design", "Cell Terminal Dimensions, External weld tab length (default = 8), mm", ") + (",
+        "Battery Design", "Cell Dimensions, Width of cell, mm", "+",
+        "Battery Design", "Cell Components, Width of buffer region for container sealing (default = 6), mm", ") * (",
+        "Battery Design", "Cell Dimensions, Length of cell, mm", "- 2 *",
+        "Battery Design", "Cell Terminal Dimensions, External weld tab length (default = 8), mm", ")) *",
+        "", "2.70", "/1000/1000/1000",
+        ]
+    ]
+
+["Cell container PET"]
+    "market for polyethylene terephthalate, granulate, amorphous" = [
+        ["B14"],
+        ["", "((","",
+        "Battery Design", "Cell Dimensions, Width of cell, mm", "+ 2 *",
+        "Battery Design", "Cell Components, Cell thickness, mm", "+",
+        "Battery Design", "Cell Components, Width of buffer region for container sealing (default = 6), mm", ") * (",
+        "Battery Design", "Cell Dimensions, Length of cell, mm", "- 2 *",
+        "Battery Design", "Cell Terminal Dimensions, External weld tab length (default = 8), mm", ") + (",
+        "Battery Design", "Cell Dimensions, Width of cell, mm", "+",
+        "Battery Design", "Cell Components, Width of buffer region for container sealing (default = 6), mm", ") * (",
+        "Battery Design", "Cell Dimensions, Length of cell, mm", "- 2 *",
+        "Battery Design", "Cell Terminal Dimensions, External weld tab length (default = 8), mm", ")) *",
+        "", "1.38", "/1000/1000/1000",
+        ]
+    ]
+
+["Cell container PP"]
+    "market for polypropylene, granulate" = [
+        ["B14"],
+        ["", "((","",
+        "Battery Design", "Cell Dimensions, Width of cell, mm", "+ 2 *",
+        "Battery Design", "Cell Components, Cell thickness, mm", "+",
+        "Battery Design", "Cell Components, Width of buffer region for container sealing (default = 6), mm", ") * (",
+        "Battery Design", "Cell Dimensions, Length of cell, mm", "- 2 *",
+        "Battery Design", "Cell Terminal Dimensions, External weld tab length (default = 8), mm", ") + (",
+        "Battery Design", "Cell Dimensions, Width of cell, mm", "+",
+        "Battery Design", "Cell Components, Width of buffer region for container sealing (default = 6), mm", ") * (",
+        "Battery Design", "Cell Dimensions, Length of cell, mm", "- 2 *",
+        "Battery Design", "Cell Terminal Dimensions, External weld tab length (default = 8), mm", ")) *",
+        "", "0.946", "/1000/1000/1000",
+        ]
+    ]
+
+
+["Interconnects"]
+    "market for copper, cathode" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    "market for metal working, average for copper product manufacturing" = [
+        ["B15"],
+        ["", "1/1000"]
+    ]
+
+["Both panels"]
+    "market for polypropylene, granulate" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    "market for injection moulding" = [
+        ["B15"],
+        ["", "1/1000"]
+    ]
+
+["Both tabs"]
+    "market for copper, cathode" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    "market for metal working, average for copper product manufacturing" = [
+        ["B15"],
+        ["", "1/1000"]
+    ]
+
+["Both terminals"]
+    "market for copper, cathode" = [
+        ["B14"],
+        ["", "1/1000/1.2"]
+    ]
+    "market for metal working, average for copper product manufacturing" = [
+        ["B15"],
+        ["", "1/1000/1.2"]
+    ]
+    "polyurethane production, flexible foam, TDI-based, low density" = [
+        ["B16"],
+        ["", "1/1000/1.2*0.2"]
+    ]
+    "market for injection moulding" = [
+        ["B17"],
+        ["", "1/1000/1.2*0.2"]
+    ]
+
+["Aluminum heat"]
+    "market for aluminium, primary, ingot" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    "market for metal working, average for aluminium product manufacturing" = [
+        ["B15"],
+        ["", "1/1000"]
+    ]
+
+["Module monitoring system"]
+    "electronic component, active, unspecified" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+
+["Module enclosure"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1/1000"]
+    ]
+
+["Gas release"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1/1000"]
+    ]
+
+["Rows of modules"]
+    "Total mass of hardware and pads in each row rack (not including cooling panels)" = [
+        ["B14"],
+        ["", "1"]
+        #item
+    ]
+    # "Total mass of hardware and pads in each row rack (not including cooling panels)" = [
+    #     ["B14"],
+    #     ["Battery Design", "Module Row Rack, Total mass of hardware and pads in each row rack (not including cooling panels), kg"]
+    #     #kg
+    # ]
+
+
+["Hardware and pads"]
+    "Mass of lower channel" = [
+        ["B14"],
+        ["Battery Design", "Module Row Rack, Mass of lower channel, kg"]
+    ]
+
+    "Mass of upper rack channel and vertical rack members" = [
+        ["B15"],
+        ["Battery Design", "Module Row Rack, Mass of upper rack channel and vertical rack members, kg"]
+    ]
+
+    "Mass of module restraint system" = [
+        ["B16"],
+        ["Battery Design", "Module Row Rack, Mass of module restraint system, kg"]
+    ]
+
+    "Mass of polymer pads between modules (0.3 g/cm3)" = [
+        ["B17"],
+        ["Battery Design", "Module Row Rack, Mass of polymer pads between modules (0.3 g/cm3), kg/row of modules"]
+    ]
+
+
+["Lower channel"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Rack channel"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Module restraint system"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Polymer pads"]
+    "market for tube insulation, elastomere" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for injection moulding" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Cooling system"]
+    "Total mass of empty coolant panels for the pack" = [
+        ["B14"],
+        ["Battery Design", "Liquid Cooling System, Total mass of empty coolant panels for the pack, kg"]
+    ]
+
+    "Total mass of coolant manifold" = [
+        ["B15"],
+        ["Battery Design", "Liquid Cooling System, Total mass of coolant manifold, kg"]
+    ]
+
+    "Total mass of coolant within pack" = [
+        ["B16"],
+        ["Battery Design", "Liquid Cooling System, Total mass of coolant within pack, kg"]
+    ]
+
+
+["Coolant panels"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Coolant manifolds"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Coolant"]
+    "market for ethylene glycol" = [
+        ["B14"],
+        ["", "1"]
+    ]
+
+["Battery jacket"]
+    "Total mass of pack jacket" = [
+        ["B14"],
+        ["", "1"]
+        #item
+    ]
+    # "Total mass of pack jacket" = [
+    #     ["B14"],
+    #     ["Battery Design", "Pack Jacket Top, Total mass of pack jacket, kg"]
+    #     #kg
+    # ]
+
+    "Mass of each module inter-connect (including fastener)" = [
+        ["B15"],
+        ["Battery Design", "Volume and Mass Summary, Mass of each module inter-connect (including fastener), g"]
+    ]
+
+    "Mass of bus bar for packs" = [
+        ["B16"],
+        ["Battery Design", "Volume and Mass Summary, Mass of bus bar for packs,  g"]
+    ]
+
+    "Mass of both battery pack terminals (90% copper including fasteners, 10% seal material)" = [
+        ["B17"],
+        ["Battery Design", "Volume and Mass Summary, Mass of both battery pack terminals (90% copper including fasteners, 10% seal material), g"]
+    ]
+
+    "Mass of battery pack heaters (0.2 kg/kW)" = [
+        ["B18"],
+        ["Battery Design", "Volume and Mass Summary, Mass of battery pack heaters (0.2 kg/kW), kg"]
+    ]
+
+
+["Pack jacket"]
+    "Mass of jacket base" = [
+        ["B14"],
+        ["", "1"]
+        #item
+    ]
+    "Mass of jacket top" = [
+        ["B15"],
+        ["", "1"]
+        #item
+    ]
+
+["Jacket base"]
+    "Mass of angle iron" = [
+        ["B14"],
+        ["Battery Design", "Pack Jacket Base, Mass of angle iron, kg"]
+    ]
+
+    "Mass of steel in pack jacket" = [
+        ["B15"],
+        ["Battery Design", "Pack Jacket Base, Mass of steel in pack jacket, kg"]
+    ]
+
+    "Mass of aluminum" = [
+        ["B16"],
+        ["Battery Design", "Pack Jacket Base, Mass of aluminum, kg"]
+    ]
+
+    "Area of insulation (density = 0.032 g/cm3)" = [
+        ["B17"],
+        ["Battery Design", "Pack Jacket Base, Area of insulation (density = 0.032 g/cm3), m2"]
+    ]
+
+
+["Jacket top"]
+    "Mass of aluminum" = [
+        ["B14"],
+        ["Battery Design", "Pack Jacket Top, Mass of aluminum, kg"]
+    ]
+
+    "Area of insulation (density = 0.032 g/cm3)" = [
+        ["B15"],
+        ["Battery Design", "Pack Jacket Top, Area of insulation (density = 0.032 g/cm3), m2"]
+    ]
+
+["Angle iron"]
+    "market for cast iron" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for metal product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Steel"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Aluminum"]
+    "market for aluminium, primary, ingot" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for aluminium product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Copper"]
+    "market for copper, cathode" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for copper product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Insulation"]
+    "polyurethane production, flexible foam, TDI-based, low density" = [
+        ["B14"],
+        ["Battery Design", "Pack Dimensions and Mass, Pack jacket insulation thickness (default = 10), mm", "/10*0.032/1000*100*100"]
+    ]
+    "market for injection moulding" = [
+        ["B15"],
+        ["Battery Design", "Pack Dimensions and Mass, Pack jacket insulation thickness (default = 10), mm", "/10*0.032/1000*100*100"]
+    ]
+
+["Module inter connect"]
+    "market for copper, cathode" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    "market for metal working, average for copper product manufacturing" = [
+        ["B15"],
+        ["", "1/1000"]
+    ]
+
+["Pack bus bar"]
+    "market for copper, cathode" = [
+        ["B14"],
+        ["", "1/1000"]
+    ]
+    "market for metal working, average for copper product manufacturing" = [
+        ["B15"],
+        ["", "1/1000"]
+    ]
+
+["Pack terminals"]
+    "market for copper, cathode" = [
+        ["B14"],
+        ["", "1/1000*0.9"]
+    ]
+    "market for metal working, average for copper product manufacturing" = [
+        ["B15"],
+        ["", "1/1000*0.9"]
+    ]
+    "market for seal, natural rubber based" = [
+        ["B16"],
+        ["", "1/1000*0.1"]
+    ]
+    "market for injection moulding" = [
+        ["B17"],
+        ["", "1/1000*0.1"]
+    ]
+
+["Pack heaters"]
+    "market for steel, low-alloyed" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for steel product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["BMS"]
+    "Total BMU mass" = [
+        ["B14"],
+        ["", "1"]
+        #item
+    ]
+    # "Pack battery management system (BMS)" = [
+    #     ["B14"],
+    #     ["Battery Design", "Volume and Mass Summary, Pack battery management system (BMS), kg"]
+    #     #kg
+    # ]
+    "BDU electronics/Power electronics" = [
+        ["B15"],
+        ["", "1"]
+        #item
+    ]
+    "Enclosure for BMS" = [
+        ["B16"],
+        ["BMS", "Total Mass of BMS, kg, Additional 30% for enclosure"]
+        # kg
+    ]
+
+["BMU"]
+    "Printed wiring board" = [
+        ["B14"],
+        ["BMS", "Number of Parts per Pack, Battery Management Unit (BMU), PCB", "*",
+        "BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Contactor - main"]
+    ]
+    "Integrated circuit" = [
+        ["B15"],
+        ["BMS", "Input Data from BatPaC, Number of ASIC"]
+    ]
+    "Enclosure for BMU" = [
+        ["B16"],
+        ["BMS", "Total Mass of BMS, kg, 10% for enclosure for BMU"]
+    ]
+
+["PWB"]
+    "printed wiring board, through-hole mounted, unspecified, Pb free" = [
+        ["B14"],
+        ["BMS", "Total Mass of BMS, kg, BMU PCB mass, (default = 0.04 kg)"]
+    ]
+
+["IC"]
+    "integrated circuit, logic type" = [
+        ["B14"],
+        ["BMS", "Total Mass of BMS, kg, BMU mass added per ASIC, (default = 0.02 kg)"]
+    ]
+
+["BDU"]
+    "Contactor - main" = [
+        ["B14"],
+        ["BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Contactor - main"]
+    ]
+    "Contactor - aux" = [
+        ["B15"],
+        ["BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Contactor - aux"]
+    ]
+    "Precharge Contactor" = [
+        ["B16"],
+        ["BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Precharge Contactor"]
+    ]
+    "Precharge resistor" = [
+        ["B17"],
+        ["BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Precharge resistor"]
+    ]
+    "Service disconnect" = [
+        ["B18"],
+        ["BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Service disconnect"]
+    ]
+    "Service disconnect fuse" = [
+        ["B19"],
+        ["BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Service disconnect fuse"]
+    ]
+    "Charger fuse" = [
+        ["B20"],
+        ["BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Charger fuse"]
+    ]
+    "Current sensor" = [
+        ["B21"],
+        ["BMS", "Number of Parts per Pack, Battery Disconnect Unit (BDU) Electronics/Power Electronics, Current sensor"]
+    ]
+
+
+["Contactor - main"]
+    "electronic component, active, unspecified" = [
+        ["B14"],
+        ["", "750/1000"]
+    ]
+
+["Contactor - aux"]
+    "electronic component, active, unspecified" = [
+        ["B14"],
+        ["", "180/1000"]
+    ]
+
+["Precharge Contactor"]
+    "electronic component, active, unspecified" = [
+        ["B14"],
+        ["", "90/1000"]
+    ]
+
+["Precharge resistor"]
+    "resistor, wirewound, through-hole mounting" = [
+        ["B14"],
+        ["", "185/1000"]
+    ]
+
+["Service disconnect"]
+    "electronic component, active, unspecified" = [
+        ["B14"],
+        ["", "150/1000"]
+    ]
+
+["Service disconnect fuse"]
+    "electronic component, active, unspecified" = [
+        ["B14"],
+        ["", "80/1000"]
+    ]
+
+["Charger fuse"]
+    "electronic component, active, unspecified" = [
+        ["B14"],
+        ["", "24/1000"]
+    ]
+
+["Current sensor"]
+    "electronic component, active, unspecified" = [
+        ["B14"],
+        ["", "55/1000"]
+    ]
+
+["Enclosure BMU"]
+    "market for aluminium, primary, ingot" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for aluminium product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]
+
+["Enclosure BMS"]
+    "market for aluminium, primary, ingot" = [
+        ["B14"],
+        ["", "1"]
+    ]
+    "market for metal working, average for aluminium product manufacturing" = [
+        ["B15"],
+        ["", "1"]
+    ]

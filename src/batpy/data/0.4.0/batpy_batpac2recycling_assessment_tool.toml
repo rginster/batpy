@@ -1,0 +1,542 @@
+["batpy"]
+    "BatPaC SemVer" = "0.4.0"
+    "information" = 'Configuration for BatPaC export to recycling assessment tool https://doi.org/10.5281/zenodo.6342832'
+
+["Battery"]
+    'Total capacity' = [
+        [
+            'C2',
+        ],
+        [
+            "Battery Design",
+            "Battery System Parameters, Total target battery system energy, kWh",
+        ],
+    ]
+    'Weight' = [['C3'], ["Battery Design", "Volume and Mass Summary, Mass of battery pack and integration unit, kg"]]
+    # 'Cell chemistry' = [['C4'], ["Chem", "Positive Electrode Active Material"]]
+
+    'Number of cells per module' = [
+        [
+            'C5',
+        ],
+        [
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+        ],
+    ]
+    'Number of modules per battery' = [
+        [
+            'C6',
+        ],
+        [
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+        ],
+    ]
+
+    # Cells
+    # Terminal and foil
+    'Cells, Cathode, Aluminum (foil)' = [
+        [
+            'D9',
+        ],
+        [
+            "","(","",
+            "Battery Design", "Cell Components, Positive terminal per cell, g", "+",
+            "Battery Design",
+            "Cell Components, Positive foil per cell, m²",
+            "*",
+            "Battery Design",
+            "Cell Components, Positive foil per cell, m², Thick., µm",
+            "*",
+            "Battery Design",
+            "Cell Components, Positive foil per cell, m², Density",
+            ")*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+        ],
+    ]
+    # Terminal and foil
+    'Cells, Cathode, Nickel' = [
+        [
+            'D10',
+        ],
+        [
+            "Recycle",
+            "Recoverable Materials at End of Pack Life, Elemental Anaylsis of Electrodes and Electrolyte, Ni Balance, Ni mass in positive electrode, g/cell",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+        ],
+    ]
+
+    'Cells, Cathode, Cobalt' = [
+        [
+            'D11',
+        ],
+        [
+            "Recycle",
+            "Recoverable Materials at End of Pack Life, Elemental Anaylsis of Electrodes and Electrolyte, Co Balance, Co mass in positive electrode, g/cell",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+
+        ],
+    ]
+
+    'Cells, Cathode, Manganese' = [
+        [
+            'D12',
+        ],
+        ["Recycle",
+        "Recoverable Materials at End of Pack Life, Elemental Anaylsis of Electrodes and Electrolyte, Mn Balance, Mn mass in positive electrode, g/cell",
+        "*",
+        "Battery Design",
+        "Battery Pack Parameters, Number of cells per module ",
+        "*",
+        "Battery Design",
+        "Battery Pack Parameters, Number of modules per pack",
+        "/1000",]
+    ]
+
+    'Cells, Cathode, Lithium' = [
+        [
+            'D13',
+        ],
+        [
+            "Recycle",
+            "Recoverable Materials at End of Pack Life, Elemental Anaylsis of Electrodes and Electrolyte, Lithium Balance, Li mass in positive electrode, g/cell",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+        ],
+    ]
+
+    'Cells, Anode, Copper (foil)' = [
+        [
+            'D15',
+        ],
+        [
+            "","(","",
+            "Battery Design", "Cell Components, Negative terminal per cell, g", "+",
+            "Battery Design",
+            "Cell Components, Negative foil per cell, m²",
+            "*",
+            "Battery Design",
+            "Cell Components, Negative foil per cell, m², Thick., µm",
+            "*",
+            "Battery Design",
+            "Cell Components, Negative foil per cell, m², Density",
+            ")*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+        ],
+    ]
+
+    'Cells, Anode, Graphite' = [
+        [
+            'D16',
+        ],
+        [
+            "Battery Design",
+            "Negative Electrode, Negative active material per cell, g/cell",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+
+        ],
+    ]
+
+    'Cells, Cell housing, Aluminum' = [
+        [
+            'D17',
+        ],
+        [
+            "Battery Design",
+            "Cell Components, Thickness of cell container aluminum layer (default = 100), µm",
+            "*",
+            "",
+            "((",
+            "",
+            "Battery Design",
+            "Cell Dimensions, Width of cell, mm",
+            "+ 2 *",
+            "Battery Design",
+            "Cell Components, Cell thickness, mm",
+            "+",
+            "Battery Design",
+            "Cell Components, Width of buffer region for container sealing (default = 6), mm",
+            ") * (",
+            "Battery Design",
+            "Cell Dimensions, Length of cell, mm",
+            "- 2 *",
+            "Battery Design",
+            "Cell Terminal Dimensions, External weld tab length (default = 8), mm",
+            ") + (",
+            "Battery Design",
+            "Cell Dimensions, Width of cell, mm",
+            "+",
+            "Battery Design",
+            "Cell Components, Width of buffer region for container sealing (default = 6), mm",
+            ") * (",
+            "Battery Design",
+            "Cell Dimensions, Length of cell, mm",
+            "- 2 *",
+            "Battery Design",
+            "Cell Terminal Dimensions, External weld tab length (default = 8), mm",
+            ")) *",
+            "",
+            "2.70",
+            "/1000/1000/1000*",
+            "Battery Design", "Battery Pack Parameters, Number of cells per module ", "*",
+            "Battery Design", "Battery Pack Parameters, Number of modules per pack", "",
+        ],
+    ]
+
+    'Cells, Separator, Plastics' = [
+        [
+            'D18',
+        ],
+        [
+            "",
+            "(",
+            "",
+            "Battery Design",
+            "Cell Components, Thickness of cell container PET layer (default = 30), µm",
+            "*",
+            "",
+            "((",
+            "",
+            "Battery Design",
+            "Cell Dimensions, Width of cell, mm",
+            "+ 2 *",
+            "Battery Design",
+            "Cell Components, Cell thickness, mm",
+            "+",
+            "Battery Design",
+            "Cell Components, Width of buffer region for container sealing (default = 6), mm",
+            ") * (",
+            "Battery Design",
+            "Cell Dimensions, Length of cell, mm",
+            "- 2 *",
+            "Battery Design",
+            "Cell Terminal Dimensions, External weld tab length (default = 8), mm",
+            ") + (",
+            "Battery Design",
+            "Cell Dimensions, Width of cell, mm",
+            "+",
+            "Battery Design",
+            "Cell Components, Width of buffer region for container sealing (default = 6), mm",
+            ") * (",
+            "Battery Design",
+            "Cell Dimensions, Length of cell, mm",
+            "- 2 *",
+            "Battery Design",
+            "Cell Terminal Dimensions, External weld tab length (default = 8), mm",
+            ")) *",
+            "",
+            "1.38",
+            "/1000/1000/1000 +",
+
+            "Battery Design",
+            "Cell Components, Thickness of cell container PP layer (default = 20), µm",
+            "*",
+            "",
+            "((",
+            "",
+            "Battery Design",
+            "Cell Dimensions, Width of cell, mm",
+            "+ 2 *",
+            "Battery Design",
+            "Cell Components, Cell thickness, mm",
+            "+",
+            "Battery Design",
+            "Cell Components, Width of buffer region for container sealing (default = 6), mm",
+            ") * (",
+            "Battery Design",
+            "Cell Dimensions, Length of cell, mm",
+            "- 2 *",
+            "Battery Design",
+            "Cell Terminal Dimensions, External weld tab length (default = 8), mm",
+            ") + (",
+            "Battery Design",
+            "Cell Dimensions, Width of cell, mm",
+            "+",
+            "Battery Design",
+            "Cell Components, Width of buffer region for container sealing (default = 6), mm",
+            ") * (",
+            "Battery Design",
+            "Cell Dimensions, Length of cell, mm",
+            "- 2 *",
+            "Battery Design",
+            "Cell Terminal Dimensions, External weld tab length (default = 8), mm",
+            ")) *",
+            "",
+            "0.946",
+            "/1000/1000/1000 +",
+
+            "Battery Design",
+            "Cell Components, Separator per cell, m²",
+            "*",
+            "Battery Design",
+            "Cell Components, Separator per cell, m², Thick., µm",
+            "*",
+            "Battery Design",
+            "Cell Components, Separator per cell, m², Density",
+            "/1000",
+            "",
+            ")",
+            "*",
+
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "",
+        ],
+    ]
+
+    'Cells, Electrolyte, Electrolyte' = [
+        [
+            'D19',
+        ],
+        [
+            "Battery Design",
+            "Cell Components, Electrolyte per cell, L",
+            "*",
+            "Battery Design",
+            "Cell Components, Electrolyte per cell, L, Density",
+            "*1000/1000*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "",
+        ],
+    ]
+    'Cells, Electrolyte, Steel' = [['D20'], ["", "0", ""]]
+
+    # binder, additive, O_2
+    'Cells, Electrolyte, Others' = [
+        [
+            'D21',
+        ],
+        [
+            "",
+            "(",
+            "",
+            "Battery Design",
+            "Positive Electrode, Positive electrode binder, g/cell",
+            "+",
+            "Battery Design",
+            "Positive Electrode, Conductive additive for positive electrode, g/cell",
+            "+",
+
+            "Battery Design",
+            "Negative Electrode, Negative electrode binder, g/cell",
+            "+",
+            "Battery Design",
+            "Negative Electrode, Conductive additive for negative electrode, g/cell",
+            "+(",
+
+            "Battery Design",
+            "Positive Electrode, Positive active material, g/cell",
+            "-",
+            "Recycle",
+            "Recoverable Materials at End of Pack Life, Elemental Anaylsis of Electrodes and Electrolyte, Lithium Balance, Li mass in positive electrode, g/cell",
+            "-",
+            "Recycle",
+            "Recoverable Materials at End of Pack Life, Elemental Anaylsis of Electrodes and Electrolyte, Ni Balance, Ni mass in positive electrode, g/cell",
+            "-",
+            "Recycle",
+            "Recoverable Materials at End of Pack Life, Elemental Anaylsis of Electrodes and Electrolyte, Co Balance, Co mass in positive electrode, g/cell",
+            "-",
+            "Recycle",
+            "Recoverable Materials at End of Pack Life, Elemental Anaylsis of Electrodes and Electrolyte, Mn Balance, Mn mass in positive electrode, g/cell",
+            "))*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of cells per module ",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+
+        ],
+    ]
+
+    # Module
+    'Module (without cells), Module housings, sensors, cell holders, Aluminum' = [
+        [
+            'D25',
+        ],
+        [
+            "Battery Design",
+            "Module Conductors / Thermal Enclosure, Total mass per module of aluminum heat conductors or thermal enclosures, g",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+
+        ],
+    ]
+    'Module (without cells), Module housings, sensors, cell holders, Steel' = [
+        [
+            'D26',
+        ],
+        [
+            "","(","",
+            "Battery Design", "Module Enclosure, Provisions for gas release (default = 5), g", "+",
+            "Battery Design",
+            "Module Enclosure, Module enclosure, g",
+            ")*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+        ],
+    ]
+    'Module (without cells), Module housings, sensors, cell holders, Plastics' = [
+        [
+            'D27',
+        ],
+        [
+            "Battery Design",
+            "Interconnect Panels, Front and Back (polymer), Mass of both panels (2.1 g/cm3), g",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+        ],
+    ]
+    'Module (without cells), Module housings, sensors, cell holders, Electronic components' = [
+        [
+            'D28',
+        ],
+        [
+            "Battery Design",
+            "Module Enclosure, Module monitoring system (MMS, 120-mm L x 12-mm W x 16-mm H, 2.0 g/cm3), g",
+            "*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+        ],
+    ]
+
+    # System
+    'System (without modules), Housing, seal, HV connector, module holder, wiring harness, connections, cooling system, battery junction box, Aluminum (housing, junction box)' = [
+        [
+            'D34',
+        ],
+        [
+
+            "Battery Design",
+            "Battery Pack Parameters, Number of rows of modules per pack",
+            "*(",
+            "Battery Design",
+            "Module Row Rack, Total mass of hardware and pads in each row rack (not including cooling panels), kg",
+            "-",
+            "Battery Design",
+            "Module Row Rack, Mass of polymer pads between modules (0.3 g/cm3), kg/row of modules",
+            ")+",
+            "Battery Design",
+            "Volume and Mass Summary, Battery jacket and hardware mass, kg",
+
+        ],
+    ]
+    'System (without modules), Housing, seal, HV connector, module holder, wiring harness, connections, cooling system, battery junction box, Steel' = [
+        [
+            'D35',
+        ],
+        [
+            "Battery Design",
+            "Liquid Cooling System, Mass of cooling system within pack,kg",
+        ],
+    ]
+    'System (without modules), Housing, seal, HV connector, module holder, wiring harness, connections, cooling system, battery junction box, Copper / Sn' = [
+        [
+            'D36',
+        ],
+        [
+            "",
+            "(",
+            "",
+            "Battery Design",
+            "Cell Interconnects (Cu), Total mass of interconnects per module, g",
+            "+",
+            "Battery Design",
+            "Tabs to Module Terminals, Mass of both tabs, g",
+            "+",
+            "Battery Design",
+            "Module Terminals, Mass of both terminals (includes 20% additional weight for insulation and fastener), g",
+            ")*",
+            "Battery Design",
+            "Battery Pack Parameters, Number of modules per pack",
+            "/1000",
+        ],
+    ]
+    'System (without modules), Housing, seal, HV connector, module holder, wiring harness, connections, cooling system, battery junction box, Electronic components' = [
+        [
+            'D37',
+        ],
+        [
+            "Battery Design",
+            "Volume and Mass Summary, Pack battery management system (BMS), kg",
+        ],
+    ]
+    'System (without modules), Housing, seal, HV connector, module holder, wiring harness, connections, cooling system, battery junction box, Cable (1.9kg) including plug / connectors' = [
+        [
+            'D38',
+        ],
+        [
+            "",
+            "0",
+        ],
+    ]
+    'System (without modules), Housing, seal, HV connector, module holder, wiring harness, connections, cooling system, battery junction box, Plastics' = [
+        [
+            'D39',
+        ],
+        [
+            "",
+            "0",
+        ],
+    ]
+    'System (without modules), Housing, seal, HV connector, module holder, wiring harness, connections, cooling system, battery junction box, other (gap filler, elastomer, seals, ..)' = [
+        [
+            'D40',
+        ],
+        [
+
+            "Battery Design",
+            "Battery Pack Parameters, Number of rows of modules per pack",
+            "*",
+            "Battery Design",
+            "Module Row Rack, Mass of polymer pads between modules (0.3 g/cm3), kg/row of modules",
+
+        ],
+    ]

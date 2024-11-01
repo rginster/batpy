@@ -1,0 +1,639 @@
+["batpy"]
+    "BatPaC SemVer" = "0.4.0"
+    "information"   = 'Configuration for recycling assessment tool (https://doi.org/10.5281/zenodo.6342832) export to brightway'
+
+["Disassembly"]
+
+    'C-BEV-System' = [
+        [
+            'B16',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Discharge, Input, battery systems',
+        ],
+    ]
+    'C-BEV-System_discharge' = [
+        [
+            'B17',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Input, battery systems',
+            "*-1",
+        ],
+    ]
+    'electricity_discharge' = [
+        [
+            'B18',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Discharge, Output, Electricity',
+            "*-1",
+        ],
+    ]
+    'C-BEV-System_discharge, 2' = [
+        [
+            'B19',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Input, battery systems',
+        ],
+    ]
+    'Aluminum_scrap' = [
+        [
+            'B20',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Output, Aluminum (housing, junction box)',
+            "*-1",
+        ],
+    ]
+    'Steel_scrap' = [
+        [
+            'B21',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Output, Steel',
+            "*-1",
+        ],
+    ]
+    'Copper_scrap' = [
+        [
+            'B22',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Output, Copper / Sn',
+            "*-1",
+        ],
+    ]
+    'Printed circuit board' = [
+        [
+            'B23',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Output, Electronic components',
+            "*-1",
+        ],
+    ]
+    'Cable scrap inkl. connector' = [
+        [
+            'B24',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Output, Cable (1.9kg) including plug / connectors',
+            "*-1",
+        ],
+    ]
+    'Plastics' = [
+        [
+            'B25',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Output, Plastics',
+            "*-1",
+        ],
+    ]
+    'Waste' = [
+        [
+            'B26',
+        ],
+        [
+            "R2_MEFA",
+            '1. Disassembly, Disassembly, Output, other (gap filer, elastomer, seals, ..)',
+            "*-1",
+        ],
+    ]
+    'Battery modules_disassembly' = [
+        [
+            'B27',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Shredder 1, Input, Battery modules',
+            "*-1",
+        ],
+    ]
+
+["Mechanical"]
+    'Battery modules_disassembly' = [
+        [
+            'B14',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Shredder 1, Input, Battery modules',
+            "",
+        ],
+    ]
+    'Nitrogen' = [
+        [
+            'B15',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Shredder 1, Resource, Nitrogen, t',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Shredder 1' = [
+        [
+            'B16',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Shredder 1, Energy, Electricity',
+            "",
+        ],
+    ]
+    'Shredded material_shredder 1' = [
+        [
+            'B17',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Shredder 1, Output, Shredded material',
+            "*-1",
+        ],
+    ]
+    'Shredded material_shredder 1, input' = [
+        [
+            'B18',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Drying, Input, Shredded material',
+            "",
+        ],
+    ]
+    'Natural gas' = [
+        [
+            'B19',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Drying, Energy, Natural gas, m3',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Drying' = [
+        [
+            'B20',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Drying, Energy, Electricity',
+            "",
+        ],
+    ]
+    'Shredded material_drying' = [
+        [
+            'B21',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Drying, Output, Shredded material, output',
+            "*-1",
+        ],
+    ]
+    'Electrolyte (g)_drying' = [
+        [
+            'B22',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Drying, Output, Electrolyte (g)',
+            "*-1",
+        ],
+    ]
+    'Exhaust_drying' = [
+        [
+            'B23',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Drying, Output, Exhaust',
+            "*-1",
+        ],
+    ]
+    'Exhaust_drying, Exhaust gas cleaning' = [
+        [
+            'B24',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Exhaust gas cleaning, Input, Exhaust',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Exhaust gas cleaning' = [
+        [
+            'B25',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Exhaust gas cleaning, Energy, Electricity',
+            "",
+        ],
+    ]
+    'Exhaust_exhaust gas cleaning' = [
+        [
+            'B26',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Exhaust gas cleaning, Output, Exhaust',
+            "*-1",
+        ],
+    ]
+    'Electrolyte (g)_drying, Electrolyte recovery' = [
+        [
+            'B27',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Electrolyte recovery, Input, Electrolyte (g)',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Electrolyte recovery' = [
+        [
+            'B28',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Electrolyte recovery, Energy, Electricity',
+            "",
+        ],
+    ]
+    'Electrolyte (I)_electrolyte recovery' = [
+        [
+            'B29',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Electrolyte recovery, Output, Electrolyte (l)',
+            "*-1",
+        ],
+    ]
+    'Shredded material_drying, Magnetic separation' = [
+        [
+            'B30',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Magnetic separation, Input, Shredded material',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Magnetic separation' = [
+        [
+            'B31',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Magnetic separation, Energy, Shredded material',
+            "",
+        ],
+    ]
+    'Shredded material_magnetic separation' = [
+        [
+            'B32',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Magnetic separation, Output, Shredded material',
+            "*-1",
+        ],
+    ]
+    'Steel_scrap' = [
+        [
+            'B33',
+        ],
+        [
+            "",
+            "(",
+            "",
+            "R2_MEFA",
+            '2. mechanical processing, Magnetic separation, Output, Steel (module)',
+            "+",
+            "R2_MEFA",
+            '2. mechanical processing, Magnetic separation, Output, Steel (cell)',
+            ")*-1",
+        ],
+    ]
+    'Shredded material_magnetic separation, Zig-zag sighting 1' = [
+        [
+            'B34',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 1, Input, Shredded material',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Zig-zag sighting 1' = [
+        [
+            'B35',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 1, Energy, Electricity',
+            "",
+        ],
+    ]
+    'Shredded material_zig-zag sighting 1' = [
+        [
+            'B36',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 1, Output, Shredded material',
+            "*-1",
+        ],
+    ]
+    'Aluminum_scrap, Zig-zag sighting 1' = [
+        [
+            'B37',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 1, Output, Aluminium (module)',
+            "*-1",
+        ],
+    ]
+    'Plastic (module)' = [
+        [
+            'B38',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 1, Output, Plastic (module)',
+            "*-1",
+        ],
+    ]
+    'Electronic components_scrap' = [
+        [
+            'B39',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 1, Output, Electronic components',
+            "*-1",
+        ],
+    ]
+    'Copper_scrap, Zig-zag sighting 1' = [
+        [
+            'B40',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 1, Output, Copper (module)',
+            "*-1",
+        ],
+    ]
+    'Shredded material_zig-zag sighting 1, Schredder 2' = [
+        [
+            'B41',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Schredder 2, Input, Shredded material',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Schredder 2' = [
+        [
+            'B42',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Schredder 2, Energy, Electricity',
+            "",
+        ],
+    ]
+    'Shredded material_shredder 2' = [
+        [
+            'B43',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Schredder 2, Output, Shredded material',
+            "*-1",
+        ],
+    ]
+    'Shredded material_shredder 2, input' = [
+        [
+            'B44',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Sieving, Input, Shredded material',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Sieving' = [
+        [
+            'B45',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Sieving, Energy, Electricity',
+            "",
+        ],
+    ]
+    'Active material_filtration' = [
+        [
+            'B46',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Sieving, Output, Active material',
+            "*-1",
+        ],
+    ]
+    'Light fraction_filtration' = [
+        [
+            'B47',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Sieving, Output, Light fraction',
+            "*-1",
+        ],
+    ]
+    'Light fraction_filtration, input' = [
+        [
+            'B48',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 2, Input, Light fraction',
+            "",
+        ],
+    ]
+    'electricity, medium voltage, Zig-zag sighting 2' = [
+        [
+            'B49',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 2, Energy, Electricity',
+            "",
+        ],
+    ]
+    'Aluminum_scrap' = [
+        [
+            'B50',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 2, Output, Aluminum foil',
+            "*-1",
+        ],
+    ]
+    'Copper_scrap' = [
+        [
+            'B51',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 2, Output, Copper foil',
+            "*-1",
+        ],
+    ]
+    'Waste' = [
+        [
+            'B52',
+        ],
+        [
+            "R2_MEFA",
+            '2. mechanical processing, Zig-zag sighting 2, Output, Other (plastics; active material)',
+            "*-1",
+        ],
+    ]
+
+["Hydro"]
+
+'Active material_filtration' = [['B14'], ["R2_Hydro_MEFA",'Hydrometallurgy, Digestion, Input, Black Mass'   ]]
+'electricity, medium voltage' = [['B15'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Digestion, Energy, Electricity' ]]
+'Sulfuric acid' = [['B16'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Digestion, Resource, Sulfuric acid (95%)' ]]
+'Solution_digestion' = [['B17'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Digestion, Output, Solution, t', "*-1"]]
+'Solution_digestion, Leaching' = [['B18'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Leaching, Input, Solution']]
+'electricity, medium voltage, Leaching' = [['B19'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Leaching, Energy, Electricity' ]]
+'Water, Leaching' = [['B20'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Leaching, Resource, Water' ]]
+'Lye_leaching, Leaching' = [['B21'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Leaching, Output, Lye, t', '*-1']]
+'Lye_leaching, Filtration C' = [['B22'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration C, Input, Lye']]
+'electricity, medium voltage, Filtration C' = [['B23'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration C, Energy, Electricity']]
+'Lye_filtration C, Filtration C' = [['B24'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration C, Output, Lye', "*-1"]]
+'Graphite_filtration C' = [['B25'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration C, Output, Graphit' , "*-1"]]
+'Graphite_filtration C, Washing C' = [['B26'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Washing C, Input, Graphite'  ]]
+'electricity, medium voltage, Washing C' = [['B27'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Washing C, Energy, Electricity']]
+'Water, Washing C' = [['B28'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Washing C, Resource, Water'  ]]
+'Graphite_washing C' = [['B29'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Washing C, Output, Graphite, t', "*-1"]]
+'Lye_filtration C' = [['B30'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Cementation Cu, Input, Lye'   ]]
+'electricity, medium voltage, Cementation Cu' = [['B31'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Cementation Cu, Energy, Electricity']]
+'Iron' = [['B32'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Cementation Cu, Resource, Iron'  ]]
+'Lye_cementation Cu' = [['B33'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Cementation Cu, Output, Lye, t' ,"*-1"]]
+'Lye_cementation Cu, Filtration Cu' = [['B34'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Cu, Input, Lye' ]]
+'electricity, medium voltage, Filtration Cu' = [['B35'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Cu, Energy, Electricity' ]]
+'Lye_cementation Cu, Filtration Cu, Output' = [['B36'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Cu, Output, Lye',"*-1"]]
+'Copper_elementary' = [['B37'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Cu, Output, Copper (elemental)', "*-1"]]
+'Lye_cementation Cu, Oxidation' = [['B38'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Oxidation, Input, Lye, t' ]]
+'electricity, medium voltage, Oxidation' = [['B39'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Oxidation, Energy, Electricity']]
+'Hydrogen peroxide' = [['B40'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Oxidation, Input, Hydrogen peroxide, t']]
+'Lye_oxidation, Oxidation' = [['B41'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Oxidation, Output, Lye, t', "*-1"]]
+'Lye_oxidation, Precipitation Al + Fe' = [['B42'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Precipitation Al + Fe, Input, Lye']]
+'electricity, medium voltage, Precipitation Al + Fe' = [['B43'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Precipitation Al + Fe, Energy, Electricity']]
+'Sodium hydroxide' = [['B44'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Precipitation Al + Fe, Resource, Sodium hydroxide']]
+'Lye_precipitation Al_Fe' = [['B45'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Precipitation Al + Fe, Output, Lye, t', "*-1"]]
+'Lye_precipitation Al_Fe, Filtration Al+Fe' = [['B46'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Al+Fe, Input, Lye']]
+'electricity, medium voltage, Filtration Al+Fe' = [['B47'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Al+Fe, Energy, Electricity' ]]
+'Lye_filtration Al_Fe' = [['B48'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Al+Fe, Output, Lye, t', "*-1"]]
+'Iron hydroxide' = [['B49'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Al+Fe, Output, Iron hydroxide Fe(OH)3', "*-1"]]
+'Aluminum hydroxide' = [['B50'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filtration Al+Fe, Output, Aluminum hydroxide Al(OH)3', "*-1"]]
+'Lye_filtration Al_Fe, Extraction Co+Ni' = [['B51'], ["R2_Hydro_MEFA",'Hydrometallurgy, Extraction Co+Ni, Input, Lye'  ]]
+'electricity, medium voltage, Extraction Co+Ni' = [['B52'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co+Ni, Energy, Electricity' ]]
+'Kerosene, Extraction Co+Ni' = [['B53'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co+Ni, Resource, Kerosene (circulation)']]
+'Cyanex 301GN, Extraction Co+Ni' = [['B54'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co+Ni, Resource, Cyanex 301GN (circulation)', "+",
+                            "R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co+Ni, Resource, Cyanex 301GN compensation for loss p.a.']]
+'Co-Ni-Solution_extraction Co, Extraction Co+Ni' = [['B55'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co+Ni, Output, Co-Ni-Solution, t', "*-1"]]
+'Lye_extraction Co_Ni, Extraction Co+Ni' = [['B56'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co+Ni, Output, Lye, t', "*-1"]]
+'Co-Ni-Solution_extraction Co' = [['B57'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Scrubbing Co+Ni, Input, Co-Ni-Solution' ]]
+'electricity, medium voltage, Scrubbing Co+Ni' = [['B58'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Scrubbing Co+Ni, Energy, Electricity' ]]
+'Co-Ni-Solution_scrubbing Co_Ni' = [['B59'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Scrubbing Co+Ni, Output, Co-Ni-Solution, t', "*-1" ]]
+'Co-Ni-Solution_scrubbing Co_Ni, Stripping Co+Ni' = [['B60'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co+Ni, Input, Co-Ni-Solution']]
+'electricity, medium voltage, Stripping Co+Ni' = [['B61'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co+Ni, Energy, Electricity' ]]
+'Sulfuric acid, Stripping Co+Ni' = [['B62'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co+Ni, Resource, Sulfuric acid (95%)']]
+'Co-Ni-Solution_stripping Co_Ni' = [['B63'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co+Ni, Output, Co-Ni-Solution, t', "*-1"]]
+'Cyanex 301GN, Stripping Co+Ni' = [['B64'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co+Ni, Output, Cyanex 301GN', "*-1"]]
+'Kerosene, Stripping Co+Ni,' = [['B65'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co+Ni, Output, Kerosene', "*-1"]]
+'Co-Ni-Solution_stripping Co_Ni, Extraction Co' = [['B66'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co, Input, Co-Ni-Solution' ]]
+'electricity, medium voltage, Extraction Co' = [['B67'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co, Energy, Electricity']]
+'Kerosene, Extraction Co' = [['B68'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co, Resource, Kerosene (circulation)' ]]
+'Cyanex 272, Extraction Co' = [['B69'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co, Resource, Cyanex 272 (circulation)', "+",
+                            "R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co, Resource, Cyanex 272 compensation loss p.a.'
+]]
+'Co-Solution_extraction Co' = [['B70'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co, Output, Co-Solution', "*-1"  ]]
+'NiSO4-Solution_extraction Co' = [['B71'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Co, Output, NiSO4-Solution, t', "*-1"]]
+'Co-Solution_extraction Co, Scrubbing Co' = [['B72'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Scrubbing Co, Input, Co-Solution' ]]
+'electricity, medium voltage, Scrubbing Co' = [['B73'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Scrubbing Co, Energy, Electricity' ]]
+'Co-Solution_scrubbing Co' = [['B74'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Scrubbing Co, Output, Co-Solution, t', "*-1"]]
+'Co-Solution_scrubbing Co, Stripping Co' = [['B75'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co, Input, Co-Solution']]
+'electricity, medium voltage, Stripping Co' = [['B76'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co, Energy, Electricity']]
+'Sulfuric acid, Stripping Co' = [['B77'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co, Resource, Sulfuric acid (95%)']]
+'CoSO4-Solution_stripping Co' = [['B78'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co, Output, CoSO4-Solution, t', "*-1"]]
+'Cyanex 272, Stripping Co' = [['B79'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co, Output, Cyanex 272', "*-1"]]
+'Kerosene, Stripping Co' = [['B80'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Co, Output, Kerosene', "*-1"]]
+'NiSO4-Solution_extraction Co, Crystallization Ni' = [['B81'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Ni, Input, NiSO4-Solution']]
+'electricity, medium voltage, Crystallization Ni' = [['B82'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Ni, Energy, Electricity']]
+'Nickel(II)-sulfat-Hexahydrat_crystallization Ni' = [['B83'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Ni, Output, NiSO4 * 6 H2O', "*-1"]]
+'Water, Crystallization Ni' = [['B84'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Ni, Output, Water', "*-1"]]
+'CoSO4-Solution_stripping Co, Crystallization Co' = [['B85'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Co, Input, CoSO4-Solution']]
+'electricity, medium voltage, Crystallization Co' = [['B86'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Co, Energy, Electricity']]
+'Cobalt(II)-sulfat Heptahydrat_crystallization Co' = [['B87'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Co, Output, CoSO4 * 7 H2O', "*-1"]]
+'Water, Crystallization Co' = [['B88'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Co, Output, Water', "*-1"]]
+'Lye_extraction Co_Ni' = [['B89'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Mn, Input, Lye']]
+'electricity, medium voltage, Extraction Mn' = [['B90'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Mn, Energy, Electricity']]
+'Kerosene, Extraction Mn' = [['B91'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Mn, Resource, Kerosene (circulation)' ]]
+'D2EHPA, Extraction Mn' = [['B92'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Mn, Resource, D2EHPA (circulation)', "+",
+                                    "R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Mn, Resource, D2EHPA compensation loss p.a.']]
+'Mn-Solution_extraction Mn' = [['B93'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Mn, Output, Mn-Solution', "*-1"]]
+'Lye_extraction Mn' = [['B94'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Extraction Mn, Output, Lye', "*-1"]]
+'Mn-Solution_extraction Mn, Scrubbing Mn' = [['B95'], ["R2_Hydro_MEFA",'Hydrometallurgy, Scrubbing Mn, Input, Mn-Solution'  ]]
+'electricity, medium voltage, Scrubbing Mn' = [['B96'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Scrubbing Mn, Energy, Electricity']]
+'Mn-Solution_scrubbing Mn' = [['B97'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Scrubbing Mn, Output, Mn-Solution, t', "*-1"]]
+'Mn-Solution_scrubbing Mn, Stripping Mn' = [['B98'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Mn, Input, Mn-Solution' ]]
+'electricity, medium voltage, Stripping Mn' = [['B99'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Mn, Energy, Electricity' ]]
+'Sulfuric acid, Stripping Mn' = [['B100'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Mn, Resource, Sulfuric acid (95%)']]
+'MnSO4-Solution_stripping Mn' = [['B101'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Mn, Output, MnSO4-Solution, t', "*-1" ]]
+'D2EHPA, Stripping Mn' = [['B102'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Mn, Output, D2EHPA', "*-1"]]
+'Kerosene, Stripping Mn' = [['B103'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Stripping Mn, Output, Kerosene', "*-1"]]
+'MnSO4-Solution_stripping Mn, Crystallization Mn' = [['B104'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Mn, Input, MnSO4-Solution']]
+'electricity, medium voltage, Crystallization Mn' = [['B105'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Mn, Energy, Electricity']]
+'Mangan(II)-sulfat-Monohydrat_crystallization Mn' = [['B106'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Mn, Output, MnSO4 * 1 H2O', "*-1"]]
+'Water, Crystallization Mn' = [['B107'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Crystallization Mn, Output, Water', "*-1"]]
+'Lye_extraction Mn, Concentration Li' = [['B108'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Concentration Li, Input, Lye, t']]
+'electricity, medium voltage, Concentration Li' = [['B109'], ["R2_Hydro_MEFA",'Hydrometallurgy, Concentration Li, Energy, Electricity' ]]
+'Lye_concentration Li' = [['B110'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Concentration Li, Output, Lye, t', "*-1"]]
+'Water, Concentration Li' = [['B111'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Concentration Li, Output, Water', "*-1"]]
+'Lye_concentration Li, Precipitation Li (90 ° C)' = [['B112'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Precipitation Li (90 ° C), Input, Lye']]
+'electricity, medium voltage, Precipitation Li (90 ° C)' = [['B113'], ["R2_Hydro_MEFA",'Hydrometallurgy, Precipitation Li (90 ° C), Energy, Electricity' ]]
+'Sodium carbonate' = [['B114'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Precipitation Li (90 ° C), Resource, Sodium carbonate']]
+'Lye_precipitation Li' = [['B115'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Precipitation Li (90 ° C), Output, Lye, t', "*-1"]]
+'Lye_precipitation Li, Filter Li' = [['B116'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filter Li, Input, Lye' ]]
+'electricity, medium voltage, Filter Li' = [['B117'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filter Li, Energy, Electricity' ]]
+'Lithium carbonate_filtration Li' = [['B118'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Filter Li, Output, Li2CO3 (anhydrous)', "*-1"]]
+'Wastewater_filtration Li' = [['B119'], ["R2_Hydro_MEFA",'Hydrometallurgy, Filter Li, Output, Wastewater', "*-1" ]]
+'Wastewater_filtration Li, Wastewater pretreatment' = [['B120'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Wastewater pretreatment, Input, Wastewater, t' ]]
+'electricity, medium voltage, Wastewater pretreatment' = [['B121'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Wastewater pretreatment, Energy, Electricity' ]]
+'Water' = [['B122'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Wastewater pretreatment, Output, Water', "*-1"]]
+'Concentrated wastewater_wastewater pretreatment' = [['B123'], ["R2_Hydro_MEFA", 'Hydrometallurgy, Wastewater pretreatment, Output, conc. Wastewater', "*-1"]]

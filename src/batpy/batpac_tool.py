@@ -536,6 +536,11 @@ class BatpacTool(BatpyWorkbook):
 
         if batpac_path is not None:
             with open(batpac_path, "w", encoding="utf-8") as toml_file:
+                toml_file.write('["batpy"]\n')
+                toml_file.write(f"'BatPaC SemVer' = '{self.version}'\n")
+                toml_file.write(
+                    "'information' = 'Saved configuration for BatPaC tool'\n"
+                )
                 for sheet in tqdm(
                     self.properties, "Saving BatPaC config from each sheet"
                 ):
@@ -579,6 +584,11 @@ class BatpacTool(BatpyWorkbook):
 
         if battery_path is not None:
             with open(battery_path, "w", encoding="utf-8") as toml_file:
+                toml_file.write('["batpy"]\n')
+                toml_file.write(f"'BatPaC SemVer' = '{self.version}'\n")
+                toml_file.write(
+                    "'information' = 'Saved configuration for batteries'\n"
+                )
                 for battery in tqdm(
                     self.batteries,
                     "Saving battery configuration for each battery",

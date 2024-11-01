@@ -100,6 +100,7 @@ def is_version_compatible(
 
 def combine_configuration(configuration_list: list[Path | str]) -> dict:
     """Combine configuration files
+
     Combines a list of configuration file into one configuration.
 
     Parameters

@@ -72,9 +72,9 @@ instance/
 # Sphinx documentation
 docs/_build/
 
-# batpac
-*batpac.xlsm
-*BatPaC.xlsm
+# # batpac
+# *batpac.xlsm
+# *BatPaC.xlsm
 
 # PyBuilder
 target/

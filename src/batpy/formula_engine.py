@@ -9,7 +9,7 @@
 import ast
 import operator
 
-MAX_FORMULA_LENGTH = 255
+MAX_FORMULA_LENGTH = 1024
 
 
 def _byte_offset_to_char_offset(source: str, byte_offset: int) -> int:
