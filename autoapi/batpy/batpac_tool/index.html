@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>batpy.batpac_tool &mdash; batpy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="batpy.batpy_workbook" href="../batpy_workbook/index.html" />
+    <link rel="prev" title="batpy.batpac_battery" href="../batpac_battery/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            batpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../example_batpac.html">Example usage of BatPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../example_batpac2brightway.html">Example usage of BatPy’s brightway2 export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">batpy</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../batpac_battery/index.html">batpy.batpac_battery</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">batpy.batpac_tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../batpy_workbook/index.html">batpy.batpy_workbook</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../brightway/index.html">batpy.brightway</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data/index.html">batpy.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datasets/index.html">batpy.datasets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../formula_engine/index.html">batpy.formula_engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../recycling_assessment_tool/index.html">batpy.recycling_assessment_tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utility_functions/index.html">batpy.utility_functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">batpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">batpy</a></li>
+      <li class="breadcrumb-item active">batpy.batpac_tool</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/batpy/batpac_tool/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-batpy.batpac_tool">
+<span id="batpy-batpac-tool"></span><h1>batpy.batpac_tool<a class="headerlink" href="#module-batpy.batpac_tool" title="Link to this heading"></a></h1>
+<p>Module, which includes the class BatpacTool</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.batpac_tool.BatpacTool" title="batpy.batpac_tool.BatpacTool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatpacTool</span></code></a></p></td>
+<td><p>BatPaC class which interacts with the BatPaC Excel tool</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">batpy.batpac_tool.</span></span><span class="sig-name descname"><span class="pre">BatpacTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batpac_workbook_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_definition_user_input_toml_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_definition_calculation_validation_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workbook_visible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../batpy_workbook/index.html#batpy.batpy_workbook.BatpyWorkbook" title="batpy.batpy_workbook.BatpyWorkbook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batpy.batpy_workbook.BatpyWorkbook</span></code></a></p>
+<p>BatPaC class which interacts with the BatPaC Excel tool</p>
+<p>This BatPaC class is used to interact directly with the BatPaC Excel tool
+and can store individual batteries (class BatPaC_battery) and additional
+parameters of the BatPaC Excel tool in the dictionary properties.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.excel_cells">
+<span class="sig-name descname"><span class="pre">excel_cells</span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.excel_cells" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.batteries">
+<span class="sig-name descname"><span class="pre">batteries</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.batteries" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.max_batteries">
+<span class="sig-name descname"><span class="pre">max_batteries</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.max_batteries" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.load_batpac_file">
+<span class="sig-name descname"><span class="pre">load_batpac_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_batpac_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.load_batpac_file" title="Link to this definition"></a></dt>
+<dd><p>Load BatPaC configuration</p>
+<p>Load the properties for the BatPaC object from a TOML battery
+configuration file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path_to_batpac_file</strong> (<em>Path</em><em> | </em><em>str</em>) – Path to the TOML BatPaC configuration file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.add_battery">
+<span class="sig-name descname"><span class="pre">add_battery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batteries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><span class="pre">batpy.batpac_battery.BatpacBattery</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.add_battery" title="Link to this definition"></a></dt>
+<dd><p>Add battery object to BatPaC object</p>
+<p>Add multiple battery objects to the BatPaC object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>batteries</strong> (<em>list</em><em>[</em><em>BatPaC_battery</em><em>]</em>) – List of BatPaC_battery objects to include in the BatPaC object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.set_new_property">
+<span class="sig-name descname"><span class="pre">set_new_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sheet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.set_new_property" title="Link to this definition"></a></dt>
+<dd><p>Set a new property of the battery</p>
+<p>Set an existing property of the BatPaC tool or create a new one in the
+format {“sheet” : {“name” : value} }.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sheet</strong> (<em>str</em>) – Name of the BatPaC Excel sheet.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the BatPaC Excel cell description.</p></li>
+<li><p><strong>value</strong> (<em>any</em>) – Value of the BatPaC Excel cell.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.load_batteries_file">
+<span class="sig-name descname"><span class="pre">load_batteries_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_batteries_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batteries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><span class="pre">batpy.batpac_battery.BatpacBattery</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.load_batteries_file" title="Link to this definition"></a></dt>
+<dd><p>Load batteries configuration</p>
+<p>Load the configuration for the batteries from TOML configuration file
+and add these batteries to the BatPaC object.
+Beware: This will clear all previous assigned batteries of the BatPaC
+object!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_to_batteries_file</strong> (<em>Path</em>) – Path to the TOML batteries configuration file.</p></li>
+<li><p><strong>batteries</strong> (<em>list</em><em>[</em><em>BatPaC_battery</em><em>]</em>) – List of BatPaC_battery objects to load battery properties from file
+and add to BatPaC object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool._wb_helper_range">
+<span class="sig-name descname"><span class="pre">_wb_helper_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">worksheet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">battery</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><span class="pre">batpy.batpac_battery.BatpacBattery</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_cell_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool._wb_helper_range" title="Link to this definition"></a></dt>
+<dd><p>Helper function for workbook range</p>
+<p>Function to find the cell range of a specified cell description.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>worksheet</strong> (<em>str</em>) – Name of the BatPaC Excel tool worksheet.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the BatPaC Excel cell description.</p></li>
+<li><p><strong>battery</strong> (<em>BatPaC_battery</em><em>, </em><em>optional</em>) – BatPaC_battery object, if the returned cell is battery specific, by
+default None.</p></li>
+<li><p><strong>additional_cell_config</strong> (<em>Path</em><em> | </em><em>dict</em><em> | </em><em>str</em><em>, </em><em>optional</em>) – Path to TOML file or dictionary or str (default dataset), which
+contains additional cell configuration to consider,
+by default None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Excel cell range.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – Raises KeyError, if worksheet name or cell description could not be
+found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.read_value">
+<span class="sig-name descname"><span class="pre">read_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">worksheet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">battery</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><span class="pre">batpy.batpac_battery.BatpacBattery</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_cell_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.read_value" title="Link to this definition"></a></dt>
+<dd><p>Read value from BatPaC Excel tool</p>
+<p>Read (battery specific) value from BatPaC Excel tool without input the
+exact cell range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>worksheet</strong> (<em>str</em>) – Name of the BatPaC Excel tool worksheet.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the BatPaC Excel cell description.</p></li>
+<li><p><strong>battery</strong> (<em>BatPaC_battery</em><em>, </em><em>optional</em>) – BatPaC_battery object, if the returned cell is battery specific, by
+default None.</p></li>
+<li><p><strong>additional_cell_config</strong> (<em>Path</em><em> | </em><em>dict</em><em> | </em><em>str</em><em>, </em><em>optional</em>) – Path to TOML file or dictionary or string (default dataset), which
+contains additional cell configuration to consider,
+by default None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value of the BatPaC Excel tool cell.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.write_value">
+<span class="sig-name descname"><span class="pre">write_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">worksheet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">battery</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><span class="pre">batpy.batpac_battery.BatpacBattery</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.write_value" title="Link to this definition"></a></dt>
+<dd><p>Write value in BatPaC Excel tool</p>
+<p>Write (specific battery) value in the BatPaC Excel tool without input
+the exact cell range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>worksheet</strong> (<em>str</em>) – Name of the BatPaC Excel tool worksheet.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the BatPaC Excel cell description.</p></li>
+<li><p><strong>value</strong> (<em>any</em>) – Value to write in the BatPaC Excel tool.</p></li>
+<li><p><strong>battery</strong> (<em>BatPaC_battery</em><em>, </em><em>optional</em>) – BatPaC_battery object, if the returned cell is battery specific,
+by default None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.stop_automatic_calculation">
+<span class="sig-name descname"><span class="pre">stop_automatic_calculation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.stop_automatic_calculation" title="Link to this definition"></a></dt>
+<dd><p>Stop automatic Excel calculation
+Stop the automatic Excel and BatPaC calculation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.start_automatic_calculation">
+<span class="sig-name descname"><span class="pre">start_automatic_calculation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.start_automatic_calculation" title="Link to this definition"></a></dt>
+<dd><p>Start automatic Excel calculation
+Start the automatic Excel and BatPaC calculation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.read_from_user_input">
+<span class="sig-name descname"><span class="pre">read_from_user_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_read_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.read_from_user_input" title="Link to this definition"></a></dt>
+<dd><p>Read user specified input from BatPaC Excel tool</p>
+<p>Read additional cell values from BatPaC Excel tool specified by user
+input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_read_file</strong> (<em>Path</em><em> | </em><em>str</em>) – Path to the TOML file or string (default dataset) containing
+additional cell ranges from which values are to be read.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary in the format {“sheet” : {“name” : value} }</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.read_calculation_and_validation_results">
+<span class="sig-name descname"><span class="pre">read_calculation_and_validation_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toml_file_calculation_validation_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.read_calculation_and_validation_results" title="Link to this definition"></a></dt>
+<dd><p>Read calculation and validation results</p>
+<p>Read the calculation and validation results from the BatPaC Excel tool.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>toml_file_calculation_validation_results</strong> (<em>Path</em><em> | </em><em>str</em><em>, </em><em>optional</em>) – Path to the TOML file or string (default dataset), containing the
+specified cell ranges of the calculation and validation results,
+by default None.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns a dictionary of the calculation and validation results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If no configuration for calculation and validation found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.calculate">
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.calculate" title="Link to this definition"></a></dt>
+<dd><p>Calculate the batteries in the BatPaC Excel tool</p>
+<p>Read all BatPaC_tool properties and its included [BatPaC_battery]
+properties, write these properties in the BatPaC Excel tool,
+and calculate the batteries in the BatPaC Excel tool.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool._save_batpac_config">
+<span class="sig-name descname"><span class="pre">_save_batpac_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batpac_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool._save_batpac_config" title="Link to this definition"></a></dt>
+<dd><p>Save BatPaC_tool configuration</p>
+<p>Read all BatPaC_tool properties from the BatPaC Excel tool, save
+these properties in the BatPaC_tool object, and write them as TOML
+file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>batpac_path</strong> (<em>Path</em><em>, </em><em>optional</em>) – If specified, storage path to the TOML file for BatPaC_tool
+properties, by default None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool._save_battery_config">
+<span class="sig-name descname"><span class="pre">_save_battery_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">battery_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool._save_battery_config" title="Link to this definition"></a></dt>
+<dd><p>Save [BatPaC_battery] configuration</p>
+<p>Read all BatPaC_tool included [BatPaC_battery] properties from the
+BatPaC Excel tool, save these properties in the [BatPaC_battery]
+objects, and write them as TOML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>battery_path</strong> (<em>Path</em><em>, </em><em>optional</em>) – If specified, storage path to the TOML file for [BatPaC_battery]
+properties, by default None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.batpac_tool.BatpacTool.save_config">
+<span class="sig-name descname"><span class="pre">save_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batpac_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">battery_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.batpac_tool.BatpacTool.save_config" title="Link to this definition"></a></dt>
+<dd><p>Save BatPaC_tool configuration</p>
+<p>Read all BatPaC_tool properties and its included [BatPaC_battery]
+properties from the BatPaC Excel tool, save these properties in the
+BatPaC_tool and [BatPaC_battery] objects, and write them as TOML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batpac_path</strong> (<em>Path</em><em>, </em><em>optional</em>) – If specified, storage path to the TOML file for BatPaC_tool
+properties, by default None.</p></li>
+<li><p><strong>battery_path</strong> (<em>Path</em><em>, </em><em>optional</em>) – If specified, storage path to the TOML file for [BatPaC_battery]
+properties, by default None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../batpac_battery/index.html" class="btn btn-neutral float-left" title="batpy.batpac_battery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../batpy_workbook/index.html" class="btn btn-neutral float-right" title="batpy.batpy_workbook" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Raphael Ginster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

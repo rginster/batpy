@@ -1,0 +1,123 @@
+batpy.batpac_battery
+====================
+
+.. py:module:: batpy.batpac_battery
+
+.. autoapi-nested-parse::
+
+   Module, which includes the class BatpacBattery
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   batpy.batpac_battery.BatpacBattery
+
+
+Module Contents
+---------------
+
+.. py:class:: BatpacBattery(name: str = 'Battery')
+
+   Battery class for interaction with BatPaC
+
+   This battery class is used to interact with BatPaC and stores battery
+   parameters in the dictionary properties.
+
+
+   .. py:attribute:: name
+
+
+   .. py:attribute:: version
+
+
+   .. py:attribute:: properties
+
+
+   .. py:method:: load_battery_file(path_to_battery_file: pathlib.Path | str, battery_name: str = 'Battery') -> bool
+
+      Load a battery configuration file
+
+      Load the properties for a battery from a TOML battery configuration
+      file.
+
+      :param path_to_battery_file: Path to the TOML battery configuration file. It is also possible to
+                                   load the included batpy datasets.
+      :type path_to_battery_file: Path | str
+      :param battery_name: Name of the table in the TOML file from which to load the battery
+                           properties. Thereby, the battery_name, by default "Battery", does
+                           not have to be equal to self.name.
+      :type battery_name: str, optional
+
+      :returns: True, if battery_name exists in the TOML file and the properties
+                were loaded.
+                False, if battery_name does not exist in the TOML file and the
+                properties could not be loaded.
+      :rtype: bool
+
+      .. rubric:: Examples
+
+      battery_config.toml contains a table with the name ["NCM"].
+      All key - value pairs are to be loaded for the battery "NCM811 - G".
+
+      >>> battery1 = BatPaC_battery("NCM811 - G")
+      >>> battery1.load_battery_file("./battery_config.toml", "NCM")
+      >>> from batpy import batpac_datasets
+      >>> battery1.load_battery_file(
+              batpac_datasets.get_batpy_dataset("batpy_batteries_config"),
+              "Battery 1"
+          )
+
+
+
+   .. py:method:: set_property(sheet: str, name: str, value: any) -> None
+
+      Set an existing property of the battery
+
+      Set an existing property of the battery in the format
+      {"sheet" : {"name" : value} }.
+
+      :param sheet: Name of the BatPaC Excel sheet.
+      :type sheet: str
+      :param name: Name of the BatPaC Excel cell description.
+      :type name: str
+      :param value: Value of the BatPaC Excel cell.
+      :type value: any
+
+
+
+   .. py:method:: get_property(sheet: str, name: str) -> any
+
+      Get property of the battery
+
+      Get an existing property of the battery.
+
+      :param sheet: Name of the BatPaC Excel sheet.
+      :type sheet: str
+      :param name: Name of the BatPaC Excel cell description.
+      :type name: str
+
+      :returns: Value of the stored property.
+      :rtype: any
+
+
+
+   .. py:method:: set_new_property(sheet: str, name: str, value: any) -> None
+
+      Set a new property of the battery
+
+      Set an existing property of the battery or create a new one in the
+      format {"sheet" : {"name" : value} }.
+
+      :param sheet: Name of the BatPaC Excel sheet.
+      :type sheet: str
+      :param name: Name of the BatPaC Excel cell description.
+      :type name: str
+      :param value: Value of the BatPaC Excel cell.
+      :type value: any
+
+
+

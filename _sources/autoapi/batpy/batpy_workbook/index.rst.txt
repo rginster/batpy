@@ -1,0 +1,152 @@
+batpy.batpy_workbook
+====================
+
+.. py:module:: batpy.batpy_workbook
+
+.. autoapi-nested-parse::
+
+   Module, which includes the basic workbook class
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   batpy.batpy_workbook.BatpyWorkbook
+
+
+Module Contents
+---------------
+
+.. py:class:: BatpyWorkbook(batpy_workbook_path: pathlib.Path, workbook_visible: bool = False)
+
+   Base class to interact with workbooks
+
+
+   .. py:attribute:: version
+
+
+   .. py:attribute:: workbook
+
+
+   .. py:attribute:: properties
+
+
+   .. py:method:: __del__() -> None
+
+      Destructor of batpy workbook object
+
+      Set the workbook calculation method to "automatic" and the
+      "screen_updating" to True after object destruction.
+
+
+
+   .. py:method:: save(path: pathlib.Path = None) -> None
+
+      Save batpy workbook
+
+      Save the batpy workbook or save the batpy workbook in another path.
+
+      :param path: If the path is specified, the batpy workbook will be saved
+                   under the path, by default None will overwrite the current
+                   batpy workbook.
+      :type path: Path, optional
+
+
+
+   .. py:method:: close() -> bool
+
+      Close batpy workbook
+
+      Close the batpy workbook if other workbooks are open, otherwise
+      the Excel instance will be closed.
+
+      :returns: True, if batpy workbook is closed.
+      :rtype: bool
+
+
+
+   .. py:method:: stop_automatic_calculation() -> None
+
+      Stop automatic Excel calculation
+
+
+
+   .. py:method:: start_automatic_calculation() -> None
+
+      Start automatic Excel calculation
+
+
+
+   .. py:method:: is_version_compatible(version_to_check: semantic_version.Version, include_minor: bool = False) -> bool
+
+      Check for version compatibility
+
+      Check if two versions (major.minor.patch) are compatible. Thereby a
+      version is compatible if major is equal. If minor should also be
+      included a version is compatible if major is equal and minor is greater
+      or equal.
+
+      :param version_to_check: Version to be checked against self.version.
+      :type version_to_check: semantic_version.Version
+      :param include_minor: Check if minor version of version_to_check is greater or equal to
+                            self.version's minor, by default False.
+      :type include_minor: bool, optional
+
+      :returns: True, if version is compatible.
+      :rtype: bool
+
+      :raises ValueError: If version is not compatible a ValueError will occur.
+
+
+
+   .. py:method:: _load_user_configuration(path_to_configuration: pathlib.Path | str) -> dict
+
+      Load configuration
+
+      Loads a single configuration from a TOML file or string.
+
+      :param path_to_configuration: Path to the TOML configuration file or configuration as string.
+      :type path_to_configuration: Path | str
+
+      :returns: Returns dictionary representation of configuration.
+      :rtype: dict
+
+
+
+   .. py:method:: _write_value_direct(worksheet: str, cell_range: str, value: any) -> None
+
+      Write value in batpy workbook
+
+      Write a value directly in the batpy workbook.
+
+      :param worksheet: Name of the batpy workbook worksheet.
+      :type worksheet: str
+      :param cell_range: Cell range of the batpy workbook.
+      :type cell_range: str
+      :param value: Value to write in the batpy workbook.
+      :type value: any
+
+
+
+   .. py:method:: _read_value_direct(worksheet: str, cell_range: str) -> any
+
+      Read value from batpy workbook
+
+      Read a value directly from the batpy workbook.
+
+      :param worksheet: Name of the batpy workbook worksheet.
+      :type worksheet: str
+      :param cell_range: Cell range of the batpy workbook.
+      :type cell_range: str
+
+      :returns: Value of the batpy workbook cell.
+      :rtype: any
+
+      :raises KeyError: Raises KeyError if the specified worksheet or range could not be
+          found.
+
+
+

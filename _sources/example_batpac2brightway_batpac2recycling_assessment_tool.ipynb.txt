@@ -1,0 +1,716 @@
+{
+ "cells": [
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Example usage of BatPy's brightway2 export and BatPy's recycling assessment tool export\n",
+    "`batpy` is able to export a calculated battery from BatPaC as a Life Cycle Inventory Excel file, which can be imported in brightway2. Moreover, `batpy` is able to export a calculated battery from BatPaC to the recycling assessment tool. In order to use `batpy` in a project for brightway2 and recycling assessment tool export, follow the example below."
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Import"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# included datasets\n",
+    "from batpy import datasets\n",
+    "\n",
+    "# batpac battery and tool classes\n",
+    "from batpy.batpac_battery import BatpacBattery\n",
+    "from batpy.batpac_tool import BatpacTool\n",
+    "\n",
+    "# brightway2 class\n",
+    "from batpy.brightway import BrightwayConnector\n",
+    "\n",
+    "# RAT class\n",
+    "from batpy.recycling_assessment_tool import RATConnector\n",
+    "\n",
+    "# utility function for combining multiple configuration files\n",
+    "from batpy.utility_functions import combine_configuration\n",
+    "\n",
+    "# pathlib for filesystem path handling\n",
+    "from pathlib import Path\n",
+    "from tqdm import tqdm\n",
+    "import shutil"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Paths to Excel files and to TOML configuration"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Excel workbooks save path\n",
+    "PATH_EXCEL_SAVE = Path(\"./example_data/excel_workbooks\")\n",
+    "\n",
+    "# Get BatPaC: https://www.anl.gov/partnerships/batpac-battery-manufacturing-cost-estimation\n",
+    "BATPY_BATPAC_EXCEL = Path(\"./example_data/excel_workbooks/BatPaC Kopie.xlsm\")\n",
+    "\n",
+    "# # Brightway workbook is included\n",
+    "# BRIGHTWAY2_EXCEL = Path(\"./example_data/excel_workbooks/BatPaC-Brightway.xlsx\")\n",
+    "\n",
+    "# # RAT workbook\n",
+    "# RAT_EXCEL = Path(\"./example_data/excel_workbooks/RAT.xlsx\")\n",
+    "\n",
+    "# brightway2 configuration\n",
+    "BRIGHTWAY_CONFIG = Path(\n",
+    "    \"./example_data/conf_brightway/batpy_batpac2brightway.toml\"\n",
+    ")\n",
+    "\n",
+    "# RAT configuration\n",
+    "RAT_EXCEL_CELLS_CONFIG = Path(\n",
+    "    \"./example_data/conf_brightway/batpy_recycling_assessment_tool_config.toml\"\n",
+    ")\n",
+    "RAT_BATPAC_EXPORT_CONFIG = Path(\n",
+    "    \"./example_data/conf_brightway/batpy_batpac2recycling_assessment_tool.toml\"\n",
+    ")\n",
+    "RAT_BRIGHTWAY_EXPORT_CONFIG = Path(\n",
+    "    \"./example_data/conf_brightway/batpy_recycling_assessment_tool2brightway_single_battery.toml\"\n",
+    ")\n",
+    "\n",
+    "# Battery config\n",
+    "BATPY_BATTERY_CONFIG = Path(\n",
+    "    \"./example_data/conf_batpac/batpy_batteries_suv_config.toml\"\n",
+    ")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Get included datasets"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Show available dataset of specified version (default latest):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[Version('0.3.0'), Version('0.0.0'), Version('0.4.0'), Version('0.1.0')]"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "datasets.get_available_batpy_dataset_versions()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'batpy_batteries_suv_config.toml': 'Standard configuration for SUV batteries',\n",
+       " 'batpy_batteries_config.toml': 'Example configuration for batteries',\n",
+       " 'batpy_batteries_standard_config.toml': 'Standard configuration for batteries',\n",
+       " 'batpy_recycling_assessment_tool2brightway_single_battery.toml': 'Configuration for recycling assessment tool (https://doi.org/10.5281/zenodo.6342832) export to brightway',\n",
+       " 'batpy_batpac_config.toml': 'Example configuration for BatPaC tool',\n",
+       " 'batpy_batpac2brightway copy.toml': 'Configuration for brightway2 export',\n",
+       " 'batpy_batpac_summary_of_results.toml': 'Configuration for worksheet Summary of Results in BatPaC Excel',\n",
+       " 'batpy_batpac_chem.toml': 'Configuration for worksheet chem in BatPaC Excel',\n",
+       " 'batpy_batpac2recycling_assessment_tool.toml': 'Configuration for BatPaC export to recycling assessment tool https://doi.org/10.5281/zenodo.6342832',\n",
+       " 'batpy_batpac_calculation_and_validation_results.toml': 'Configuration for calculation and validation results in BatPaC Excel',\n",
+       " 'batpy_batpac_recycle.toml': 'Configuration for worksheet Recycle in BatPaC Excel',\n",
+       " 'batpy_batpac_user_input_cells.toml': 'Configuration for standard user input cells in BatPaC Excel',\n",
+       " 'batpy_batpac_bms.toml': 'Configuration for worksheet BMS in BatPaC Excel',\n",
+       " 'batpy_recycling_assessment_tool_config.toml': 'Configuration for recycling assessment tool https://doi.org/10.5281/zenodo.6342832',\n",
+       " 'batpy_batpac_battery_design.toml': 'Configuration for worksheet battery design in BatPaC Excel',\n",
+       " 'batpy_recycling_assessment_tool2brightway.toml': 'Configuration for recycling assessment tool (https://doi.org/10.5281/zenodo.6342832) export to brightway',\n",
+       " 'batpy_batpac2brightway.toml': 'Configuration for brightway2 export'}"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "datasets.get_available_batpy_datasets()"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Export integrated datasets"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "datasets.copy_integrated_dataset(\"batpy_batpac2brightway\", BRIGHTWAY_CONFIG)\n",
+    "datasets.copy_integrated_dataset(\n",
+    "    \"batpy_batteries_suv_config\", BATPY_BATTERY_CONFIG\n",
+    ")\n",
+    "# RAT\n",
+    "datasets.copy_integrated_dataset(\n",
+    "    \"batpy_recycling_assessment_tool_config\", RAT_EXCEL_CELLS_CONFIG\n",
+    ")\n",
+    "datasets.copy_integrated_dataset(\n",
+    "    \"batpy_batpac2recycling_assessment_tool\", RAT_BATPAC_EXPORT_CONFIG\n",
+    ")\n",
+    "datasets.copy_integrated_dataset(\n",
+    "    \"batpy_recycling_assessment_tool2brightway_single_battery\", RAT_BRIGHTWAY_EXPORT_CONFIG\n",
+    ")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Load multiple included datasets for BatPaC configuration and combine them:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "batpy_batpac_dataset = combine_configuration(\n",
+    "    [\n",
+    "        datasets.get_batpy_dataset(\"batpy_batpac_battery_design\"),\n",
+    "        datasets.get_batpy_dataset(\"batpy_batpac_bms\"),\n",
+    "        datasets.get_batpy_dataset(\"batpy_batpac_recycle\"),\n",
+    "        datasets.get_batpy_dataset(\"batpy_batpac_chem\"),\n",
+    "    ]\n",
+    ")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## BatPaC tool\n",
+    "### Create BatPaC instance"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "batpac_excel = BatpacTool(\n",
+    "    BATPY_BATPAC_EXCEL,\n",
+    "    datasets.get_batpy_dataset(\"batpy_batpac_user_input_cells\"),\n",
+    "    None,\n",
+    "    False,\n",
+    ")\n"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Brightway2 connector\n",
+    "- For each cell chemistry\n",
+    "    - Create batteries\n",
+    "    - Change properties\n",
+    "    - For each battery:\n",
+    "        - Save integrated brightway2 Excel file\n",
+    "        - Create brightway2 instance\n",
+    "        - Load brightway2 configuration and export BatPaC battery data into brightway2 Excel\n",
+    "        - Save Excel file\n",
+    "        - Close Excel file"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# battery_properties_to_change = {\n",
+    "#     (\"Dashboard\", \"Total pack energy, 0-100% SOC (kWh)\"): [\n",
+    "#         20,\n",
+    "#         45,\n",
+    "#         68,\n",
+    "#         85,\n",
+    "#         95,\n",
+    "#         100,\n",
+    "#         120,\n",
+    "#     ]\n",
+    "# }\n",
+    "\n",
+    "battery_properties_to_change = {\n",
+    "    (\"Dashboard\", \"Total pack energy, 0-100% SOC (kWh)\"): [\n",
+    "        20,\n",
+    "        45,\n",
+    "        68,\n",
+    "        95,\n",
+    "        85,\n",
+    "        100,\n",
+    "        120,\n",
+    "    ]\n",
+    "}"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- \"NMC333-G (Power)\",\n",
+    "- \"NMC333-G (Energy)\",\n",
+    "- \"NMC532-G (Power)\",\n",
+    "- \"NMC532-G (Energy)\",\n",
+    "- \"NMC622-G (Power)\",\n",
+    "- \"NMC622-G (Energy)\",\n",
+    "- \"NMC811-G (Power)\",\n",
+    "    - \"NMC811-G (Energy)\",\n",
+    "- \"NCA-G (Power)\",\n",
+    "- \"NCA-G (Energy)\",\n",
+    "- \"LFP-G (Power)\",\n",
+    "- \"LFP-G (Energy)\",\n",
+    "- \"NMC955-G (Power)\",\n",
+    "- \"NMC955-G (Energy)\",\n",
+    "    <!-- # \"LMO-G (Power)\",\n",
+    "    # \"LMO-G (Energy)\",\n",
+    "    # \"LMO-LTO (Power)\",\n",
+    "    # \"LMO-LTO (Energy)\",\n",
+    "    # \"50%/50% NMC532/LMO - G\", -->\n",
+    "    \n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# battery_cell_chemistries = [\n",
+    "#     \"NMC333-G (Power)\",\n",
+    "#     \"NMC333-G (Energy)\",\n",
+    "#     \"NMC532-G (Power)\",\n",
+    "#     \"NMC532-G (Energy)\",\n",
+    "#     \"NMC622-G (Power)\",\n",
+    "#     \"NMC622-G (Energy)\",\n",
+    "#     \"NMC811-G (Power)\",\n",
+    "#     \"NMC811-G (Energy)\",\n",
+    "#     \"NCA-G (Power)\",\n",
+    "#     \"NCA-G (Energy)\",\n",
+    "#     \"LFP-G (Power)\",\n",
+    "#     \"LFP-G (Energy)\",\n",
+    "#     \"NMC955-G (Power)\",\n",
+    "#     \"NMC955-G (Energy)\",\n",
+    "#     # \"LMO-G (Power)\",\n",
+    "#     # \"LMO-G (Energy)\",\n",
+    "#     # \"LMO-LTO (Power)\",\n",
+    "#     # \"LMO-LTO (Energy)\",\n",
+    "#     # \"50%/50% NMC532/LMO - G\",\n",
+    "# ]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "battery_cell_chemistries = [\n",
+    "    \"NMC811-G (Energy)\",\n",
+    "]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def create_batteries(\n",
+    "    cell_chemistry: str, battery_properties: dict\n",
+    ") -> BatpacTool:\n",
+    "    bat1 = BatpacBattery(\"Battery 1\")\n",
+    "    bat2 = BatpacBattery(\"Battery 2\")\n",
+    "    bat3 = BatpacBattery(\"Battery 3\")\n",
+    "    bat4 = BatpacBattery(\"Battery 4\")\n",
+    "    bat5 = BatpacBattery(\"Battery 5\")\n",
+    "    bat6 = BatpacBattery(\"Battery 6\")\n",
+    "    bat7 = BatpacBattery(\"Battery 7\")\n",
+    "\n",
+    "    batpac_excel.load_batteries_file(\n",
+    "        BATPY_BATTERY_CONFIG,\n",
+    "        [\n",
+    "            bat1,\n",
+    "            bat2,\n",
+    "            bat3,\n",
+    "            bat4,\n",
+    "            bat5,\n",
+    "            bat6,\n",
+    "            bat7,\n",
+    "        ],\n",
+    "    )\n",
+    "\n",
+    "    batpac_excel.set_new_property(\n",
+    "        \"Dashboard\", \"Electrode Couple\", cell_chemistry\n",
+    "    )\n",
+    "\n",
+    "    for index, battery in enumerate(batpac_excel.batteries):\n",
+    "        for key_1, key_2 in battery_properties:\n",
+    "            battery.set_new_property(\n",
+    "                key_1, key_2, battery_properties[(key_1, key_2)][index]\n",
+    "            )\n",
+    "\n",
+    "    batpac_excel.calculate()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def brightway2_export(battery) -> None:\n",
+    "    battery_chemistry = batpac_excel.read_value(\n",
+    "        \"Dashboard\", \"Electrode Couple\"\n",
+    "    )\n",
+    "    battery_capacity = batpac_excel.read_value(\n",
+    "        \"Dashboard\", \"Total pack energy, 0-100% SOC (kWh)\", battery\n",
+    "    )\n",
+    "    database_name = (\n",
+    "        f\"Battery pack production {battery_chemistry} {battery_capacity} kWh\"\n",
+    "    )\n",
+    "    activity_name = (\n",
+    "        f\"Battery pack assembly, {battery_chemistry}, {battery_capacity} kWh\"\n",
+    "    )\n",
+    "    reference_product = (\n",
+    "        f\"Battery system, {battery_chemistry}, {battery_capacity} kWh\"\n",
+    "    )\n",
+    "\n",
+    "    positive_active_material = batpac_excel.read_value(\n",
+    "        \"Chem\",\n",
+    "        \"Positive Electrode Active Material\",\n",
+    "        battery,\n",
+    "        datasets.get_batpy_dataset(\"batpy_batpac_chem\"),\n",
+    "    )\n",
+    "\n",
+    "    positive_active_material = (\n",
+    "        f\"Positive Active Material {positive_active_material}\"\n",
+    "    )\n",
+    "\n",
+    "    path_to_copy = PATH_EXCEL_SAVE / f\"BatPaC-Brightway_base.xlsx\"\n",
+    "\n",
+    "    datasets.copy_integrated_brightway_workbook(path_to_copy)\n",
+    "    brightway_excel = BrightwayConnector(path_to_copy, True)\n",
+    "\n",
+    "    brightway_excel.load_batpac_to_brightway_configuration(BRIGHTWAY_CONFIG)\n",
+    "    brightway_excel._write_value_direct(\"Battery Pack\", \"B2\", database_name)\n",
+    "    brightway_excel._write_value_direct(\"Battery Pack\", \"B5\", activity_name)\n",
+    "    brightway_excel._write_value_direct(\n",
+    "        \"Battery Pack\", \"B11\", reference_product\n",
+    "    )\n",
+    "\n",
+    "    brightway_excel._write_value_direct(\n",
+    "        \"Pos. Active material\", \"A14\", positive_active_material\n",
+    "    )\n",
+    "\n",
+    "    brightway_excel.export_batpac_battery_to_brightway(\n",
+    "        batpac=batpac_excel,\n",
+    "        battery=battery,\n",
+    "        batpac_config=batpy_batpac_dataset,\n",
+    "    )\n",
+    "\n",
+    "    path_to_save = (\n",
+    "        PATH_EXCEL_SAVE\n",
+    "        / f\"BatPaC-Brightway_{battery_chemistry}_{battery_capacity}_kWh.xlsx\"\n",
+    "    )\n",
+    "    brightway_excel.save(path_to_save)\n",
+    "    brightway_excel.close()\n",
+    "\n",
+    "    # recycled\n",
+    "    database_name_recycled = f\"Battery pack production recycled {battery_chemistry} {battery_capacity} kWh\"\n",
+    "    activity_name_recycled = f\"Battery pack assembly, recycled, {battery_chemistry}, {battery_capacity} kWh\"\n",
+    "    reference_product_recycled = f\"Battery system, recycled, {battery_chemistry}, {battery_capacity} kWh\"\n",
+    "\n",
+    "    path_to_recycled_copy = (\n",
+    "        PATH_EXCEL_SAVE\n",
+    "        / f\"BatPaC-Brightway_recycled_{battery_chemistry}_{battery_capacity}_kWh.xlsx\"\n",
+    "    )\n",
+    "    shutil.copy(path_to_save, path_to_recycled_copy)\n",
+    "    brightway_excel = BrightwayConnector(path_to_recycled_copy, True)\n",
+    "\n",
+    "    brightway_excel.load_batpac_to_brightway_configuration(BRIGHTWAY_CONFIG)\n",
+    "    brightway_excel._write_value_direct(\n",
+    "        \"Battery Pack\", \"B2\", database_name_recycled\n",
+    "    )\n",
+    "    brightway_excel._write_value_direct(\n",
+    "        \"Battery Pack\", \"B5\", activity_name_recycled\n",
+    "    )\n",
+    "    brightway_excel._write_value_direct(\n",
+    "        \"Battery Pack\", \"B11\", reference_product_recycled\n",
+    "    )\n",
+    "\n",
+    "    brightway_excel.save()\n",
+    "    brightway_excel.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def rat_export_with_brightway(battery) -> None:\n",
+    "    # Import from BatPaC\n",
+    "\n",
+    "    battery_chemistry = batpac_excel.read_value(\n",
+    "        \"Dashboard\", \"Electrode Couple\"\n",
+    "    )\n",
+    "    battery_capacity = batpac_excel.read_value(\n",
+    "        \"Dashboard\", \"Total pack energy, 0-100% SOC (kWh)\", battery\n",
+    "    )\n",
+    "\n",
+    "    # positive_active_material = batpac_excel.read_value(\n",
+    "    #     \"Chem\",\n",
+    "    #     \"Positive Electrode Active Material\",\n",
+    "    #     battery,\n",
+    "    #     datasets.get_batpy_dataset(\"batpy_batpac_chem\"),\n",
+    "    # )\n",
+    "\n",
+    "    # positive_active_material = (\n",
+    "    #     f\"Positive Active Material {positive_active_material}\"\n",
+    "    # )\n",
+    "\n",
+    "    path_to_copy = PATH_EXCEL_SAVE / f\"RAT_base.xlsx\"\n",
+    "\n",
+    "    # datasets.copy_integrated_rat_workbook(path_to_copy)\n",
+    "    rat_excel = RATConnector(path_to_copy, RAT_EXCEL_CELLS_CONFIG, True)\n",
+    "\n",
+    "    rat_excel.load_batpac_to_rat_configuration(RAT_BATPAC_EXPORT_CONFIG)\n",
+    "    rat_excel.stop_automatic_calculation()\n",
+    "    rat_excel._write_value_direct(\"Battery\", \"C4\", battery_chemistry)\n",
+    "\n",
+    "    rat_excel.export_batpac_battery_to_rat(\n",
+    "        batpac=batpac_excel,\n",
+    "        battery=battery,\n",
+    "        batpac_config=batpy_batpac_dataset,\n",
+    "    )\n",
+    "\n",
+    "    # Brightway\n",
+    "    path_to_copy = PATH_EXCEL_SAVE / f\"RAT_brightway_base.xlsx\"\n",
+    " \n",
+    "    database_name = (\n",
+    "        f\"Battery pack recycling {battery_chemistry} {battery_capacity} kWh\"\n",
+    "    )\n",
+    "    activity_name_disassembly = (\n",
+    "        f\"Battery pack disassembly, {battery_chemistry}, {battery_capacity} kWh\"\n",
+    "    )\n",
+    "    activity_name_mechanical = (\n",
+    "        f\"Battery mechanical processing, {battery_chemistry}, {battery_capacity} kWh\"\n",
+    "    )\n",
+    "    activity_name_hydro= (\n",
+    "        f\"Battery hydrometallurgy, {battery_chemistry}, {battery_capacity} kWh\"\n",
+    "    )\n",
+    "\n",
+    "    # datasets.copy_integrated_brightway_workbook(path_to_copy)\n",
+    "    rat_brightway_excel = BrightwayConnector(path_to_copy, True)\n",
+    "    rat_brightway_excel.stop_automatic_calculation()\n",
+    "    rat_brightway_excel._write_value_direct(\"Disassembly\", \"B2\", database_name)\n",
+    "    rat_brightway_excel._write_value_direct(\"Disassembly\", \"B5\", activity_name_disassembly)\n",
+    "    rat_brightway_excel._write_value_direct(\"Mechanical\", \"B3\", activity_name_mechanical)\n",
+    "    rat_brightway_excel._write_value_direct(\"Hydro\", \"B3\", activity_name_hydro)\n",
+    "\n",
+    "    rat_excel.load_rat_to_brightway_configuration(RAT_BRIGHTWAY_EXPORT_CONFIG)\n",
+    "    rat_excel.export_rat_to_brightway(\n",
+    "        brightway=rat_brightway_excel,\n",
+    "        rat_config=RAT_EXCEL_CELLS_CONFIG\n",
+    "    )\n",
+    "\n",
+    "    path_to_save_rat_brigthway = (\n",
+    "        PATH_EXCEL_SAVE\n",
+    "        / f\"RAT_brightway_{battery_chemistry}_{battery_capacity}_kWh.xlsx\"\n",
+    "    )\n",
+    "    rat_brightway_excel.save(path_to_save_rat_brigthway)\n",
+    "    rat_brightway_excel.close()\n",
+    "\n",
+    "    path_to_save = (\n",
+    "        PATH_EXCEL_SAVE\n",
+    "        / f\"RAT_{battery_chemistry}_{battery_capacity}_kWh.xlsx\"\n",
+    "    )\n",
+    "    rat_excel.save(path_to_save)\n",
+    "    rat_excel.close()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def rat_export(battery) -> None:\n",
+    "    battery_chemistry = batpac_excel.read_value(\n",
+    "        \"Dashboard\", \"Electrode Couple\"\n",
+    "    )\n",
+    "    battery_capacity = batpac_excel.read_value(\n",
+    "        \"Dashboard\", \"Total pack energy, 0-100% SOC (kWh)\", battery\n",
+    "    )\n",
+    "\n",
+    "    # positive_active_material = batpac_excel.read_value(\n",
+    "    #     \"Chem\",\n",
+    "    #     \"Positive Electrode Active Material\",\n",
+    "    #     battery,\n",
+    "    #     datasets.get_batpy_dataset(\"batpy_batpac_chem\"),\n",
+    "    # )\n",
+    "\n",
+    "    # positive_active_material = (\n",
+    "    #     f\"Positive Active Material {positive_active_material}\"\n",
+    "    # )\n",
+    "\n",
+    "    path_to_copy = PATH_EXCEL_SAVE / f\"RAT_base.xlsx\"\n",
+    "\n",
+    "    # datasets.copy_integrated_rat_workbook(path_to_copy)\n",
+    "    rat_excel = RATConnector(path_to_copy, True)\n",
+    "\n",
+    "    rat_excel.load_batpac_to_rat_configuration(RAT_BATPAC_EXPORT_CONFIG)\n",
+    "    rat_excel.stop_automatic_calculation()\n",
+    "    rat_excel._write_value_direct(\"Battery\", \"C4\", battery_chemistry)\n",
+    "    # rat_excel._write_value_direct(\"Battery Pack\", \"B5\", activity_name)\n",
+    "    # rat_excel._write_value_direct(\n",
+    "    #     \"Battery Pack\", \"B11\", reference_product\n",
+    "    # )\n",
+    "    # rat_excel._write_value_direct(\n",
+    "    #     \"Pos. Active material\", \"A14\", positive_active_material\n",
+    "    # )\n",
+    "\n",
+    "    rat_excel.export_batpac_battery_to_rat(\n",
+    "        batpac=batpac_excel,\n",
+    "        battery=battery,\n",
+    "        batpac_config=batpy_batpac_dataset,\n",
+    "    )\n",
+    "\n",
+    "    path_to_save = (\n",
+    "        PATH_EXCEL_SAVE\n",
+    "        / f\"RAT_{battery_chemistry}_{battery_capacity}_kWh.xlsx\"\n",
+    "    )\n",
+    "    rat_excel.save(path_to_save)\n",
+    "    rat_excel.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "Processing BatPaC configuration in each sheet: 100%|██████████| 1/1 [00:00<00:00, 17.99it/s]\n",
+      "Processing battery configuration in each sheet: 100%|██████████| 5/5 [00:07<00:00,  1.55s/it]\n",
+      "Export each battery: 100%|██████████| 7/7 [17:52<00:00, 153.15s/it]\n"
+     ]
+    }
+   ],
+   "source": [
+    "for chemistry in battery_cell_chemistries:\n",
+    "\n",
+    "    create_batteries(chemistry, battery_properties_to_change)\n",
+    "    for battery in tqdm(\n",
+    "        batpac_excel.batteries,\n",
+    "        \"Export each battery\",\n",
+    "    ):\n",
+    "        brightway2_export(battery)\n",
+    "        rat_export_with_brightway(battery)\n",
+    "        \n"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Close BatPaC file"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "batpac_excel.close()\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": ".venv",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.14"
+  },
+  "nbsphinx": {
+   "execute": "never"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

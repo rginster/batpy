@@ -1,0 +1,24 @@
+batpy.data
+==========
+
+.. py:module:: batpy.data
+
+.. autoapi-nested-parse::
+
+   batpy's build in datasets
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   batpy.data.__versions__
+
+
+Package Contents
+----------------
+
+.. py:data:: __versions__
+

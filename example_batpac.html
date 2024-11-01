@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example usage of BatPy &mdash; batpy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Example usage of BatPy’s brightway2 export" href="example_batpac2brightway.html" />
+    <link rel="prev" title="batpy" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            batpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Example usage of BatPy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#import">Import</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paths-to-excel-file-and-to-toml-configuration">Paths to Excel file and to TOML configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-included-datasets">Get included datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#batteries">Batteries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-batteries">Create batteries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#change-battery-properties">Change battery properties</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#batpac-tool">BatPaC tool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-batpac-instance">Create BatPaC instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-batteries-to-batpac-object">Add batteries to BatPaC object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-configuration-file-for-batpac-instance">Load configuration file for BatPaC instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#write-configuration-in-excel-file-and-calculate-batteries">Write configuration in Excel file and calculate batteries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-calculation-and-validation-results">Print calculation and validation results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-additional-cells">Read additional cells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#save-configuration-from-excel">Save configuration from Excel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#save-excel-file">Save Excel file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#close-excel-file">Close Excel file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example_batpac2brightway.html">Example usage of BatPy’s brightway2 export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">batpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Example usage of BatPy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/example_batpac.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-usage-of-batpy">
+<h1>Example usage of BatPy<a class="headerlink" href="#example-usage-of-batpy" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">batpy</span></code> is able to read, write, and calculate batteries in the BatPaC tool. To use <code class="docutils literal notranslate"><span class="pre">batpy</span></code> in a project. In order to use <code class="docutils literal notranslate"><span class="pre">batpy</span></code>in a project for BatPaC tool interaction, follow the example below.</p>
+<section id="import">
+<h2>Import<a class="headerlink" href="#import" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># included datasets</span>
+<span class="kn">from</span> <span class="nn">batpy</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="c1"># batpac battery and tool classes</span>
+<span class="kn">from</span> <span class="nn">batpy.batpac_battery</span> <span class="kn">import</span> <span class="n">BatpacBattery</span>
+<span class="kn">from</span> <span class="nn">batpy.batpac_tool</span> <span class="kn">import</span> <span class="n">BatpacTool</span>
+
+<span class="c1"># pathlib for filesystem path handling</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># included datasets</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">batpy</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># batpac battery and tool classes</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">batpy.batpac_battery</span> <span class="kn">import</span> <span class="n">BatpacBattery</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;batpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="paths-to-excel-file-and-to-toml-configuration">
+<h2>Paths to Excel file and to TOML configuration<a class="headerlink" href="#paths-to-excel-file-and-to-toml-configuration" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get BatPaC: https://www.anl.gov/partnerships/batpac-battery-manufacturing-cost-estimation</span>
+<span class="n">BATPY_BATPAC_EXCEL</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./example_data/excel_workbooks/dummy_BatPaC.xlsx&quot;</span><span class="p">)</span>
+
+<span class="c1"># BatPaC battery configuration</span>
+<span class="n">BATPY_BATPAC_BATTERY_CONFIG</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="s2">&quot;./example_data/conf_batpac/batpy_batteries_config.toml&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-included-datasets">
+<h2>Get included datasets<a class="headerlink" href="#get-included-datasets" title="Link to this heading"></a></h2>
+<p>Show available dataset versions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">get_available_batpy_dataset_versions</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Version(&#39;0.3.0&#39;), Version(&#39;0.0.0&#39;), Version(&#39;0.1.0&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show latest version:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">get_latest_batpy_dataset_version</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Version(&#39;0.3.0&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show available dataset of specified version and their description (default latest):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">get_available_batpy_datasets</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;batpy_batteries_config.toml&#39;: &#39;Example configuration for batteries&#39;,
+ &#39;batpy_batpac_config.toml&#39;: &#39;Example configuration for BatPaC tool&#39;,
+ &#39;batpy_batpac_summary_of_results.toml&#39;: &#39;Configuration for worksheet Summary of Results in BatPaC Excel&#39;,
+ &#39;batpy_batpac_calculation_and_validation_results.toml&#39;: &#39;Configuration for calculation and validation results in BatPaC Excel&#39;,
+ &#39;batpy_batpac_user_input_cells.toml&#39;: &#39;Configuration for standard user input cells in BatPaC Excel&#39;,
+ &#39;batpy_batpac_battery_design.toml&#39;: &#39;Configuration for worksheet battery design in BatPaC Excel&#39;,
+ &#39;batpy_batpac2brightway.toml&#39;: &#39;Configuration for brightway2 export&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Export integrated dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_batteries_config&quot;</span><span class="p">,</span> <span class="n">BATPY_BATPAC_BATTERY_CONFIG</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load included datasets:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpy_batpac_battery_design</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_batpac_battery_design&quot;</span>
+<span class="p">)</span>
+<span class="n">batpy_batpac_user_input_config</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_batpac_user_input_cells&quot;</span>
+<span class="p">)</span>
+
+<span class="n">batpy_batpac_tool_config</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_config&quot;</span><span class="p">)</span>
+
+<span class="n">batpy_batpac_tool_calculation_validation_config</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_batpac_calculation_and_validation_results&quot;</span>
+<span class="p">)</span>
+
+<span class="n">additional_user_defined_results_cells</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_batpac_summary_of_results&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="batteries">
+<h2>Batteries<a class="headerlink" href="#batteries" title="Link to this heading"></a></h2>
+<section id="create-batteries">
+<h3>Create batteries<a class="headerlink" href="#create-batteries" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bat1</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 1&quot;</span><span class="p">)</span>
+<span class="n">bat2</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 2&quot;</span><span class="p">)</span>
+<span class="n">bat3</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 3&quot;</span><span class="p">)</span>
+<span class="n">bat4</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 4&quot;</span><span class="p">)</span>
+<span class="n">bat5</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 5&quot;</span><span class="p">)</span>
+<span class="n">bat6</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 6&quot;</span><span class="p">)</span>
+<span class="n">bat7</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 7&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="change-battery-properties">
+<h3>Change battery properties<a class="headerlink" href="#change-battery-properties" title="Link to this heading"></a></h3>
+<p>a) Write individual properties for created batteries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bat1</span><span class="o">.</span><span class="n">set_new_property</span><span class="p">(</span><span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Number of modules in parallel&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) Load individiual battery configuration from file</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bat2</span><span class="o">.</span><span class="n">load_battery_file</span><span class="p">(</span><span class="n">BATPY_BATPAC_BATTERY_CONFIG</span><span class="p">,</span> <span class="s2">&quot;Battery 2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="batpac-tool">
+<h2>BatPaC tool<a class="headerlink" href="#batpac-tool" title="Link to this heading"></a></h2>
+<section id="create-batpac-instance">
+<h3>Create BatPaC instance<a class="headerlink" href="#create-batpac-instance" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span> <span class="o">=</span> <span class="n">BatpacTool</span><span class="p">(</span>
+    <span class="n">BATPY_BATPAC_EXCEL</span><span class="p">,</span>
+    <span class="n">batpy_batpac_user_input_config</span><span class="p">,</span>
+    <span class="n">batpy_batpac_tool_calculation_validation_config</span><span class="p">,</span>
+    <span class="n">workbook_visible</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="add-batteries-to-batpac-object">
+<h3>Add batteries to BatPaC object<a class="headerlink" href="#add-batteries-to-batpac-object" title="Link to this heading"></a></h3>
+<p>a) Add individual batteries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">add_battery</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">bat1</span><span class="p">,</span>
+        <span class="n">bat2</span><span class="p">,</span>
+        <span class="n">bat3</span><span class="p">,</span>
+        <span class="n">bat4</span><span class="p">,</span>
+        <span class="n">bat5</span><span class="p">,</span>
+        <span class="n">bat6</span><span class="p">,</span>
+        <span class="n">bat7</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) Add individual batteries and load their configuration file (will overwrite all batteries)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">load_batteries_file</span><span class="p">(</span>
+    <span class="n">BATPY_BATPAC_BATTERY_CONFIG</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="n">bat1</span><span class="p">,</span>
+        <span class="n">bat2</span><span class="p">,</span>
+        <span class="n">bat3</span><span class="p">,</span>
+        <span class="n">bat4</span><span class="p">,</span>
+        <span class="n">bat5</span><span class="p">,</span>
+        <span class="n">bat6</span><span class="p">,</span>
+        <span class="n">bat7</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-configuration-file-for-batpac-instance">
+<h3>Load configuration file for BatPaC instance<a class="headerlink" href="#load-configuration-file-for-batpac-instance" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">load_batpac_file</span><span class="p">(</span><span class="n">batpy_batpac_tool_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="write-configuration-in-excel-file-and-calculate-batteries">
+<h3>Write configuration in Excel file and calculate batteries<a class="headerlink" href="#write-configuration-in-excel-file-and-calculate-batteries" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing BatPaC configuration in each sheet: 100%|██████████| 7/7 [00:26&lt;00:00,  3.73s/it]
+Processing battery configuration in each sheet: 100%|██████████| 5/5 [00:11&lt;00:00,  2.26s/it]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="print-calculation-and-validation-results">
+<h3>Print calculation and validation results<a class="headerlink" href="#print-calculation-and-validation-results" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_calculation_and_validation_results</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------------------------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+
+| Parameter                                    |          Battery 1          |          Battery 2          |          Battery 3          |          Battery 4          |          Battery 5          |          Battery 6          |          Battery 7          |
++----------------------------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+
+| Configuration Errors (see table to right)    |          1, 2, 3, 4         |           2, 3, 4           |             3, 4            |             3, 4            |             3, 4            |             3, 4            |             3, 4            |
+| Configuration Warnings (see table  to right) |             6, 7            |             6, 7            |              7              |              7              |              7              |              7              |              7              |
+| Plant Size, GWh                              |             15.0            |             20.0            |             25.0            |             30.0            |             35.0            |             40.0            |             45.0            |
+| Power-to-energy ratio                        |      3.3333333333333335     |             5.0             |             6.0             |      6.666666666666667      |      7.142857142857143      |             7.5             |      7.777777777777778      |
+| Adequacy of cooling                          |             None            |             Poor            |          Excellent          |          Excellent          |          Excellent          |          Excellent          |          Excellent          |
+| Cathode thickness limited by                 | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override |
++----------------------------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Parameter&#39;: [&#39;Battery 1&#39;,
+  &#39;Battery 2&#39;,
+  &#39;Battery 3&#39;,
+  &#39;Battery 4&#39;,
+  &#39;Battery 5&#39;,
+  &#39;Battery 6&#39;,
+  &#39;Battery 7&#39;],
+ &#39;Configuration Errors (see table to right)&#39;: [&#39;1, 2, 3, 4&#39;,
+  &#39;2, 3, 4&#39;,
+  &#39;3, 4&#39;,
+  &#39;3, 4&#39;,
+  &#39;3, 4&#39;,
+  &#39;3, 4&#39;,
+  &#39;3, 4&#39;],
+ &#39;Configuration Warnings (see table  to right)&#39;: [&#39;6, 7&#39;,
+  &#39;6, 7&#39;,
+  &#39;7&#39;,
+  &#39;7&#39;,
+  &#39;7&#39;,
+  &#39;7&#39;,
+  &#39;7&#39;],
+ &#39;Plant Size, GWh&#39;: [15.0, 20.0, 25.0, 30.0, 35.0, 40.0, 45.0],
+ &#39;Power-to-energy ratio&#39;: [3.3333333333333335,
+  5.0,
+  6.0,
+  6.666666666666667,
+  7.142857142857143,
+  7.5,
+  7.777777777777778],
+ &#39;Adequacy of cooling&#39;: [None,
+  &#39;Poor&#39;,
+  &#39;Excellent&#39;,
+  &#39;Excellent&#39;,
+  &#39;Excellent&#39;,
+  &#39;Excellent&#39;,
+  &#39;Excellent&#39;],
+ &#39;Cathode thickness limited by&#39;: [&#39;Positive Thickness Override&#39;,
+  &#39;Positive Thickness Override&#39;,
+  &#39;Positive Thickness Override&#39;,
+  &#39;Positive Thickness Override&#39;,
+  &#39;Positive Thickness Override&#39;,
+  &#39;Positive Thickness Override&#39;,
+  &#39;Positive Thickness Override&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-additional-cells">
+<h3>Read additional cells<a class="headerlink" href="#read-additional-cells" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_results</span> <span class="o">=</span> <span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_from_user_input</span><span class="p">(</span>
+    <span class="n">additional_user_defined_results_cells</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_results</span><span class="p">[</span><span class="s2">&quot;Summary of Results&quot;</span><span class="p">][</span><span class="s2">&quot;Battery 1&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Battery System Parameters, Battery System Configuration and Performance, Number of battery packs&#39;: 1.0,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Packs in series or parallel&#39;: &#39; &#39;,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Battery system average OCV, V&#39;: 0.017396678537706666,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Battery system nominal operating voltage, V&#39;: 0.017394939930528,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Battery system capacity, Ah&#39;: 1.0,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Battery system total energy, kWh&#39;: 1.7394939930528e-05,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Battery system useable energy, kWh(Useable)&#39;: 1.4785698940948799e-05,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Battery system power at target % OCV, kW&#39;: None,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Battery system rated power, kW&#39;: None,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Target SOC at full power, %&#39;: 20.0,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Pulse time at rated power, s&#39;: 10.0,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, % OCV at rated power (adjusted for thickness limit), %&#39;: 80.0,
+ &#39;Battery System Parameters, Battery System Configuration and Performance, Cooling system power requirement, W&#39;: 0.8000000041377129,
+ &#39;Battery System Parameters, Battery System Size, Battery system volume (all packs and cooling), L&#39;: 3.39785056178627,
+ &#39;Battery System Parameters, Battery System Size, Battery system mass (all packs and cooling), kg&#39;: 7460.178966688378,
+ &#39;Battery System Parameters, Battery System Metrics, Battery system energy density, Wh/L&#39;: 0.005119395221837943,
+ &#39;Battery System Parameters, Battery System Metrics, Battery system specific energy, Wh/kg&#39;: 2.331705446772911e-06,
+ &#39;Battery System Parameters, Battery System Metrics, Battery system useable energy density, Wh(Useable)/L&#39;: 0.004351485938562251,
+ &#39;Battery System Parameters, Battery System Metrics, Battery system useable specific energy, Wh(Useable)/kg&#39;: 1.9819496297569742e-06,
+ &#39;Pack Parameters, Pack Configuration and Performance, Number of cells per pack&#39;: 100.0,
+ &#39;Pack Parameters, Pack Configuration and Performance, Number of modules per pack&#39;: 20.0,
+ &#39;Pack Parameters, Pack Configuration and Performance, Pack average OCV, V&#39;: 0.017396678537706666,
+ &#39;Pack Parameters, Pack Configuration and Performance, Pack nominal operating voltage, V&#39;: 0.017394939930528,
+ &#39;Pack Parameters, Pack Configuration and Performance, Pack capacity, Ah&#39;: 1.0,
+ &#39;Pack Parameters, Pack Configuration and Performance, Pack total energy, kWh&#39;: 1.7394939930528e-05,
+ &#39;Pack Parameters, Pack Configuration and Performance, Pack useable energy, kWh(Useable)&#39;: 1.4785698940948799e-05,
+ &#39;Pack Parameters, Pack Configuration and Performance, Pack power at target %OCV, kW&#39;: None,
+ &#39;Pack Parameters, Pack Configuration and Performance, Pack power at rated power, kW&#39;: None,
+ &#39;Pack Parameters, Pack Size, Pack length, mm&#39;: 135.8,
+ &#39;Pack Parameters, Pack Size, Pack width, mm&#39;: 238.66677826335894,
+ &#39;Pack Parameters, Pack Size, Pack height, mm&#39;: 46.60556485527991,
+ &#39;Pack Parameters, Pack Size, Pack volume, L&#39;: 2.59785056178627,
+ &#39;Pack Parameters, Pack Size, Pack total mass, kg&#39;: 7458.178966688378,
+ &#39;Pack Parameters, Pack Metrics, Pack power to energy ratio (with respect to power at target %OCV)&#39;: None,
+ &#39;Pack Parameters, Pack Metrics, Pack power to energy ratio (with respect to rated power)&#39;: None,
+ &#39;Pack Parameters, Pack Metrics, Pack energy density, Wh/L&#39;: 0.006695897056744988,
+ &#39;Pack Parameters, Pack Metrics, Pack specific energy, Wh/kg&#39;: 2.332330721510133e-06,
+ &#39;Pack Parameters, Pack Metrics, Pack useable energy density, Wh(Useable)/L&#39;: 0.005691512498233239,
+ &#39;Pack Parameters, Pack Metrics, Pack useable specific energy, Wh(Useable)/kg&#39;: 1.9824811132836125e-06,
+ &#39;Module Parameters, Module Configuration and Performance, Number of cells per module&#39;: 5.0,
+ &#39;Module Parameters, Module Configuration and Performance, Module average OCV, V&#39;: 8.698339268853333,
+ &#39;Module Parameters, Module Configuration and Performance, Module nominal operating voltage, V&#39;: 8.697469965264,
+ &#39;Module Parameters, Module Configuration and Performance, Module capacity, Ah&#39;: 0.0001,
+ &#39;Module Parameters, Module Configuration and Performance, Module total energy, kWh&#39;: 8.697469965264001e-07,
+ &#39;Module Parameters, Module Configuration and Performance, Module useable energy, kWh(Useable)&#39;: 7.392849470474401e-07,
+ &#39;Module Parameters, Module Configuration and Performance, Module power at target %OCV, kW&#39;: None,
+ &#39;Module Parameters, Module Configuration and Performance, Module power at rated power, kW&#39;: 5.0,
+ &#39;Module Parameters, Module Size, Module length, mm&#39;: 39.416694565839734,
+ &#39;Module Parameters, Module Size, Module width, mm&#39;: 7.6,
+ &#39;Module Parameters, Module Size, Module height, mm&#39;: 6.405564855279912,
+ &#39;Module Parameters, Module Size, Module volume, L&#39;: 0.001918895070009067,
+ &#39;Module Parameters, Module Size, Module volume per pack, L&#39;: 0.03837790140018134,
+ &#39;Module Parameters, Module Size, Module mass, kg&#39;: 0.24930163267098202,
+ &#39;Module Parameters, Module Size, Module mass per pack, kg&#39;: None,
+ &#39;Module Parameters, Module Metrics, Module energy density, Wh/L&#39;: 0.4532540679893927,
+ &#39;Module Parameters, Module Metrics, Module specific energy, Wh/kg&#39;: 0.0034887336565270557,
+ &#39;Module Parameters, Module Metrics, Module useable energy density, Wh(Useable)/L&#39;: 0.38526595779098377,
+ &#39;Module Parameters, Module Metrics, Module useable specific energy, Wh(Useable)/kg&#39;: 0.002965423608047998,
+ &#39;Cell Parameters, Cell Performance, Cell average OCV, V&#39;: 3.4793357075413334,
+ &#39;Cell Parameters, Cell Performance, Cell nominal operating voltage, V&#39;: 3.4789879861056,
+ &#39;Cell Parameters, Cell Performance, Cell capacity, Ah&#39;: 5e-05,
+ &#39;Cell Parameters, Cell Performance, Cell total energy, kWh&#39;: 1.7394939930528003e-07,
+ &#39;Cell Parameters, Cell Performance, Cell useable energy, kWh(Useable)&#39;: 1.4785698940948803e-07,
+ &#39;Cell Parameters, Cell Performance, Cell power at target %OCV, kW&#39;: None,
+ &#39;Cell Parameters, Cell Performance, Cell power at rated power, kW&#39;: 1.0,
+ &#39;Cell Parameters, Cell Size,Cell length, mm&#39;: 31.416694565839737,
+ &#39;Cell Parameters, Cell Size,Cell width, mm&#39;: 5.005564855279912,
+ &#39;Cell Parameters, Cell Size,Cell thickness, mm&#39;: 1.0,
+ &#39;Cell Parameters, Cell Size,Cell volume, L&#39;: 0.0001572583021878308,
+ &#39;Cell Parameters, Cell Size,Cell volume per pack, L&#39;: 0.015725830218783078,
+ &#39;Cell Parameters, Cell Size,Cell mass, kg&#39;: 0.005592130604280419,
+ &#39;Cell Parameters, Cell Size,Cell mass per pack, kg&#39;: 0.5592130604280419,
+ &#39;Cell Parameters, Cell Metrics, Cell energy density, Wh/L&#39;: 1.1061380981813806,
+ &#39;Cell Parameters, Cell Metrics, Cell specific energy, Wh/kg&#39;: 0.031106104562746234,
+ &#39;Cell Parameters, Cell Metrics, Cell useable energy density, Wh(Useable)/L&#39;: 0.9402173834541737,
+ &#39;Cell Parameters, Cell Metrics, Cell useable specific energy, Wh(Useable)/kg&#39;: 0.026440188878334308,
+ &#39;Cell Parameters, Additional Cell Information, Positive electrode thickness, µm&#39;: 1.0,
+ &#39;Cell Parameters, Additional Cell Information, Negative electrode thickness, µm&#39;: 1.2708328050734725,
+ &#39;Cell Parameters, Additional Cell Information, Positive electode areal capacity, mAh/cm²&#39;: 0.06715929876651021,
+ &#39;Cell Parameters, Additional Cell Information, Negative electrode areal capacity, mAh/cm²&#39;: 0.07387522864316123,
+ &#39;Plant Size, GWh&#39;: 8.697469965264e-06,
+ &#39;Packs manufactured at 100% utilization (pack/year)&#39;: 500000.0,
+ &#39;Packs manufactured per year (packs/year)&#39;: 500000.0,
+ &#39;Modules manufactured per year (modules/year)&#39;: 10000000.0,
+ &#39;Accepted cells manufactured per year (cells/year)&#39;: 50000000.0,
+ &#39;Costs, Battery System, Battery system cost, $&#39;: 65591.16432778076,
+ &#39;Costs, Battery System, Battery system cost, $/kWh&#39;: 3770703698.301868,
+ &#39;Costs, Battery System, Battery system cost, $/kWh(Useable)&#39;: 4436121998.002197,
+ &#39;Costs, Pack, Pack cost, $/pack&#39;: 65551.16432778076,
+ &#39;Costs, Pack, Pack cost, $/kWh&#39;: 3768404179.0071907,
+ &#39;Costs, Pack, Pack cost, $/kWh(Useable)&#39;: 4433416681.18493,
+ &#39;Costs, Module, Module cost, $/module&#39;: 17.496735940381853,
+ &#39;Costs, Module, Module cost per pack, $/pack&#39;: 349.93471880763707,
+ &#39;Costs, Module, Module cost, $/kWh&#39;: 20117040.94439004,
+ &#39;Costs, Module, Module cost, $/kWh(Useable)&#39;: 23667106.99340005,
+ &#39;Costs, Cell, Cell cost, $/cell&#39;: 1.0621528456420808,
+ &#39;Costs, Cell, Cell cost, $/module&#39;: 5.310764228210404,
+ &#39;Costs, Cell, Cell cost, $/pack&#39;: 106.21528456420808,
+ &#39;Costs, Cell, Cell cost, $/kWh&#39;: 6106102.406125644,
+ &#39;Costs, Cell, Cell cost, $/kWh(Useable)&#39;: 7183649.889559581,
+ &#39;Costs, Additional Considerations, Module fraction of pack cost&#39;: 0.0053383448241717014,
+ &#39;Costs, Additional Considerations, Cell fraction of module cost&#39;: 0.30352885511367556,
+ &#39;Costs, Additional Considerations, Cell fraction of pack cost&#39;: 0.0016203416926828522}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-configuration-from-excel">
+<h3>Save configuration from Excel<a class="headerlink" href="#save-configuration-from-excel" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">save_config</span><span class="p">(</span>
+    <span class="n">batpac_path</span><span class="o">=</span><span class="s2">&quot;./example_data/conf_batpac/saved_batpac_config.toml&quot;</span><span class="p">,</span>
+    <span class="n">battery_path</span><span class="o">=</span><span class="s2">&quot;./example_data/conf_batpac/saved_batteries_config.toml&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving BatPaC config from each sheet: 100%|██████████| 7/7 [00:00&lt;00:00, 19027.95it/s]
+Saving battery configuration for each battery: 100%|██████████| 7/7 [00:00&lt;00:00, 10190.95it/s]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="save-excel-file">
+<h2>Save Excel file<a class="headerlink" href="#save-excel-file" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;./example_data/excel_workbooks/saved_dummy_BatPaC.xlsx&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="close-excel-file">
+<h2>Close Excel file<a class="headerlink" href="#close-excel-file" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="batpy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example_batpac2brightway.html" class="btn btn-neutral float-right" title="Example usage of BatPy’s brightway2 export" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Raphael Ginster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

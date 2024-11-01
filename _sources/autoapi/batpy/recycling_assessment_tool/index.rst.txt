@@ -1,0 +1,227 @@
+batpy.recycling_assessment_tool
+===============================
+
+.. py:module:: batpy.recycling_assessment_tool
+
+.. autoapi-nested-parse::
+
+   Module, which connects batpac and brightway2 with the recycling assessment
+   tool (RAT).
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   batpy.recycling_assessment_tool.RATConnector
+
+
+Module Contents
+---------------
+
+.. py:class:: RATConnector(rat_workbook_path: pathlib.Path, excel_cell_definitions_toml_path: pathlib.Path | str, workbook_visible: bool = False)
+
+   Bases: :py:obj:`batpy.batpy_workbook.BatpyWorkbook`
+
+
+   Connector for interaction with BatPaC and brightway2 with the Recycling
+   Assessment Tool (RAT).
+
+   This class is used to connect BatPaC and brightway2 with RAT.
+
+
+   .. py:attribute:: excel_cells
+
+
+   .. py:attribute:: _chunk_length
+      :value: 3
+
+
+
+   .. py:attribute:: properties_batpac
+      :value: None
+
+
+
+   .. py:attribute:: properties_brightway
+      :value: None
+
+
+
+   .. py:method:: load_batpac_to_rat_configuration(path_batpac_to_rat_file: pathlib.Path | str) -> None
+
+      Load user file configuration
+
+      Loads a single configuration from a TOML file, string or dictionary.
+
+      :param path_to_user_file: Path to the TOML configuration file or configuration as string.
+      :type path_to_user_file: Path | str
+
+
+
+   .. py:method:: load_rat_to_brightway_configuration(path_rat_to_brightway_file: pathlib.Path | str) -> None
+
+      Load user file configuration
+
+      Loads a single configuration from a TOML file, string or dictionary.
+
+      :param path_to_user_file: Path to the TOML configuration file or configuration as string.
+      :type path_to_user_file: Path | str
+
+
+
+   .. py:method:: _wb_helper_range(worksheet: str, name: str, additional_cell_config: pathlib.Path | dict | str = None) -> str
+
+      Helper function for workbook range
+
+      Function to find the cell range of a specified cell description.
+
+      :param worksheet: Name of the rat Excel tool worksheet.
+      :type worksheet: str
+      :param name: Name of the rat Excel cell description.
+      :type name: str
+      :param additional_cell_config: Path to TOML file or dictionary or str (default dataset), which
+                                     contains additional cell configuration to consider,
+                                     by default None.
+      :type additional_cell_config: Path | dict | str, optional
+
+      :returns: Excel cell range.
+      :rtype: str
+
+      :raises KeyError: Raises KeyError, if worksheet name or cell description could not be
+          found.
+
+
+
+   .. py:method:: read_value(worksheet: str, name: str, additional_cell_config: pathlib.Path | dict | str = None) -> any
+
+      Read value from rat Excel tool
+
+      Read value from rat Excel tool without input the exact cell range.
+
+      :param worksheet: Name of the rat Excel tool worksheet.
+      :type worksheet: str
+      :param name: Name of the rat Excel cell description.
+      :type name: str
+      :param additional_cell_config: Path to TOML file or dictionary or string (default dataset), which
+                                     contains additional cell configuration to consider,
+                                     by default None.
+      :type additional_cell_config: Path | dict | str, optional
+
+      :returns: Value of the rat Excel tool cell.
+      :rtype: any
+
+
+
+   .. py:method:: _check_data_chunk_batpac(chunk_to_check: list, batpac: batpy.batpac_tool.BatpacTool, battery: batpy.batpac_battery.BatpacBattery, batpac_config: pathlib.Path | str | dict) -> list
+
+      Checks data from list of chunks from batpac
+
+      Converts the references of the list and combines the single chunks into
+      a list of strings.
+
+      :param chunk_to_check: List of chunks to check
+      :type chunk_to_check: list
+      :param batpac: Batpac object from which data should be read.
+      :type batpac: BatpacTool
+      :param battery: Battery object from which data should be read.
+      :type battery: BatpacBattery
+      :param batpac_config: Configuration of the BatPaC tool with the corresponding cell ranges
+      :type batpac_config: Path | str | dict
+
+      :returns: List of converted strings
+      :rtype: list
+
+
+
+   .. py:method:: _get_data_from_chunk_batpac(chunk_to_write: list, batpac: batpy.batpac_tool.BatpacTool, battery: batpy.batpac_battery.BatpacBattery, batpac_config: pathlib.Path | str | dict) -> float
+
+      Get data from chunk from batpac
+
+      Converts the chunks into a float.
+
+      :param chunk_to_write: List of chunks to write
+      :type chunk_to_write: list
+      :param batpac: Batpac object from which data should be read.
+      :type batpac: BatpacTool
+      :param battery: Battery object from which data should be read.
+      :type battery: BatpacBattery
+      :param batpac_config: Configuration of the BatPaC tool with the corresponding cell ranges
+      :type batpac_config: Path | str | dict
+
+      :returns: Calculated float of the chunk
+      :rtype: float
+
+
+
+   .. py:method:: _check_data_chunk(chunk_to_check: list, rat_config: pathlib.Path | str | dict) -> list
+
+      Checks data from list of chunks
+
+      Converts the references of the list and combines the single chunks into
+      a list of strings.
+
+      :param chunk_to_check: List of chunks to check
+      :type chunk_to_check: list
+      :param rat_config: Configuration of the rat tool with the corresponding cell ranges
+      :type rat_config: Path | str | dict
+
+      :returns: List of converted strings
+      :rtype: list
+
+
+
+   .. py:method:: _get_data_from_chunk(chunk_to_write: list, rat_config: pathlib.Path | str | dict) -> float
+
+      Get data from chunk
+
+      Converts the chunks into a float.
+
+      :param chunk_to_write: List of chunks to write
+      :type chunk_to_write: list
+      :param rat_config: Configuration of the rat tool with the corresponding cell ranges
+      :type rat_config: Path | str | dict
+
+      :returns: Calculated float of the chunk
+      :rtype: float
+
+
+
+   .. py:method:: export_batpac_battery_to_rat(batpac: batpy.batpac_tool.BatpacTool, battery: batpy.batpac_battery.BatpacBattery, batpac_config: pathlib.Path | str | dict) -> None
+
+      Export battery from BatPaC in rat worksheet
+
+      Export specified battery from BatPaC Excel tool in the RAT Excel
+      worksheet.
+
+      :param batpac: BatPaC object to read from.
+      :type batpac: BatpacTool
+      :param battery: Battery object to export.
+      :type battery: BatpacBattery
+      :param batpac_config: Path to the TOML configuration file or configuration as string or
+                            dictionary.
+      :type batpac_config: Path | str | dict
+
+      :raises KeyError: If battery object is not in the specified batpac object.
+
+
+
+   .. py:method:: export_rat_to_brightway(brightway: batpy.brightway.BrightwayConnector, rat_config: pathlib.Path | str | dict) -> None
+
+      Export current battery from rat to brightway worksheet
+
+      Export the current battery from the recycling assessment tool to the
+      brightway worksheet.
+
+      :param brightway: Brightway object to export the data.
+      :type brightway: BrightwayConnector
+      :param rat_config: Path to the TOML configuration file or configuration as string or
+                         dictionary.
+      :type rat_config: Path | str | dict
+
+      :raises KeyError: If no properties are loaded.
+
+
+

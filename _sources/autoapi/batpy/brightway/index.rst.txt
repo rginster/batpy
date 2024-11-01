@@ -1,0 +1,108 @@
+batpy.brightway
+===============
+
+.. py:module:: batpy.brightway
+
+.. autoapi-nested-parse::
+
+   Module, which connects batpac and brightway
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   batpy.brightway.BrightwayConnector
+
+
+Module Contents
+---------------
+
+.. py:class:: BrightwayConnector(brightway_workbook_path: pathlib.Path, workbook_visible: bool = False)
+
+   Bases: :py:obj:`batpy.batpy_workbook.BatpyWorkbook`
+
+
+   Connector for interaction with BatPaC and brightway2
+
+   This class is used to connect BatPaC with brightway2.
+
+
+   .. py:attribute:: _chunk_length
+      :value: 3
+
+
+
+   .. py:method:: load_batpac_to_brightway_configuration(path_batpac_to_brightway_file: pathlib.Path | str) -> None
+
+      Load user file configuration
+
+      Loads a single configuration from a TOML file, string or dictionary.
+
+      :param path_to_user_file: Path to the TOML configuration file or configuration as string.
+      :type path_to_user_file: Path | str
+
+
+
+   .. py:method:: _check_data_chunk(chunk_to_check: list, batpac: batpy.batpac_tool.BatpacTool, battery: batpy.batpac_battery.BatpacBattery, batpac_config: pathlib.Path | str | dict) -> list
+
+      Checks data from list of chunks
+
+      Converts the references of the list and combines the single chunks into
+      a list of strings.
+
+      :param chunk_to_check: List of chunks to check
+      :type chunk_to_check: list
+      :param batpac: Batpac object from which data should be read.
+      :type batpac: BatpacTool
+      :param battery: Battery object from which data should be read.
+      :type battery: BatpacBattery
+      :param batpac_config: Configuration of the BatPaC tool with the corresponding cell ranges
+      :type batpac_config: Path | str | dict
+
+      :returns: List of converted strings
+      :rtype: list
+
+
+
+   .. py:method:: _get_data_from_chunk(chunk_to_write: list, batpac: batpy.batpac_tool.BatpacTool, battery: batpy.batpac_battery.BatpacBattery, batpac_config: pathlib.Path | str | dict) -> float
+
+      Get data from chunk
+
+      Converts the chunks into a float.
+
+      :param chunk_to_write: List of chunks to write
+      :type chunk_to_write: list
+      :param batpac: Batpac object from which data should be read.
+      :type batpac: BatpacTool
+      :param battery: Battery object from which data should be read.
+      :type battery: BatpacBattery
+      :param batpac_config: Configuration of the BatPaC tool with the corresponding cell ranges
+      :type batpac_config: Path | str | dict
+
+      :returns: Calculated float of the chunk
+      :rtype: float
+
+
+
+   .. py:method:: export_batpac_battery_to_brightway(batpac: batpy.batpac_tool.BatpacTool, battery: batpy.batpac_battery.BatpacBattery, batpac_config: pathlib.Path | str | dict) -> None
+
+      Export battery from BatPaC in brightway worksheet
+
+      Export specified battery from BatPaC Excel tool in the brightway2 Excel
+      worksheet.
+
+      :param batpac: BatPaC object to read from.
+      :type batpac: BatpacTool
+      :param battery: Battery object to export.
+      :type battery: BatpacBattery
+      :param batpac_config: Path to the TOML configuration file or configuration as string or
+                            dictionary.
+      :type batpac_config: Path | str | dict
+
+      :raises KeyError: If battery object is not in the specified batpac object.
+
+
+

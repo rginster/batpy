@@ -1,0 +1,74 @@
+batpy.utility_functions
+=======================
+
+.. py:module:: batpy.utility_functions
+
+.. autoapi-nested-parse::
+
+   Module, which contains utility functions for batpy
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   batpy.utility_functions.load_configuration
+   batpy.utility_functions.is_version_compatible
+   batpy.utility_functions.combine_configuration
+
+
+Module Contents
+---------------
+
+.. py:function:: load_configuration(configuration: pathlib.Path | str) -> dict
+
+   Load configuration
+
+   Loads a single configuration from a TOML file, string or dictionary.
+
+   :param configuration: Path to the TOML configuration file or configuration as string or
+                         dictionary.
+   :type configuration: Path | str
+
+   :returns: Returns dictionary representation of configuration.
+   :rtype: dict
+
+
+.. py:function:: is_version_compatible(self_version: semantic_version.Version, version_to_check: semantic_version.Version, include_minor: bool = False) -> bool
+
+   Check for version compatibility
+
+   Check if two versions (major.minor.patch) are compatible. Thereby a version
+   is compatible if major is equal. If minor should also be included a version
+   is compatible if major is equal and minor is greater or equal.
+
+   :param self_version: Version
+   :type self_version: semantic_version.Version
+   :param version_to_check: Version to be checked against self_version.
+   :type version_to_check: semantic_version.Version
+   :param include_minor: Check if minor version of version_to_check is greater or equal to
+                         self_version's minor, by default False.
+   :type include_minor: bool, optional
+
+   :returns: True, if version is compatible.
+   :rtype: bool
+
+   :raises ValueError: If version is not compatible a ValueError will occur.
+
+
+.. py:function:: combine_configuration(configuration_list: list[pathlib.Path | str]) -> dict
+
+   Combine configuration files
+
+   Combines a list of configuration file into one configuration.
+
+   :param configuration_list: List of individual configurations. Thereby it is possible to combine
+                              different configuration types (path, str) with each other.
+   :type configuration_list: list[Path  |  str ]
+
+   :returns: Combined configuration
+   :rtype: dict
+
+

@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>batpy.brightway &mdash; batpy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="batpy.data" href="../data/index.html" />
+    <link rel="prev" title="batpy.batpy_workbook" href="../batpy_workbook/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            batpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../example_batpac.html">Example usage of BatPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../example_batpac2brightway.html">Example usage of BatPy’s brightway2 export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">batpy</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../batpac_battery/index.html">batpy.batpac_battery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../batpac_tool/index.html">batpy.batpac_tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../batpy_workbook/index.html">batpy.batpy_workbook</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">batpy.brightway</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data/index.html">batpy.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datasets/index.html">batpy.datasets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../formula_engine/index.html">batpy.formula_engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../recycling_assessment_tool/index.html">batpy.recycling_assessment_tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utility_functions/index.html">batpy.utility_functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">batpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">batpy</a></li>
+      <li class="breadcrumb-item active">batpy.brightway</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/batpy/brightway/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-batpy.brightway">
+<span id="batpy-brightway"></span><h1>batpy.brightway<a class="headerlink" href="#module-batpy.brightway" title="Link to this heading"></a></h1>
+<p>Module, which connects batpac and brightway</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.brightway.BrightwayConnector" title="batpy.brightway.BrightwayConnector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BrightwayConnector</span></code></a></p></td>
+<td><p>Connector for interaction with BatPaC and brightway2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="batpy.brightway.BrightwayConnector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">batpy.brightway.</span></span><span class="sig-name descname"><span class="pre">BrightwayConnector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">brightway_workbook_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workbook_visible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#batpy.brightway.BrightwayConnector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../batpy_workbook/index.html#batpy.batpy_workbook.BatpyWorkbook" title="batpy.batpy_workbook.BatpyWorkbook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batpy.batpy_workbook.BatpyWorkbook</span></code></a></p>
+<p>Connector for interaction with BatPaC and brightway2</p>
+<p>This class is used to connect BatPaC with brightway2.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="batpy.brightway.BrightwayConnector._chunk_length">
+<span class="sig-name descname"><span class="pre">_chunk_length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#batpy.brightway.BrightwayConnector._chunk_length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.brightway.BrightwayConnector.load_batpac_to_brightway_configuration">
+<span class="sig-name descname"><span class="pre">load_batpac_to_brightway_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_batpac_to_brightway_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.brightway.BrightwayConnector.load_batpac_to_brightway_configuration" title="Link to this definition"></a></dt>
+<dd><p>Load user file configuration</p>
+<p>Loads a single configuration from a TOML file, string or dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path_to_user_file</strong> (<em>Path</em><em> | </em><em>str</em>) – Path to the TOML configuration file or configuration as string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.brightway.BrightwayConnector._check_data_chunk">
+<span class="sig-name descname"><span class="pre">_check_data_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chunk_to_check</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batpac</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_tool/index.html#batpy.batpac_tool.BatpacTool" title="batpy.batpac_tool.BatpacTool"><span class="pre">batpy.batpac_tool.BatpacTool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">battery</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><span class="pre">batpy.batpac_battery.BatpacBattery</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batpac_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#batpy.brightway.BrightwayConnector._check_data_chunk" title="Link to this definition"></a></dt>
+<dd><p>Checks data from list of chunks</p>
+<p>Converts the references of the list and combines the single chunks into
+a list of strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chunk_to_check</strong> (<em>list</em>) – List of chunks to check</p></li>
+<li><p><strong>batpac</strong> (<a class="reference internal" href="../batpac_tool/index.html#batpy.batpac_tool.BatpacTool" title="batpy.batpac_tool.BatpacTool"><em>BatpacTool</em></a>) – Batpac object from which data should be read.</p></li>
+<li><p><strong>battery</strong> (<a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><em>BatpacBattery</em></a>) – Battery object from which data should be read.</p></li>
+<li><p><strong>batpac_config</strong> (<em>Path</em><em> | </em><em>str</em><em> | </em><em>dict</em>) – Configuration of the BatPaC tool with the corresponding cell ranges</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of converted strings</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.brightway.BrightwayConnector._get_data_from_chunk">
+<span class="sig-name descname"><span class="pre">_get_data_from_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chunk_to_write</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batpac</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_tool/index.html#batpy.batpac_tool.BatpacTool" title="batpy.batpac_tool.BatpacTool"><span class="pre">batpy.batpac_tool.BatpacTool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">battery</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><span class="pre">batpy.batpac_battery.BatpacBattery</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batpac_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#batpy.brightway.BrightwayConnector._get_data_from_chunk" title="Link to this definition"></a></dt>
+<dd><p>Get data from chunk</p>
+<p>Converts the chunks into a float.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chunk_to_write</strong> (<em>list</em>) – List of chunks to write</p></li>
+<li><p><strong>batpac</strong> (<a class="reference internal" href="../batpac_tool/index.html#batpy.batpac_tool.BatpacTool" title="batpy.batpac_tool.BatpacTool"><em>BatpacTool</em></a>) – Batpac object from which data should be read.</p></li>
+<li><p><strong>battery</strong> (<a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><em>BatpacBattery</em></a>) – Battery object from which data should be read.</p></li>
+<li><p><strong>batpac_config</strong> (<em>Path</em><em> | </em><em>str</em><em> | </em><em>dict</em>) – Configuration of the BatPaC tool with the corresponding cell ranges</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Calculated float of the chunk</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.brightway.BrightwayConnector.export_batpac_battery_to_brightway">
+<span class="sig-name descname"><span class="pre">export_batpac_battery_to_brightway</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batpac</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_tool/index.html#batpy.batpac_tool.BatpacTool" title="batpy.batpac_tool.BatpacTool"><span class="pre">batpy.batpac_tool.BatpacTool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">battery</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><span class="pre">batpy.batpac_battery.BatpacBattery</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batpac_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#batpy.brightway.BrightwayConnector.export_batpac_battery_to_brightway" title="Link to this definition"></a></dt>
+<dd><p>Export battery from BatPaC in brightway worksheet</p>
+<p>Export specified battery from BatPaC Excel tool in the brightway2 Excel
+worksheet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batpac</strong> (<a class="reference internal" href="../batpac_tool/index.html#batpy.batpac_tool.BatpacTool" title="batpy.batpac_tool.BatpacTool"><em>BatpacTool</em></a>) – BatPaC object to read from.</p></li>
+<li><p><strong>battery</strong> (<a class="reference internal" href="../batpac_battery/index.html#batpy.batpac_battery.BatpacBattery" title="batpy.batpac_battery.BatpacBattery"><em>BatpacBattery</em></a>) – Battery object to export.</p></li>
+<li><p><strong>batpac_config</strong> (<em>Path</em><em> | </em><em>str</em><em> | </em><em>dict</em>) – Path to the TOML configuration file or configuration as string or
+dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If battery object is not in the specified batpac object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../batpy_workbook/index.html" class="btn btn-neutral float-left" title="batpy.batpy_workbook" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../data/index.html" class="btn btn-neutral float-right" title="batpy.data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Raphael Ginster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

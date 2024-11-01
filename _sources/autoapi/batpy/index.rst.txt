@@ -1,0 +1,41 @@
+batpy
+=====
+
+.. py:module:: batpy
+
+.. autoapi-nested-parse::
+
+   Package to interact with BatPaC
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/batpy/batpac_battery/index
+   /autoapi/batpy/batpac_tool/index
+   /autoapi/batpy/batpy_workbook/index
+   /autoapi/batpy/brightway/index
+   /autoapi/batpy/data/index
+   /autoapi/batpy/datasets/index
+   /autoapi/batpy/formula_engine/index
+   /autoapi/batpy/recycling_assessment_tool/index
+   /autoapi/batpy/utility_functions/index
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   batpy.__version__
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+

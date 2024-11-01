@@ -1,0 +1,727 @@
+{
+    "cells": [
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "# Example usage of BatPy\n",
+                "`batpy` is able to read, write, and calculate batteries in the BatPaC tool. To use `batpy` in a project. In order to use `batpy`in a project for BatPaC tool interaction, follow the example below."
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## Import"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 1,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "# included datasets\n",
+                "from batpy import datasets\n",
+                "\n",
+                "# batpac battery and tool classes\n",
+                "from batpy.batpac_battery import BatpacBattery\n",
+                "from batpy.batpac_tool import BatpacTool\n",
+                "\n",
+                "# pathlib for filesystem path handling\n",
+                "from pathlib import Path\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## Paths to Excel file and to TOML configuration"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 2,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "# Get BatPaC: https://www.anl.gov/partnerships/batpac-battery-manufacturing-cost-estimation\n",
+                "BATPY_BATPAC_EXCEL = Path(\"./example_data/excel_workbooks/dummy_BatPaC.xlsx\")\n",
+                "\n",
+                "# BatPaC battery configuration\n",
+                "BATPY_BATPAC_BATTERY_CONFIG = Path(\n",
+                "    \"./example_data/conf_batpac/batpy_batteries_config.toml\"\n",
+                ")"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## Get included datasets"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "Show available dataset versions:"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 3,
+            "metadata": {},
+            "outputs": [
+                {
+                    "data": {
+                        "text/plain": [
+                            "[Version('0.3.0'), Version('0.0.0'), Version('0.1.0')]"
+                        ]
+                    },
+                    "execution_count": 3,
+                    "metadata": {},
+                    "output_type": "execute_result"
+                }
+            ],
+            "source": [
+                "datasets.get_available_batpy_dataset_versions()\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "Show latest version:"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 4,
+            "metadata": {},
+            "outputs": [
+                {
+                    "data": {
+                        "text/plain": [
+                            "Version('0.3.0')"
+                        ]
+                    },
+                    "execution_count": 4,
+                    "metadata": {},
+                    "output_type": "execute_result"
+                }
+            ],
+            "source": [
+                "datasets.get_latest_batpy_dataset_version()"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "Show available dataset of specified version and their description (default latest):"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 5,
+            "metadata": {},
+            "outputs": [
+                {
+                    "data": {
+                        "text/plain": [
+                            "{'batpy_batteries_config.toml': 'Example configuration for batteries',\n",
+                            " 'batpy_batpac_config.toml': 'Example configuration for BatPaC tool',\n",
+                            " 'batpy_batpac_summary_of_results.toml': 'Configuration for worksheet Summary of Results in BatPaC Excel',\n",
+                            " 'batpy_batpac_calculation_and_validation_results.toml': 'Configuration for calculation and validation results in BatPaC Excel',\n",
+                            " 'batpy_batpac_user_input_cells.toml': 'Configuration for standard user input cells in BatPaC Excel',\n",
+                            " 'batpy_batpac_battery_design.toml': 'Configuration for worksheet battery design in BatPaC Excel',\n",
+                            " 'batpy_batpac2brightway.toml': 'Configuration for brightway2 export'}"
+                        ]
+                    },
+                    "execution_count": 5,
+                    "metadata": {},
+                    "output_type": "execute_result"
+                }
+            ],
+            "source": [
+                "datasets.get_available_batpy_datasets()"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "Export integrated dataset"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 6,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "datasets.copy_integrated_dataset(\n",
+                "    \"batpy_batteries_config\", BATPY_BATPAC_BATTERY_CONFIG\n",
+                ")"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "Load included datasets:"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 7,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "batpy_batpac_battery_design = datasets.get_batpy_dataset(\n",
+                "    \"batpy_batpac_battery_design\"\n",
+                ")\n",
+                "batpy_batpac_user_input_config = datasets.get_batpy_dataset(\n",
+                "    \"batpy_batpac_user_input_cells\"\n",
+                ")\n",
+                "\n",
+                "batpy_batpac_tool_config = datasets.get_batpy_dataset(\"batpy_batpac_config\")\n",
+                "\n",
+                "batpy_batpac_tool_calculation_validation_config = datasets.get_batpy_dataset(\n",
+                "    \"batpy_batpac_calculation_and_validation_results\"\n",
+                ")\n",
+                "\n",
+                "additional_user_defined_results_cells = datasets.get_batpy_dataset(\n",
+                "    \"batpy_batpac_summary_of_results\"\n",
+                ")"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## Batteries\n",
+                "### Create batteries"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 8,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "bat1 = BatpacBattery(\"Battery 1\")\n",
+                "bat2 = BatpacBattery(\"Battery 2\")\n",
+                "bat3 = BatpacBattery(\"Battery 3\")\n",
+                "bat4 = BatpacBattery(\"Battery 4\")\n",
+                "bat5 = BatpacBattery(\"Battery 5\")\n",
+                "bat6 = BatpacBattery(\"Battery 6\")\n",
+                "bat7 = BatpacBattery(\"Battery 7\")\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Change battery properties\n",
+                "a) Write individual properties for created batteries"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 9,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "bat1.set_new_property(\"Dashboard\", \"Number of modules in parallel\", 10)\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "b) Load individiual battery configuration from file"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 10,
+            "metadata": {},
+            "outputs": [
+                {
+                    "data": {
+                        "text/plain": [
+                            "True"
+                        ]
+                    },
+                    "execution_count": 10,
+                    "metadata": {},
+                    "output_type": "execute_result"
+                }
+            ],
+            "source": [
+                "bat2.load_battery_file(BATPY_BATPAC_BATTERY_CONFIG, \"Battery 2\")\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## BatPaC tool\n",
+                "### Create BatPaC instance"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 11,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "batpac_excel = BatpacTool(\n",
+                "    BATPY_BATPAC_EXCEL,\n",
+                "    batpy_batpac_user_input_config,\n",
+                "    batpy_batpac_tool_calculation_validation_config,\n",
+                "    workbook_visible=False,\n",
+                ")\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Add batteries to BatPaC object\n",
+                "a) Add individual batteries"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 12,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "batpac_excel.add_battery(\n",
+                "    [\n",
+                "        bat1,\n",
+                "        bat2,\n",
+                "        bat3,\n",
+                "        bat4,\n",
+                "        bat5,\n",
+                "        bat6,\n",
+                "        bat7,\n",
+                "    ]\n",
+                ")\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "b) Add individual batteries and load their configuration file (will overwrite all batteries)"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 13,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "batpac_excel.load_batteries_file(\n",
+                "    BATPY_BATPAC_BATTERY_CONFIG,\n",
+                "    [\n",
+                "        bat1,\n",
+                "        bat2,\n",
+                "        bat3,\n",
+                "        bat4,\n",
+                "        bat5,\n",
+                "        bat6,\n",
+                "        bat7,\n",
+                "    ],\n",
+                ")\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Load configuration file for BatPaC instance"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 14,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "batpac_excel.load_batpac_file(batpy_batpac_tool_config)\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Write configuration in Excel file and calculate batteries"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 15,
+            "metadata": {},
+            "outputs": [
+                {
+                    "name": "stderr",
+                    "output_type": "stream",
+                    "text": [
+                        "Processing BatPaC configuration in each sheet: 100%|██████████| 7/7 [00:26<00:00,  3.73s/it]\n",
+                        "Processing battery configuration in each sheet: 100%|██████████| 5/5 [00:11<00:00,  2.26s/it]\n"
+                    ]
+                }
+            ],
+            "source": [
+                "batpac_excel.calculate()\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Print calculation and validation results"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 16,
+            "metadata": {},
+            "outputs": [
+                {
+                    "name": "stdout",
+                    "output_type": "stream",
+                    "text": [
+                        "+----------------------------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+\n",
+                        "| Parameter                                    |          Battery 1          |          Battery 2          |          Battery 3          |          Battery 4          |          Battery 5          |          Battery 6          |          Battery 7          |\n",
+                        "+----------------------------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+\n",
+                        "| Configuration Errors (see table to right)    |          1, 2, 3, 4         |           2, 3, 4           |             3, 4            |             3, 4            |             3, 4            |             3, 4            |             3, 4            |\n",
+                        "| Configuration Warnings (see table  to right) |             6, 7            |             6, 7            |              7              |              7              |              7              |              7              |              7              |\n",
+                        "| Plant Size, GWh                              |             15.0            |             20.0            |             25.0            |             30.0            |             35.0            |             40.0            |             45.0            |\n",
+                        "| Power-to-energy ratio                        |      3.3333333333333335     |             5.0             |             6.0             |      6.666666666666667      |      7.142857142857143      |             7.5             |      7.777777777777778      |\n",
+                        "| Adequacy of cooling                          |             None            |             Poor            |          Excellent          |          Excellent          |          Excellent          |          Excellent          |          Excellent          |\n",
+                        "| Cathode thickness limited by                 | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override | Positive Thickness Override |\n",
+                        "+----------------------------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+\n"
+                    ]
+                },
+                {
+                    "data": {
+                        "text/plain": [
+                            "{'Parameter': ['Battery 1',\n",
+                            "  'Battery 2',\n",
+                            "  'Battery 3',\n",
+                            "  'Battery 4',\n",
+                            "  'Battery 5',\n",
+                            "  'Battery 6',\n",
+                            "  'Battery 7'],\n",
+                            " 'Configuration Errors (see table to right)': ['1, 2, 3, 4',\n",
+                            "  '2, 3, 4',\n",
+                            "  '3, 4',\n",
+                            "  '3, 4',\n",
+                            "  '3, 4',\n",
+                            "  '3, 4',\n",
+                            "  '3, 4'],\n",
+                            " 'Configuration Warnings (see table  to right)': ['6, 7',\n",
+                            "  '6, 7',\n",
+                            "  '7',\n",
+                            "  '7',\n",
+                            "  '7',\n",
+                            "  '7',\n",
+                            "  '7'],\n",
+                            " 'Plant Size, GWh': [15.0, 20.0, 25.0, 30.0, 35.0, 40.0, 45.0],\n",
+                            " 'Power-to-energy ratio': [3.3333333333333335,\n",
+                            "  5.0,\n",
+                            "  6.0,\n",
+                            "  6.666666666666667,\n",
+                            "  7.142857142857143,\n",
+                            "  7.5,\n",
+                            "  7.777777777777778],\n",
+                            " 'Adequacy of cooling': [None,\n",
+                            "  'Poor',\n",
+                            "  'Excellent',\n",
+                            "  'Excellent',\n",
+                            "  'Excellent',\n",
+                            "  'Excellent',\n",
+                            "  'Excellent'],\n",
+                            " 'Cathode thickness limited by': ['Positive Thickness Override',\n",
+                            "  'Positive Thickness Override',\n",
+                            "  'Positive Thickness Override',\n",
+                            "  'Positive Thickness Override',\n",
+                            "  'Positive Thickness Override',\n",
+                            "  'Positive Thickness Override',\n",
+                            "  'Positive Thickness Override']}"
+                        ]
+                    },
+                    "execution_count": 16,
+                    "metadata": {},
+                    "output_type": "execute_result"
+                }
+            ],
+            "source": [
+                "batpac_excel.read_calculation_and_validation_results()\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Read additional cells"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 17,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "user_results = batpac_excel.read_from_user_input(\n",
+                "    additional_user_defined_results_cells\n",
+                ")"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 18,
+            "metadata": {},
+            "outputs": [
+                {
+                    "data": {
+                        "text/plain": [
+                            "{'Battery System Parameters, Battery System Configuration and Performance, Number of battery packs': 1.0,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Packs in series or parallel': ' ',\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Battery system average OCV, V': 0.017396678537706666,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Battery system nominal operating voltage, V': 0.017394939930528,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Battery system capacity, Ah': 1.0,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Battery system total energy, kWh': 1.7394939930528e-05,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Battery system useable energy, kWh(Useable)': 1.4785698940948799e-05,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Battery system power at target % OCV, kW': None,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Battery system rated power, kW': None,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Target SOC at full power, %': 20.0,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Pulse time at rated power, s': 10.0,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, % OCV at rated power (adjusted for thickness limit), %': 80.0,\n",
+                            " 'Battery System Parameters, Battery System Configuration and Performance, Cooling system power requirement, W': 0.8000000041377129,\n",
+                            " 'Battery System Parameters, Battery System Size, Battery system volume (all packs and cooling), L': 3.39785056178627,\n",
+                            " 'Battery System Parameters, Battery System Size, Battery system mass (all packs and cooling), kg': 7460.178966688378,\n",
+                            " 'Battery System Parameters, Battery System Metrics, Battery system energy density, Wh/L': 0.005119395221837943,\n",
+                            " 'Battery System Parameters, Battery System Metrics, Battery system specific energy, Wh/kg': 2.331705446772911e-06,\n",
+                            " 'Battery System Parameters, Battery System Metrics, Battery system useable energy density, Wh(Useable)/L': 0.004351485938562251,\n",
+                            " 'Battery System Parameters, Battery System Metrics, Battery system useable specific energy, Wh(Useable)/kg': 1.9819496297569742e-06,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Number of cells per pack': 100.0,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Number of modules per pack': 20.0,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Pack average OCV, V': 0.017396678537706666,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Pack nominal operating voltage, V': 0.017394939930528,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Pack capacity, Ah': 1.0,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Pack total energy, kWh': 1.7394939930528e-05,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Pack useable energy, kWh(Useable)': 1.4785698940948799e-05,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Pack power at target %OCV, kW': None,\n",
+                            " 'Pack Parameters, Pack Configuration and Performance, Pack power at rated power, kW': None,\n",
+                            " 'Pack Parameters, Pack Size, Pack length, mm': 135.8,\n",
+                            " 'Pack Parameters, Pack Size, Pack width, mm': 238.66677826335894,\n",
+                            " 'Pack Parameters, Pack Size, Pack height, mm': 46.60556485527991,\n",
+                            " 'Pack Parameters, Pack Size, Pack volume, L': 2.59785056178627,\n",
+                            " 'Pack Parameters, Pack Size, Pack total mass, kg': 7458.178966688378,\n",
+                            " 'Pack Parameters, Pack Metrics, Pack power to energy ratio (with respect to power at target %OCV)': None,\n",
+                            " 'Pack Parameters, Pack Metrics, Pack power to energy ratio (with respect to rated power)': None,\n",
+                            " 'Pack Parameters, Pack Metrics, Pack energy density, Wh/L': 0.006695897056744988,\n",
+                            " 'Pack Parameters, Pack Metrics, Pack specific energy, Wh/kg': 2.332330721510133e-06,\n",
+                            " 'Pack Parameters, Pack Metrics, Pack useable energy density, Wh(Useable)/L': 0.005691512498233239,\n",
+                            " 'Pack Parameters, Pack Metrics, Pack useable specific energy, Wh(Useable)/kg': 1.9824811132836125e-06,\n",
+                            " 'Module Parameters, Module Configuration and Performance, Number of cells per module': 5.0,\n",
+                            " 'Module Parameters, Module Configuration and Performance, Module average OCV, V': 8.698339268853333,\n",
+                            " 'Module Parameters, Module Configuration and Performance, Module nominal operating voltage, V': 8.697469965264,\n",
+                            " 'Module Parameters, Module Configuration and Performance, Module capacity, Ah': 0.0001,\n",
+                            " 'Module Parameters, Module Configuration and Performance, Module total energy, kWh': 8.697469965264001e-07,\n",
+                            " 'Module Parameters, Module Configuration and Performance, Module useable energy, kWh(Useable)': 7.392849470474401e-07,\n",
+                            " 'Module Parameters, Module Configuration and Performance, Module power at target %OCV, kW': None,\n",
+                            " 'Module Parameters, Module Configuration and Performance, Module power at rated power, kW': 5.0,\n",
+                            " 'Module Parameters, Module Size, Module length, mm': 39.416694565839734,\n",
+                            " 'Module Parameters, Module Size, Module width, mm': 7.6,\n",
+                            " 'Module Parameters, Module Size, Module height, mm': 6.405564855279912,\n",
+                            " 'Module Parameters, Module Size, Module volume, L': 0.001918895070009067,\n",
+                            " 'Module Parameters, Module Size, Module volume per pack, L': 0.03837790140018134,\n",
+                            " 'Module Parameters, Module Size, Module mass, kg': 0.24930163267098202,\n",
+                            " 'Module Parameters, Module Size, Module mass per pack, kg': None,\n",
+                            " 'Module Parameters, Module Metrics, Module energy density, Wh/L': 0.4532540679893927,\n",
+                            " 'Module Parameters, Module Metrics, Module specific energy, Wh/kg': 0.0034887336565270557,\n",
+                            " 'Module Parameters, Module Metrics, Module useable energy density, Wh(Useable)/L': 0.38526595779098377,\n",
+                            " 'Module Parameters, Module Metrics, Module useable specific energy, Wh(Useable)/kg': 0.002965423608047998,\n",
+                            " 'Cell Parameters, Cell Performance, Cell average OCV, V': 3.4793357075413334,\n",
+                            " 'Cell Parameters, Cell Performance, Cell nominal operating voltage, V': 3.4789879861056,\n",
+                            " 'Cell Parameters, Cell Performance, Cell capacity, Ah': 5e-05,\n",
+                            " 'Cell Parameters, Cell Performance, Cell total energy, kWh': 1.7394939930528003e-07,\n",
+                            " 'Cell Parameters, Cell Performance, Cell useable energy, kWh(Useable)': 1.4785698940948803e-07,\n",
+                            " 'Cell Parameters, Cell Performance, Cell power at target %OCV, kW': None,\n",
+                            " 'Cell Parameters, Cell Performance, Cell power at rated power, kW': 1.0,\n",
+                            " 'Cell Parameters, Cell Size,Cell length, mm': 31.416694565839737,\n",
+                            " 'Cell Parameters, Cell Size,Cell width, mm': 5.005564855279912,\n",
+                            " 'Cell Parameters, Cell Size,Cell thickness, mm': 1.0,\n",
+                            " 'Cell Parameters, Cell Size,Cell volume, L': 0.0001572583021878308,\n",
+                            " 'Cell Parameters, Cell Size,Cell volume per pack, L': 0.015725830218783078,\n",
+                            " 'Cell Parameters, Cell Size,Cell mass, kg': 0.005592130604280419,\n",
+                            " 'Cell Parameters, Cell Size,Cell mass per pack, kg': 0.5592130604280419,\n",
+                            " 'Cell Parameters, Cell Metrics, Cell energy density, Wh/L': 1.1061380981813806,\n",
+                            " 'Cell Parameters, Cell Metrics, Cell specific energy, Wh/kg': 0.031106104562746234,\n",
+                            " 'Cell Parameters, Cell Metrics, Cell useable energy density, Wh(Useable)/L': 0.9402173834541737,\n",
+                            " 'Cell Parameters, Cell Metrics, Cell useable specific energy, Wh(Useable)/kg': 0.026440188878334308,\n",
+                            " 'Cell Parameters, Additional Cell Information, Positive electrode thickness, µm': 1.0,\n",
+                            " 'Cell Parameters, Additional Cell Information, Negative electrode thickness, µm': 1.2708328050734725,\n",
+                            " 'Cell Parameters, Additional Cell Information, Positive electode areal capacity, mAh/cm²': 0.06715929876651021,\n",
+                            " 'Cell Parameters, Additional Cell Information, Negative electrode areal capacity, mAh/cm²': 0.07387522864316123,\n",
+                            " 'Plant Size, GWh': 8.697469965264e-06,\n",
+                            " 'Packs manufactured at 100% utilization (pack/year)': 500000.0,\n",
+                            " 'Packs manufactured per year (packs/year)': 500000.0,\n",
+                            " 'Modules manufactured per year (modules/year)': 10000000.0,\n",
+                            " 'Accepted cells manufactured per year (cells/year)': 50000000.0,\n",
+                            " 'Costs, Battery System, Battery system cost, $': 65591.16432778076,\n",
+                            " 'Costs, Battery System, Battery system cost, $/kWh': 3770703698.301868,\n",
+                            " 'Costs, Battery System, Battery system cost, $/kWh(Useable)': 4436121998.002197,\n",
+                            " 'Costs, Pack, Pack cost, $/pack': 65551.16432778076,\n",
+                            " 'Costs, Pack, Pack cost, $/kWh': 3768404179.0071907,\n",
+                            " 'Costs, Pack, Pack cost, $/kWh(Useable)': 4433416681.18493,\n",
+                            " 'Costs, Module, Module cost, $/module': 17.496735940381853,\n",
+                            " 'Costs, Module, Module cost per pack, $/pack': 349.93471880763707,\n",
+                            " 'Costs, Module, Module cost, $/kWh': 20117040.94439004,\n",
+                            " 'Costs, Module, Module cost, $/kWh(Useable)': 23667106.99340005,\n",
+                            " 'Costs, Cell, Cell cost, $/cell': 1.0621528456420808,\n",
+                            " 'Costs, Cell, Cell cost, $/module': 5.310764228210404,\n",
+                            " 'Costs, Cell, Cell cost, $/pack': 106.21528456420808,\n",
+                            " 'Costs, Cell, Cell cost, $/kWh': 6106102.406125644,\n",
+                            " 'Costs, Cell, Cell cost, $/kWh(Useable)': 7183649.889559581,\n",
+                            " 'Costs, Additional Considerations, Module fraction of pack cost': 0.0053383448241717014,\n",
+                            " 'Costs, Additional Considerations, Cell fraction of module cost': 0.30352885511367556,\n",
+                            " 'Costs, Additional Considerations, Cell fraction of pack cost': 0.0016203416926828522}"
+                        ]
+                    },
+                    "execution_count": 18,
+                    "metadata": {},
+                    "output_type": "execute_result"
+                }
+            ],
+            "source": [
+                "user_results[\"Summary of Results\"][\"Battery 1\"]\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "### Save configuration from Excel"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 19,
+            "metadata": {},
+            "outputs": [
+                {
+                    "name": "stderr",
+                    "output_type": "stream",
+                    "text": [
+                        "Saving BatPaC config from each sheet: 100%|██████████| 7/7 [00:00<00:00, 19027.95it/s]\n",
+                        "Saving battery configuration for each battery: 100%|██████████| 7/7 [00:00<00:00, 10190.95it/s]\n"
+                    ]
+                }
+            ],
+            "source": [
+                "batpac_excel.save_config(\n",
+                "    batpac_path=\"./example_data/conf_batpac/saved_batpac_config.toml\",\n",
+                "    battery_path=\"./example_data/conf_batpac/saved_batteries_config.toml\",\n",
+                ")\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## Save Excel file"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 20,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                "batpac_excel.save(\"./example_data/excel_workbooks/saved_dummy_BatPaC.xlsx\")\n"
+            ]
+        },
+        {
+            "attachments": {},
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                "## Close Excel file"
+            ]
+        },
+        {
+            "cell_type": "code",
+            "execution_count": 21,
+            "metadata": {},
+            "outputs": [
+                {
+                    "data": {
+                        "text/plain": [
+                            "True"
+                        ]
+                    },
+                    "execution_count": 21,
+                    "metadata": {},
+                    "output_type": "execute_result"
+                }
+            ],
+            "source": [
+                "batpac_excel.close()\n"
+            ]
+        }
+    ],
+    "metadata": {
+        "kernelspec": {
+            "display_name": "Python 3",
+            "language": "python",
+            "name": "python3"
+        },
+        "language_info": {
+            "codemirror_mode": {
+                "name": "ipython",
+                "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.10.10"
+        },
+        "nbsphinx": {
+            "execute": "never"
+        }
+    },
+    "nbformat": 4,
+    "nbformat_minor": 4
+}

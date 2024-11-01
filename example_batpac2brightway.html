@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example usage of BatPy’s brightway2 export &mdash; batpy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Example usage of BatPy" href="example_batpac.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            batpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="example_batpac.html">Example usage of BatPy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Example usage of BatPy’s brightway2 export</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#import">Import</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paths-to-excel-files-and-to-toml-configuration">Paths to Excel files and to TOML configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-included-datasets">Get included datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#batteries">Batteries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-batteries">Create batteries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#batpac-tool">BatPaC tool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-batpac-instance">Create BatPaC instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-batteries-to-batpac-object">Add batteries to BatPaC object</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#brightway2-connector">Brightway2 connector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-brightway2-instance">Create brightway2 instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-brightway2-configuration-and-export-batpac-battery-data-into-brightway2-excel">Load brightway2 configuration and export BatPaC battery data into brightway2 Excel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#save-excel-file">Save Excel file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#close-excel-file">Close Excel file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">batpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Example usage of BatPy’s brightway2 export</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/example_batpac2brightway.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-usage-of-batpy-s-brightway2-export">
+<h1>Example usage of BatPy’s brightway2 export<a class="headerlink" href="#example-usage-of-batpy-s-brightway2-export" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">batpy</span></code> is able to export a calculated battery from BatPaC as a Life Cycle Inventory Excel file, which can be imported in brightway2. In order to use <code class="docutils literal notranslate"><span class="pre">batpy</span></code>in a project for brightway2 export, follow the example below.</p>
+<section id="import">
+<h2>Import<a class="headerlink" href="#import" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># included datasets</span>
+<span class="kn">from</span> <span class="nn">batpy</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="c1"># batpac battery and tool classes</span>
+<span class="kn">from</span> <span class="nn">batpy.batpac_battery</span> <span class="kn">import</span> <span class="n">BatpacBattery</span>
+<span class="kn">from</span> <span class="nn">batpy.batpac_tool</span> <span class="kn">import</span> <span class="n">BatpacTool</span>
+
+<span class="c1"># brightway2 class</span>
+<span class="kn">from</span> <span class="nn">batpy.brightway</span> <span class="kn">import</span> <span class="n">BrightwayConnector</span>
+
+<span class="c1"># utility function for combining multiple configuration files</span>
+<span class="kn">from</span> <span class="nn">batpy.utility_functions</span> <span class="kn">import</span> <span class="n">combine_configuration</span>
+
+<span class="c1"># pathlib for filesystem path handling</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># included datasets</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">batpy</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># batpac battery and tool classes</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">batpy.batpac_battery</span> <span class="kn">import</span> <span class="n">BatpacBattery</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;batpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="paths-to-excel-files-and-to-toml-configuration">
+<h2>Paths to Excel files and to TOML configuration<a class="headerlink" href="#paths-to-excel-files-and-to-toml-configuration" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get BatPaC: https://www.anl.gov/partnerships/batpac-battery-manufacturing-cost-estimation</span>
+<span class="n">BATPY_BATPAC_EXCEL</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./example_data/excel_workbooks/dummy_BatPaC.xlsx&quot;</span><span class="p">)</span>
+
+<span class="c1"># Brightway workbook is included</span>
+<span class="n">BRIGHTWAY2_EXCEL</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./example_data/excel_workbooks/BatPaC-Brightway.xlsx&quot;</span><span class="p">)</span>
+
+<span class="c1"># brightway2 configuration</span>
+<span class="n">BRIGHTWAY_CONFIG</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="s2">&quot;./example_data/conf_brightway/batpy_batpac2brightway.toml&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-included-datasets">
+<h2>Get included datasets<a class="headerlink" href="#get-included-datasets" title="Link to this heading"></a></h2>
+<p>Show available dataset of specified version (default latest):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">get_available_batpy_dataset_versions</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Version(&#39;0.3.0&#39;), Version(&#39;0.0.0&#39;), Version(&#39;0.1.0&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">get_available_batpy_datasets</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;batpy_batteries_config.toml&#39;: &#39;Example configuration for batteries&#39;,
+ &#39;batpy_batpac_config.toml&#39;: &#39;Example configuration for BatPaC tool&#39;,
+ &#39;batpy_batpac_summary_of_results.toml&#39;: &#39;Configuration for worksheet Summary of Results in BatPaC Excel&#39;,
+ &#39;batpy_batpac_calculation_and_validation_results.toml&#39;: &#39;Configuration for calculation and validation results in BatPaC Excel&#39;,
+ &#39;batpy_batpac_user_input_cells.toml&#39;: &#39;Configuration for standard user input cells in BatPaC Excel&#39;,
+ &#39;batpy_batpac_battery_design.toml&#39;: &#39;Configuration for worksheet battery design in BatPaC Excel&#39;,
+ &#39;batpy_batpac2brightway.toml&#39;: &#39;Configuration for brightway2 export&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Export integrated dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac2brightway&quot;</span><span class="p">,</span> <span class="n">BRIGHTWAY_CONFIG</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load multiple included datasets for BatPaC configuration and combine them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpy_batpac_dataset</span> <span class="o">=</span> <span class="n">combine_configuration</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_battery_design&quot;</span><span class="p">),</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_summary_of_results&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Save integrated brightway2 Excel file</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_brightway_workbook</span><span class="p">(</span><span class="n">BRIGHTWAY2_EXCEL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="batteries">
+<h2>Batteries<a class="headerlink" href="#batteries" title="Link to this heading"></a></h2>
+<section id="create-batteries">
+<h3>Create batteries<a class="headerlink" href="#create-batteries" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bat1</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 1&quot;</span><span class="p">)</span>
+<span class="n">bat2</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 2&quot;</span><span class="p">)</span>
+<span class="n">bat3</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 3&quot;</span><span class="p">)</span>
+<span class="n">bat4</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 4&quot;</span><span class="p">)</span>
+<span class="n">bat5</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 5&quot;</span><span class="p">)</span>
+<span class="n">bat6</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 6&quot;</span><span class="p">)</span>
+<span class="n">bat7</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 7&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="batpac-tool">
+<h2>BatPaC tool<a class="headerlink" href="#batpac-tool" title="Link to this heading"></a></h2>
+<section id="create-batpac-instance">
+<h3>Create BatPaC instance<a class="headerlink" href="#create-batpac-instance" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span> <span class="o">=</span> <span class="n">BatpacTool</span><span class="p">(</span>
+    <span class="n">BATPY_BATPAC_EXCEL</span><span class="p">,</span>
+    <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_user_input_cells&quot;</span><span class="p">),</span>
+    <span class="kc">None</span><span class="p">,</span>
+    <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="add-batteries-to-batpac-object">
+<h3>Add batteries to BatPaC object<a class="headerlink" href="#add-batteries-to-batpac-object" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">add_battery</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">bat1</span><span class="p">,</span>
+        <span class="n">bat2</span><span class="p">,</span>
+        <span class="n">bat3</span><span class="p">,</span>
+        <span class="n">bat4</span><span class="p">,</span>
+        <span class="n">bat5</span><span class="p">,</span>
+        <span class="n">bat6</span><span class="p">,</span>
+        <span class="n">bat7</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="brightway2-connector">
+<h2>Brightway2 connector<a class="headerlink" href="#brightway2-connector" title="Link to this heading"></a></h2>
+<section id="create-brightway2-instance">
+<h3>Create brightway2 instance<a class="headerlink" href="#create-brightway2-instance" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brightway_excel</span> <span class="o">=</span> <span class="n">BrightwayConnector</span><span class="p">(</span><span class="n">BRIGHTWAY2_EXCEL</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-brightway2-configuration-and-export-batpac-battery-data-into-brightway2-excel">
+<h3>Load brightway2 configuration and export BatPaC battery data into brightway2 Excel<a class="headerlink" href="#load-brightway2-configuration-and-export-batpac-battery-data-into-brightway2-excel" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brightway_excel</span><span class="o">.</span><span class="n">load_batpac_to_brightway_configuration</span><span class="p">(</span><span class="n">BRIGHTWAY_CONFIG</span><span class="p">)</span>
+
+<span class="n">brightway_excel</span><span class="o">.</span><span class="n">export_batpac_battery_to_brightway</span><span class="p">(</span>
+    <span class="n">batpac</span><span class="o">=</span><span class="n">batpac_excel</span><span class="p">,</span>
+    <span class="n">battery</span><span class="o">=</span><span class="n">bat1</span><span class="p">,</span>
+    <span class="n">batpac_config</span><span class="o">=</span><span class="n">batpy_batpac_dataset</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="save-excel-file">
+<h2>Save Excel file<a class="headerlink" href="#save-excel-file" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brightway_excel</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="close-excel-file">
+<h2>Close Excel file<a class="headerlink" href="#close-excel-file" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">brightway_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example_batpac.html" class="btn btn-neutral float-left" title="Example usage of BatPy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Raphael Ginster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

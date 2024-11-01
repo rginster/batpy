@@ -1,0 +1,132 @@
+batpy.datasets
+==============
+
+.. py:module:: batpy.datasets
+
+.. autoapi-nested-parse::
+
+   Module to load default batpy datasets
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   batpy.datasets.get_available_batpy_dataset_versions
+   batpy.datasets.get_latest_batpy_dataset_version
+   batpy.datasets.get_batpy_dataset
+   batpy.datasets.get_available_batpy_dataset_names
+   batpy.datasets.get_dataset_information
+   batpy.datasets.get_available_batpy_datasets
+   batpy.datasets.get_path
+   batpy.datasets.copy_integrated_brightway_workbook
+   batpy.datasets.copy_integrated_dataset
+
+
+Module Contents
+---------------
+
+.. py:function:: get_available_batpy_dataset_versions() -> list[semantic_version.Version]
+
+   Get available batpy dataset versions
+
+   :returns: List of available batpy dataset versions
+   :rtype: list[semantic_version.Version]
+
+
+.. py:function:: get_latest_batpy_dataset_version() -> semantic_version.Version
+
+   Get latest batpy dataset version
+
+   :returns: Latest batpy dataset version available
+   :rtype: semantic_version.Version
+
+
+.. py:function:: get_batpy_dataset(dataset_name: str, dataset_version: semantic_version.Version | str = None) -> str
+
+   Get included batpy dataset
+
+   :param dataset_name: Name of included batpy dataset.
+   :type dataset_name: str
+   :param dataset_version: Specific version of the included batpy dataset, otherwise latest
+                           version available, by default None.
+   :type dataset_version: semantic_version.Version | str, optional
+
+   :returns: File content as string.
+   :rtype: str
+
+
+.. py:function:: get_available_batpy_dataset_names(dataset_version: semantic_version.Version | str = None) -> list[str]
+
+   Get available batpy dataset names
+
+   :param dataset_version: Specific version of the included batpy dataset, otherwise latest
+                           version available, by default None.
+   :type dataset_version: semantic_version.Version | str, optional
+
+   :returns: List of included batpy dataset names.
+   :rtype: list[str]
+
+   :raises ValueError: If 'dataset_version' is not available.
+
+
+.. py:function:: get_dataset_information(dataset_stream: str) -> str
+
+   Get information of dataset
+
+   :param dataset_stream: String representation of dataset.
+   :type dataset_stream: str
+
+   :returns: Available dataset information
+   :rtype: str
+
+   :raises KeyError: If no information is specified
+
+
+.. py:function:: get_available_batpy_datasets(dataset_version: semantic_version.Version | str = None) -> dict[str, str]
+
+   Get available batpy datasets
+
+   :param dataset_version: Specific version of the included batpy dataset, otherwise latest
+                           version available, by default None.
+   :type dataset_version: semantic_version.Version | str, optional
+
+   :returns: Returns available batpy dataset names and their corresponding
+             information.
+   :rtype: dict[str, str]
+
+
+.. py:function:: get_path(module_name: str | types.ModuleType) -> pathlib.Path
+
+   Get module path
+
+   :param module_name: Module name or class
+   :type module_name: str | ModuleType
+
+   :returns: Path of the module
+   :rtype: Path
+
+
+.. py:function:: copy_integrated_brightway_workbook(path_to_save_workbook: pathlib.Path) -> None
+
+   Copy integrated brightway2 workbook to specified location
+
+   :param path_to_save_workbook: Path to save integrated brigthway2 workbook
+   :type path_to_save_workbook: Path
+
+
+.. py:function:: copy_integrated_dataset(dataset_to_export: str, path_to_save_toml_file: pathlib.Path, dataset_version_to_export: semantic_version.Version | str = None) -> None
+
+   Copy integrated dataset to specified location
+
+   :param dataset_to_export: Name of the dataset to export
+   :type dataset_to_export: str
+   :param path_to_save_toml_file: Path to save integrated dataset
+   :type path_to_save_toml_file: Path
+   :param dataset_version_to_export: Specific version of the included batpy dataset, otherwise latest
+                                     version available, by default None.
+   :type dataset_version_to_export: semantic_version.Version | str, optional
+
+

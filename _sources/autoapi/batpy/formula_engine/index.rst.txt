@@ -1,0 +1,283 @@
+batpy.formula_engine
+====================
+
+.. py:module:: batpy.formula_engine
+
+.. autoapi-nested-parse::
+
+   Module, which implements formula engine for batpy
+
+   Implementation of batpy's formula evaluator written on top of Python's AST
+   package. Idea is based on https://blog.oyam.dev/python-formulas/
+
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   batpy.formula_engine.MAX_FORMULA_LENGTH
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   batpy.formula_engine.FormulaError
+   batpy.formula_engine.FormulaSyntaxError
+   batpy.formula_engine.FormulaRuntimeError
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   batpy.formula_engine._byte_offset_to_char_offset
+   batpy.formula_engine._eval_constant
+   batpy.formula_engine._eval_name
+   batpy.formula_engine._eval_node
+   batpy.formula_engine.evaluate_formula
+   batpy.formula_engine._eval_expression
+   batpy.formula_engine._eval_binop
+   batpy.formula_engine._eval_unaryop
+
+
+Module Contents
+---------------
+
+.. py:data:: MAX_FORMULA_LENGTH
+   :value: 1024
+
+
+.. py:function:: _byte_offset_to_char_offset(source: str, byte_offset: int) -> int
+
+   Convert byte offset to char offset
+
+   Cuts out all bytes before byte_offset mark and then attempts to count the
+   characters in the cut out part.
+
+   :param source: Input string from which a part is to be cut out
+   :type source: str
+   :param byte_offset: Byte offset marker to cut out all previous bytes
+   :type byte_offset: int
+
+   :returns: Counted characters
+   :rtype: int
+
+
+.. py:exception:: FormulaError
+
+   Bases: :py:obj:`Exception`
+
+
+   Base class for formula engine errors
+
+   :param Exception: Common base class for all non-exit exceptions.
+
+
+.. py:exception:: FormulaSyntaxError(msg: str, lineno: int, offset: int)
+
+   Bases: :py:obj:`FormulaError`
+
+
+   Class for formula engine errors regarding syntax
+
+   :param FormulaError: Base class for formula engine errors
+
+
+   .. py:attribute:: msg
+
+
+   .. py:attribute:: lineno
+
+
+   .. py:attribute:: offset
+
+
+   .. py:method:: from_ast_node(source: str, node: ast.AST, msg: str) -> FormulaSyntaxError
+      :classmethod:
+
+
+      Convert AST node's position and use it in the error object
+
+      :param source: Formula to evaluate
+      :type source: str
+      :param node: Ast node
+      :type node: ast.AST
+      :param msg: Error message
+      :type msg: str
+
+      :returns: Error message whith line number and offset
+      :rtype: FormulaSyntaxError
+
+
+
+   .. py:method:: from_syntax_error(error: SyntaxError, msg: str) -> FormulaSyntaxError
+      :classmethod:
+
+
+      Python's parser errors
+
+      :param error: Error type
+      :type error: SyntaxError
+      :param msg: Error message
+      :type msg: str
+
+      :returns: Error message whith line number and offset
+      :rtype: FormulaSyntaxError
+
+
+
+   .. py:method:: __str__() -> str
+
+      Error string representation
+
+      :returns: Error as string
+      :rtype: str
+
+
+
+.. py:exception:: FormulaRuntimeError
+
+   Bases: :py:obj:`FormulaError`
+
+
+   Class for formula engine errors during runtime
+
+   :param FormulaError: Base class for formula engine errors
+   :type FormulaError: _type_
+
+
+.. py:function:: _eval_constant(source: str, node: ast.Constant, vars_val: dict[str, any]) -> float
+
+   Evaluate the value of the AST constant node
+
+   :param source: Formula to evaluate
+   :type source: str
+   :param node: Ast node
+   :type node: ast.Constant
+   :param vars_val: Variables and their values used to evaluate the function
+   :type vars_val: dict[str, any]
+
+   :returns: Result of the evaluated formula
+   :rtype: float
+
+   :raises FormulaSyntaxError.from_ast_node: Error, if AST node's formula syntax is wrong
+
+
+.. py:function:: _eval_name(source: str, node: ast.Name, vars_val: dict[str, any]) -> float
+
+   Evaluate the value of the variable (AST name node)
+
+   :param source: Formula to evaluate
+   :type source: str
+   :param node: Ast node
+   :type node: ast.Name
+   :param vars_val: Variables and their values used to evaluate the function
+   :type vars_val: dict[str, any]
+
+   :returns: Result of the evaluated formula
+   :rtype: float
+
+   :raises FormulaSyntaxError.from_ast_node: Error, if AST node's formula syntax is wrong
+
+
+.. py:function:: _eval_node(source: str, node: ast.AST, vars_val: dict[str, any]) -> float
+
+   Evaluate supported AST node
+
+   The eval_node function accepts supported AST nodes and passes the node to a
+   more specific function.
+
+   :param source: Formula to evaluate
+   :type source: str
+   :param node: Ast node
+   :type node: ast.AST
+   :param vars_val: Variables and their values used to evaluate the function
+   :type vars_val: dict[str, any]
+
+   :returns: Result of the evaluated formula
+   :rtype: float
+
+   :raises FormulaSyntaxError.from_ast_node: Error, if AST node's formula syntax is wrong
+
+
+.. py:function:: evaluate_formula(formula: str, vars_val: dict[str, any] = None) -> float
+
+   Evaluate formula from string
+
+   :param formula: Formula to evaluate
+   :type formula: str
+   :param vars_val: Variables and their values used to evaluate the function,
+                    by default None
+   :type vars_val: dict[str, any], optional
+
+   :returns: Result of the evaluated formula
+   :rtype: float
+
+   :raises FormulaSyntaxError: Error, if formula syntax is wrong
+   :raises FormulaSyntaxError.from_syntax_error: Error, if formula could not be parsed
+   :raises FormulaRuntimeError: Error, if exception occurs during runtime
+
+   .. rubric:: Examples
+
+   >>> evaluate_formula("a + b * 2", {"a": 2, "b": 20})
+   42
+
+
+.. py:function:: _eval_expression(source: str, node: ast.Expression, vars_val: dict[str, any]) -> float
+
+   Evaluate top level AST node
+
+   :param source: Formula to evaluate
+   :type source: str
+   :param node: Ast node
+   :type node: ast.AST
+   :param vars_val: Variables and their values used to evaluate the function
+   :type vars_val: dict[str, any]
+
+   :returns: Result of the evaluated formula
+   :rtype: float
+
+
+.. py:function:: _eval_binop(source: str, node: ast.BinOp, vars_val: dict[str, any]) -> float
+
+   Evaluate binary operations from AST node
+
+   Evaluate the left and the right operands using eval_node and then apply
+   the binary operation over their values.
+
+   :param source: Formula to evaluate
+   :type source: str
+   :param node: Ast node
+   :type node: ast.BinOp
+   :param vars_val: Variables and their values used to evaluate the function
+   :type vars_val: dict[str, any]
+
+   :returns: Result of the evaluated formula
+   :rtype: float
+
+   :raises FormulaSyntaxError.from_ast_node: Error, if AST node's formula syntax is wrong
+
+
+.. py:function:: _eval_unaryop(source: str, node: ast.UnaryOp, vars_val: dict[str, any]) -> float
+
+   Evaluate unary operations from AST node
+
+   :param source: Formula to evaluate
+   :type source: str
+   :param node: Ast node
+   :type node: ast.UnaryOp
+   :param vars_val: Variables and their values used to evaluate the function
+   :type vars_val: dict[str, any]
+
+   :returns: Result of the evaluated formula
+   :rtype: float
+
+   :raises FormulaSyntaxError.from_ast_node: Error, if AST node's formula syntax is wrong
+
+

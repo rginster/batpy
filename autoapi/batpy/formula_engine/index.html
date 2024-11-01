@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>batpy.formula_engine &mdash; batpy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="batpy.recycling_assessment_tool" href="../recycling_assessment_tool/index.html" />
+    <link rel="prev" title="batpy.datasets" href="../datasets/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            batpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../example_batpac.html">Example usage of BatPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../example_batpac2brightway.html">Example usage of BatPy’s brightway2 export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">batpy</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../batpac_battery/index.html">batpy.batpac_battery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../batpac_tool/index.html">batpy.batpac_tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../batpy_workbook/index.html">batpy.batpy_workbook</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../brightway/index.html">batpy.brightway</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data/index.html">batpy.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datasets/index.html">batpy.datasets</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">batpy.formula_engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../recycling_assessment_tool/index.html">batpy.recycling_assessment_tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utility_functions/index.html">batpy.utility_functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">batpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">batpy</a></li>
+      <li class="breadcrumb-item active">batpy.formula_engine</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/batpy/formula_engine/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-batpy.formula_engine">
+<span id="batpy-formula-engine"></span><h1>batpy.formula_engine<a class="headerlink" href="#module-batpy.formula_engine" title="Link to this heading"></a></h1>
+<p>Module, which implements formula engine for batpy</p>
+<p>Implementation of batpy’s formula evaluator written on top of Python’s AST
+package. Idea is based on <a class="reference external" href="https://blog.oyam.dev/python-formulas/">https://blog.oyam.dev/python-formulas/</a></p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.formula_engine.MAX_FORMULA_LENGTH" title="batpy.formula_engine.MAX_FORMULA_LENGTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_FORMULA_LENGTH</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.formula_engine.FormulaError" title="batpy.formula_engine.FormulaError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormulaError</span></code></a></p></td>
+<td><p>Base class for formula engine errors</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#batpy.formula_engine.FormulaSyntaxError" title="batpy.formula_engine.FormulaSyntaxError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormulaSyntaxError</span></code></a></p></td>
+<td><p>Class for formula engine errors regarding syntax</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.formula_engine.FormulaRuntimeError" title="batpy.formula_engine.FormulaRuntimeError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormulaRuntimeError</span></code></a></p></td>
+<td><p>Class for formula engine errors during runtime</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.formula_engine._byte_offset_to_char_offset" title="batpy.formula_engine._byte_offset_to_char_offset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_byte_offset_to_char_offset</span></code></a>(→ int)</p></td>
+<td><p>Convert byte offset to char offset</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#batpy.formula_engine._eval_constant" title="batpy.formula_engine._eval_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_eval_constant</span></code></a>(→ float)</p></td>
+<td><p>Evaluate the value of the AST constant node</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.formula_engine._eval_name" title="batpy.formula_engine._eval_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_eval_name</span></code></a>(→ float)</p></td>
+<td><p>Evaluate the value of the variable (AST name node)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#batpy.formula_engine._eval_node" title="batpy.formula_engine._eval_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_eval_node</span></code></a>(→ float)</p></td>
+<td><p>Evaluate supported AST node</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.formula_engine.evaluate_formula" title="batpy.formula_engine.evaluate_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_formula</span></code></a>(→ float)</p></td>
+<td><p>Evaluate formula from string</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#batpy.formula_engine._eval_expression" title="batpy.formula_engine._eval_expression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_eval_expression</span></code></a>(→ float)</p></td>
+<td><p>Evaluate top level AST node</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#batpy.formula_engine._eval_binop" title="batpy.formula_engine._eval_binop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_eval_binop</span></code></a>(→ float)</p></td>
+<td><p>Evaluate binary operations from AST node</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#batpy.formula_engine._eval_unaryop" title="batpy.formula_engine._eval_unaryop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_eval_unaryop</span></code></a>(→ float)</p></td>
+<td><p>Evaluate unary operations from AST node</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="batpy.formula_engine.MAX_FORMULA_LENGTH">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">MAX_FORMULA_LENGTH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1024</span></em><a class="headerlink" href="#batpy.formula_engine.MAX_FORMULA_LENGTH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="batpy.formula_engine._byte_offset_to_char_offset">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">_byte_offset_to_char_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">byte_offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#batpy.formula_engine._byte_offset_to_char_offset" title="Link to this definition"></a></dt>
+<dd><p>Convert byte offset to char offset</p>
+<p>Cuts out all bytes before byte_offset mark and then attempts to count the
+characters in the cut out part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Input string from which a part is to be cut out</p></li>
+<li><p><strong>byte_offset</strong> (<em>int</em>) – Byte offset marker to cut out all previous bytes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Counted characters</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">FormulaError</span></span><a class="headerlink" href="#batpy.formula_engine.FormulaError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Base class for formula engine errors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – Common base class for all non-exit exceptions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaSyntaxError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">FormulaSyntaxError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#batpy.formula_engine.FormulaSyntaxError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#batpy.formula_engine.FormulaError" title="batpy.formula_engine.FormulaError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormulaError</span></code></a></p>
+<p>Class for formula engine errors regarding syntax</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>FormulaError</strong> – Base class for formula engine errors</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaSyntaxError.msg">
+<span class="sig-name descname"><span class="pre">msg</span></span><a class="headerlink" href="#batpy.formula_engine.FormulaSyntaxError.msg" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaSyntaxError.lineno">
+<span class="sig-name descname"><span class="pre">lineno</span></span><a class="headerlink" href="#batpy.formula_engine.FormulaSyntaxError.lineno" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaSyntaxError.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><a class="headerlink" href="#batpy.formula_engine.FormulaSyntaxError.offset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaSyntaxError.from_ast_node">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ast_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ast.AST</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#batpy.formula_engine.FormulaSyntaxError" title="batpy.formula_engine.FormulaSyntaxError"><span class="pre">FormulaSyntaxError</span></a></span></span><a class="headerlink" href="#batpy.formula_engine.FormulaSyntaxError.from_ast_node" title="Link to this definition"></a></dt>
+<dd><p>Convert AST node’s position and use it in the error object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Formula to evaluate</p></li>
+<li><p><strong>node</strong> (<em>ast.AST</em>) – Ast node</p></li>
+<li><p><strong>msg</strong> (<em>str</em>) – Error message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error message whith line number and offset</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#batpy.formula_engine.FormulaSyntaxError" title="batpy.formula_engine.FormulaSyntaxError">FormulaSyntaxError</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaSyntaxError.from_syntax_error">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_syntax_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SyntaxError</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#batpy.formula_engine.FormulaSyntaxError" title="batpy.formula_engine.FormulaSyntaxError"><span class="pre">FormulaSyntaxError</span></a></span></span><a class="headerlink" href="#batpy.formula_engine.FormulaSyntaxError.from_syntax_error" title="Link to this definition"></a></dt>
+<dd><p>Python’s parser errors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>SyntaxError</em>) – Error type</p></li>
+<li><p><strong>msg</strong> (<em>str</em>) – Error message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error message whith line number and offset</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#batpy.formula_engine.FormulaSyntaxError" title="batpy.formula_engine.FormulaSyntaxError">FormulaSyntaxError</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaSyntaxError.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#batpy.formula_engine.FormulaSyntaxError.__str__" title="Link to this definition"></a></dt>
+<dd><p>Error string representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Error as string</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="batpy.formula_engine.FormulaRuntimeError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">FormulaRuntimeError</span></span><a class="headerlink" href="#batpy.formula_engine.FormulaRuntimeError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#batpy.formula_engine.FormulaError" title="batpy.formula_engine.FormulaError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormulaError</span></code></a></p>
+<p>Class for formula engine errors during runtime</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>FormulaError</strong> (<em>_type_</em>) – Base class for formula engine errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="batpy.formula_engine._eval_constant">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">_eval_constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ast.Constant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#batpy.formula_engine._eval_constant" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the value of the AST constant node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Formula to evaluate</p></li>
+<li><p><strong>node</strong> (<em>ast.Constant</em>) – Ast node</p></li>
+<li><p><strong>vars_val</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>any</em><em>]</em>) – Variables and their values used to evaluate the function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the evaluated formula</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FormulaSyntaxError.from_ast_node</strong> – Error, if AST node’s formula syntax is wrong</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="batpy.formula_engine._eval_name">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">_eval_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ast.Name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#batpy.formula_engine._eval_name" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the value of the variable (AST name node)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Formula to evaluate</p></li>
+<li><p><strong>node</strong> (<em>ast.Name</em>) – Ast node</p></li>
+<li><p><strong>vars_val</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>any</em><em>]</em>) – Variables and their values used to evaluate the function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the evaluated formula</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FormulaSyntaxError.from_ast_node</strong> – Error, if AST node’s formula syntax is wrong</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="batpy.formula_engine._eval_node">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">_eval_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ast.AST</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#batpy.formula_engine._eval_node" title="Link to this definition"></a></dt>
+<dd><p>Evaluate supported AST node</p>
+<p>The eval_node function accepts supported AST nodes and passes the node to a
+more specific function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Formula to evaluate</p></li>
+<li><p><strong>node</strong> (<em>ast.AST</em>) – Ast node</p></li>
+<li><p><strong>vars_val</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>any</em><em>]</em>) – Variables and their values used to evaluate the function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the evaluated formula</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FormulaSyntaxError.from_ast_node</strong> – Error, if AST node’s formula syntax is wrong</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="batpy.formula_engine.evaluate_formula">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">evaluate_formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#batpy.formula_engine.evaluate_formula" title="Link to this definition"></a></dt>
+<dd><p>Evaluate formula from string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>formula</strong> (<em>str</em>) – Formula to evaluate</p></li>
+<li><p><strong>vars_val</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>any</em><em>]</em><em>, </em><em>optional</em>) – Variables and their values used to evaluate the function,
+by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the evaluated formula</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#batpy.formula_engine.FormulaSyntaxError" title="batpy.formula_engine.FormulaSyntaxError"><strong>FormulaSyntaxError</strong></a> – Error, if formula syntax is wrong</p></li>
+<li><p><strong>FormulaSyntaxError.from_syntax_error</strong> – Error, if formula could not be parsed</p></li>
+<li><p><a class="reference internal" href="#batpy.formula_engine.FormulaRuntimeError" title="batpy.formula_engine.FormulaRuntimeError"><strong>FormulaRuntimeError</strong></a> – Error, if exception occurs during runtime</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">evaluate_formula</span><span class="p">(</span><span class="s2">&quot;a + b * 2&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+<span class="go">42</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="batpy.formula_engine._eval_expression">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">_eval_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ast.Expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#batpy.formula_engine._eval_expression" title="Link to this definition"></a></dt>
+<dd><p>Evaluate top level AST node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Formula to evaluate</p></li>
+<li><p><strong>node</strong> (<em>ast.AST</em>) – Ast node</p></li>
+<li><p><strong>vars_val</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>any</em><em>]</em>) – Variables and their values used to evaluate the function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the evaluated formula</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="batpy.formula_engine._eval_binop">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">_eval_binop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ast.BinOp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#batpy.formula_engine._eval_binop" title="Link to this definition"></a></dt>
+<dd><p>Evaluate binary operations from AST node</p>
+<p>Evaluate the left and the right operands using eval_node and then apply
+the binary operation over their values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Formula to evaluate</p></li>
+<li><p><strong>node</strong> (<em>ast.BinOp</em>) – Ast node</p></li>
+<li><p><strong>vars_val</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>any</em><em>]</em>) – Variables and their values used to evaluate the function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the evaluated formula</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FormulaSyntaxError.from_ast_node</strong> – Error, if AST node’s formula syntax is wrong</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="batpy.formula_engine._eval_unaryop">
+<span class="sig-prename descclassname"><span class="pre">batpy.formula_engine.</span></span><span class="sig-name descname"><span class="pre">_eval_unaryop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ast.UnaryOp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#batpy.formula_engine._eval_unaryop" title="Link to this definition"></a></dt>
+<dd><p>Evaluate unary operations from AST node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Formula to evaluate</p></li>
+<li><p><strong>node</strong> (<em>ast.UnaryOp</em>) – Ast node</p></li>
+<li><p><strong>vars_val</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>any</em><em>]</em>) – Variables and their values used to evaluate the function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the evaluated formula</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FormulaSyntaxError.from_ast_node</strong> – Error, if AST node’s formula syntax is wrong</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../datasets/index.html" class="btn btn-neutral float-left" title="batpy.datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../recycling_assessment_tool/index.html" class="btn btn-neutral float-right" title="batpy.recycling_assessment_tool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Raphael Ginster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

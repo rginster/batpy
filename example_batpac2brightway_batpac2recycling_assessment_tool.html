@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example usage of BatPy’s brightway2 export and BatPy’s recycling assessment tool export &mdash; batpy  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            batpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="example_batpac.html">Example usage of BatPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_batpac2brightway.html">Example usage of BatPy’s brightway2 export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">batpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Example usage of BatPy’s brightway2 export and BatPy’s recycling assessment tool export</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/example_batpac2brightway_batpac2recycling_assessment_tool.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-usage-of-batpy-s-brightway2-export-and-batpy-s-recycling-assessment-tool-export">
+<h1>Example usage of BatPy’s brightway2 export and BatPy’s recycling assessment tool export<a class="headerlink" href="#example-usage-of-batpy-s-brightway2-export-and-batpy-s-recycling-assessment-tool-export" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">batpy</span></code> is able to export a calculated battery from BatPaC as a Life Cycle Inventory Excel file, which can be imported in brightway2. Moreover, <code class="docutils literal notranslate"><span class="pre">batpy</span></code> is able to export a calculated battery from BatPaC to the recycling assessment tool. In order to use <code class="docutils literal notranslate"><span class="pre">batpy</span></code> in a project for brightway2 and recycling assessment tool export, follow the example below.</p>
+<section id="import">
+<h2>Import<a class="headerlink" href="#import" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># included datasets</span>
+<span class="kn">from</span> <span class="nn">batpy</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="c1"># batpac battery and tool classes</span>
+<span class="kn">from</span> <span class="nn">batpy.batpac_battery</span> <span class="kn">import</span> <span class="n">BatpacBattery</span>
+<span class="kn">from</span> <span class="nn">batpy.batpac_tool</span> <span class="kn">import</span> <span class="n">BatpacTool</span>
+
+<span class="c1"># brightway2 class</span>
+<span class="kn">from</span> <span class="nn">batpy.brightway</span> <span class="kn">import</span> <span class="n">BrightwayConnector</span>
+
+<span class="c1"># RAT class</span>
+<span class="kn">from</span> <span class="nn">batpy.recycling_assessment_tool</span> <span class="kn">import</span> <span class="n">RATConnector</span>
+
+<span class="c1"># utility function for combining multiple configuration files</span>
+<span class="kn">from</span> <span class="nn">batpy.utility_functions</span> <span class="kn">import</span> <span class="n">combine_configuration</span>
+
+<span class="c1"># pathlib for filesystem path handling</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># included datasets</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">batpy</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># batpac battery and tool classes</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">batpy.batpac_battery</span> <span class="kn">import</span> <span class="n">BatpacBattery</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;batpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="paths-to-excel-files-and-to-toml-configuration">
+<h2>Paths to Excel files and to TOML configuration<a class="headerlink" href="#paths-to-excel-files-and-to-toml-configuration" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Excel workbooks save path</span>
+<span class="n">PATH_EXCEL_SAVE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./example_data/excel_workbooks&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get BatPaC: https://www.anl.gov/partnerships/batpac-battery-manufacturing-cost-estimation</span>
+<span class="n">BATPY_BATPAC_EXCEL</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./example_data/excel_workbooks/BatPaC Kopie.xlsm&quot;</span><span class="p">)</span>
+
+<span class="c1"># # Brightway workbook is included</span>
+<span class="c1"># BRIGHTWAY2_EXCEL = Path(&quot;./example_data/excel_workbooks/BatPaC-Brightway.xlsx&quot;)</span>
+
+<span class="c1"># # RAT workbook</span>
+<span class="c1"># RAT_EXCEL = Path(&quot;./example_data/excel_workbooks/RAT.xlsx&quot;)</span>
+
+<span class="c1"># brightway2 configuration</span>
+<span class="n">BRIGHTWAY_CONFIG</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="s2">&quot;./example_data/conf_brightway/batpy_batpac2brightway.toml&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># RAT configuration</span>
+<span class="n">RAT_EXCEL_CELLS_CONFIG</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="s2">&quot;./example_data/conf_brightway/batpy_recycling_assessment_tool_config.toml&quot;</span>
+<span class="p">)</span>
+<span class="n">RAT_BATPAC_EXPORT_CONFIG</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="s2">&quot;./example_data/conf_brightway/batpy_batpac2recycling_assessment_tool.toml&quot;</span>
+<span class="p">)</span>
+<span class="n">RAT_BRIGHTWAY_EXPORT_CONFIG</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="s2">&quot;./example_data/conf_brightway/batpy_recycling_assessment_tool2brightway_single_battery.toml&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Battery config</span>
+<span class="n">BATPY_BATTERY_CONFIG</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="s2">&quot;./example_data/conf_batpac/batpy_batteries_suv_config.toml&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-included-datasets">
+<h2>Get included datasets<a class="headerlink" href="#get-included-datasets" title="Link to this heading"></a></h2>
+<p>Show available dataset of specified version (default latest):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">get_available_batpy_dataset_versions</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Version(&#39;0.3.0&#39;), Version(&#39;0.0.0&#39;), Version(&#39;0.4.0&#39;), Version(&#39;0.1.0&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">get_available_batpy_datasets</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;batpy_batteries_suv_config.toml&#39;: &#39;Standard configuration for SUV batteries&#39;,
+ &#39;batpy_batteries_config.toml&#39;: &#39;Example configuration for batteries&#39;,
+ &#39;batpy_batteries_standard_config.toml&#39;: &#39;Standard configuration for batteries&#39;,
+ &#39;batpy_recycling_assessment_tool2brightway_single_battery.toml&#39;: &#39;Configuration for recycling assessment tool (https://doi.org/10.5281/zenodo.6342832) export to brightway&#39;,
+ &#39;batpy_batpac_config.toml&#39;: &#39;Example configuration for BatPaC tool&#39;,
+ &#39;batpy_batpac2brightway copy.toml&#39;: &#39;Configuration for brightway2 export&#39;,
+ &#39;batpy_batpac_summary_of_results.toml&#39;: &#39;Configuration for worksheet Summary of Results in BatPaC Excel&#39;,
+ &#39;batpy_batpac_chem.toml&#39;: &#39;Configuration for worksheet chem in BatPaC Excel&#39;,
+ &#39;batpy_batpac2recycling_assessment_tool.toml&#39;: &#39;Configuration for BatPaC export to recycling assessment tool https://doi.org/10.5281/zenodo.6342832&#39;,
+ &#39;batpy_batpac_calculation_and_validation_results.toml&#39;: &#39;Configuration for calculation and validation results in BatPaC Excel&#39;,
+ &#39;batpy_batpac_recycle.toml&#39;: &#39;Configuration for worksheet Recycle in BatPaC Excel&#39;,
+ &#39;batpy_batpac_user_input_cells.toml&#39;: &#39;Configuration for standard user input cells in BatPaC Excel&#39;,
+ &#39;batpy_batpac_bms.toml&#39;: &#39;Configuration for worksheet BMS in BatPaC Excel&#39;,
+ &#39;batpy_recycling_assessment_tool_config.toml&#39;: &#39;Configuration for recycling assessment tool https://doi.org/10.5281/zenodo.6342832&#39;,
+ &#39;batpy_batpac_battery_design.toml&#39;: &#39;Configuration for worksheet battery design in BatPaC Excel&#39;,
+ &#39;batpy_recycling_assessment_tool2brightway.toml&#39;: &#39;Configuration for recycling assessment tool (https://doi.org/10.5281/zenodo.6342832) export to brightway&#39;,
+ &#39;batpy_batpac2brightway.toml&#39;: &#39;Configuration for brightway2 export&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Export integrated datasets</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac2brightway&quot;</span><span class="p">,</span> <span class="n">BRIGHTWAY_CONFIG</span><span class="p">)</span>
+<span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_batteries_suv_config&quot;</span><span class="p">,</span> <span class="n">BATPY_BATTERY_CONFIG</span>
+<span class="p">)</span>
+<span class="c1"># RAT</span>
+<span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_recycling_assessment_tool_config&quot;</span><span class="p">,</span> <span class="n">RAT_EXCEL_CELLS_CONFIG</span>
+<span class="p">)</span>
+<span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_batpac2recycling_assessment_tool&quot;</span><span class="p">,</span> <span class="n">RAT_BATPAC_EXPORT_CONFIG</span>
+<span class="p">)</span>
+<span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;batpy_recycling_assessment_tool2brightway_single_battery&quot;</span><span class="p">,</span> <span class="n">RAT_BRIGHTWAY_EXPORT_CONFIG</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load multiple included datasets for BatPaC configuration and combine them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpy_batpac_dataset</span> <span class="o">=</span> <span class="n">combine_configuration</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_battery_design&quot;</span><span class="p">),</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_bms&quot;</span><span class="p">),</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_recycle&quot;</span><span class="p">),</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_chem&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="batpac-tool">
+<h2>BatPaC tool<a class="headerlink" href="#batpac-tool" title="Link to this heading"></a></h2>
+<section id="create-batpac-instance">
+<h3>Create BatPaC instance<a class="headerlink" href="#create-batpac-instance" title="Link to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span> <span class="o">=</span> <span class="n">BatpacTool</span><span class="p">(</span>
+    <span class="n">BATPY_BATPAC_EXCEL</span><span class="p">,</span>
+    <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_user_input_cells&quot;</span><span class="p">),</span>
+    <span class="kc">None</span><span class="p">,</span>
+    <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="brightway2-connector">
+<h2>Brightway2 connector<a class="headerlink" href="#brightway2-connector" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>For each cell chemistry</p>
+<ul>
+<li><p>Create batteries</p></li>
+<li><p>Change properties</p></li>
+<li><p>For each battery:</p>
+<ul>
+<li><p>Save integrated brightway2 Excel file</p></li>
+<li><p>Create brightway2 instance</p></li>
+<li><p>Load brightway2 configuration and export BatPaC battery data into brightway2 Excel</p></li>
+<li><p>Save Excel file</p></li>
+<li><p>Close Excel file</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># battery_properties_to_change = {</span>
+<span class="c1">#     (&quot;Dashboard&quot;, &quot;Total pack energy, 0-100% SOC (kWh)&quot;): [</span>
+<span class="c1">#         20,</span>
+<span class="c1">#         45,</span>
+<span class="c1">#         68,</span>
+<span class="c1">#         85,</span>
+<span class="c1">#         95,</span>
+<span class="c1">#         100,</span>
+<span class="c1">#         120,</span>
+<span class="c1">#     ]</span>
+<span class="c1"># }</span>
+
+<span class="n">battery_properties_to_change</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Total pack energy, 0-100% SOC (kWh)&quot;</span><span class="p">):</span> <span class="p">[</span>
+        <span class="mi">20</span><span class="p">,</span>
+        <span class="mi">45</span><span class="p">,</span>
+        <span class="mi">68</span><span class="p">,</span>
+        <span class="mi">95</span><span class="p">,</span>
+        <span class="mi">85</span><span class="p">,</span>
+        <span class="mi">100</span><span class="p">,</span>
+        <span class="mi">120</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>“NMC333-G (Power)”,</p></li>
+<li><p>“NMC333-G (Energy)”,</p></li>
+<li><p>“NMC532-G (Power)”,</p></li>
+<li><p>“NMC532-G (Energy)”,</p></li>
+<li><p>“NMC622-G (Power)”,</p></li>
+<li><p>“NMC622-G (Energy)”,</p></li>
+<li><p>“NMC811-G (Power)”,</p>
+<ul class="simple">
+<li><p>“NMC811-G (Energy)”,</p></li>
+</ul>
+</li>
+<li><p>“NCA-G (Power)”,</p></li>
+<li><p>“NCA-G (Energy)”,</p></li>
+<li><p>“LFP-G (Power)”,</p></li>
+<li><p>“LFP-G (Energy)”,</p></li>
+<li><p>“NMC955-G (Power)”,</p></li>
+<li><p>“NMC955-G (Energy)”,</p>
+  <!-- # "LMO-G (Power)",
+  # "LMO-G (Energy)",
+  # "LMO-LTO (Power)",
+  # "LMO-LTO (Energy)",
+  # "50%/50% NMC532/LMO - G", -->
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># battery_cell_chemistries = [</span>
+<span class="c1">#     &quot;NMC333-G (Power)&quot;,</span>
+<span class="c1">#     &quot;NMC333-G (Energy)&quot;,</span>
+<span class="c1">#     &quot;NMC532-G (Power)&quot;,</span>
+<span class="c1">#     &quot;NMC532-G (Energy)&quot;,</span>
+<span class="c1">#     &quot;NMC622-G (Power)&quot;,</span>
+<span class="c1">#     &quot;NMC622-G (Energy)&quot;,</span>
+<span class="c1">#     &quot;NMC811-G (Power)&quot;,</span>
+<span class="c1">#     &quot;NMC811-G (Energy)&quot;,</span>
+<span class="c1">#     &quot;NCA-G (Power)&quot;,</span>
+<span class="c1">#     &quot;NCA-G (Energy)&quot;,</span>
+<span class="c1">#     &quot;LFP-G (Power)&quot;,</span>
+<span class="c1">#     &quot;LFP-G (Energy)&quot;,</span>
+<span class="c1">#     &quot;NMC955-G (Power)&quot;,</span>
+<span class="c1">#     &quot;NMC955-G (Energy)&quot;,</span>
+<span class="c1">#     # &quot;LMO-G (Power)&quot;,</span>
+<span class="c1">#     # &quot;LMO-G (Energy)&quot;,</span>
+<span class="c1">#     # &quot;LMO-LTO (Power)&quot;,</span>
+<span class="c1">#     # &quot;LMO-LTO (Energy)&quot;,</span>
+<span class="c1">#     # &quot;50%/50% NMC532/LMO - G&quot;,</span>
+<span class="c1"># ]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">battery_cell_chemistries</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;NMC811-G (Energy)&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_batteries</span><span class="p">(</span>
+    <span class="n">cell_chemistry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">battery_properties</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BatpacTool</span><span class="p">:</span>
+    <span class="n">bat1</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 1&quot;</span><span class="p">)</span>
+    <span class="n">bat2</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 2&quot;</span><span class="p">)</span>
+    <span class="n">bat3</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 3&quot;</span><span class="p">)</span>
+    <span class="n">bat4</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 4&quot;</span><span class="p">)</span>
+    <span class="n">bat5</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 5&quot;</span><span class="p">)</span>
+    <span class="n">bat6</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 6&quot;</span><span class="p">)</span>
+    <span class="n">bat7</span> <span class="o">=</span> <span class="n">BatpacBattery</span><span class="p">(</span><span class="s2">&quot;Battery 7&quot;</span><span class="p">)</span>
+
+    <span class="n">batpac_excel</span><span class="o">.</span><span class="n">load_batteries_file</span><span class="p">(</span>
+        <span class="n">BATPY_BATTERY_CONFIG</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="n">bat1</span><span class="p">,</span>
+            <span class="n">bat2</span><span class="p">,</span>
+            <span class="n">bat3</span><span class="p">,</span>
+            <span class="n">bat4</span><span class="p">,</span>
+            <span class="n">bat5</span><span class="p">,</span>
+            <span class="n">bat6</span><span class="p">,</span>
+            <span class="n">bat7</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="n">batpac_excel</span><span class="o">.</span><span class="n">set_new_property</span><span class="p">(</span>
+        <span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Electrode Couple&quot;</span><span class="p">,</span> <span class="n">cell_chemistry</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">battery</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">batteries</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key_1</span><span class="p">,</span> <span class="n">key_2</span> <span class="ow">in</span> <span class="n">battery_properties</span><span class="p">:</span>
+            <span class="n">battery</span><span class="o">.</span><span class="n">set_new_property</span><span class="p">(</span>
+                <span class="n">key_1</span><span class="p">,</span> <span class="n">key_2</span><span class="p">,</span> <span class="n">battery_properties</span><span class="p">[(</span><span class="n">key_1</span><span class="p">,</span> <span class="n">key_2</span><span class="p">)][</span><span class="n">index</span><span class="p">]</span>
+            <span class="p">)</span>
+
+    <span class="n">batpac_excel</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">brightway2_export</span><span class="p">(</span><span class="n">battery</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">battery_chemistry</span> <span class="o">=</span> <span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span>
+        <span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Electrode Couple&quot;</span>
+    <span class="p">)</span>
+    <span class="n">battery_capacity</span> <span class="o">=</span> <span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span>
+        <span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Total pack energy, 0-100% SOC (kWh)&quot;</span><span class="p">,</span> <span class="n">battery</span>
+    <span class="p">)</span>
+    <span class="n">database_name</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Battery pack production </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="p">)</span>
+    <span class="n">activity_name</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Battery pack assembly, </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="p">)</span>
+    <span class="n">reference_product</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Battery system, </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">positive_active_material</span> <span class="o">=</span> <span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span>
+        <span class="s2">&quot;Chem&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Positive Electrode Active Material&quot;</span><span class="p">,</span>
+        <span class="n">battery</span><span class="p">,</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">get_batpy_dataset</span><span class="p">(</span><span class="s2">&quot;batpy_batpac_chem&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">positive_active_material</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Positive Active Material </span><span class="si">{</span><span class="n">positive_active_material</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">path_to_copy</span> <span class="o">=</span> <span class="n">PATH_EXCEL_SAVE</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;BatPaC-Brightway_base.xlsx&quot;</span>
+
+    <span class="n">datasets</span><span class="o">.</span><span class="n">copy_integrated_brightway_workbook</span><span class="p">(</span><span class="n">path_to_copy</span><span class="p">)</span>
+    <span class="n">brightway_excel</span> <span class="o">=</span> <span class="n">BrightwayConnector</span><span class="p">(</span><span class="n">path_to_copy</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">load_batpac_to_brightway_configuration</span><span class="p">(</span><span class="n">BRIGHTWAY_CONFIG</span><span class="p">)</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span><span class="s2">&quot;Battery Pack&quot;</span><span class="p">,</span> <span class="s2">&quot;B2&quot;</span><span class="p">,</span> <span class="n">database_name</span><span class="p">)</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span><span class="s2">&quot;Battery Pack&quot;</span><span class="p">,</span> <span class="s2">&quot;B5&quot;</span><span class="p">,</span> <span class="n">activity_name</span><span class="p">)</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span>
+        <span class="s2">&quot;Battery Pack&quot;</span><span class="p">,</span> <span class="s2">&quot;B11&quot;</span><span class="p">,</span> <span class="n">reference_product</span>
+    <span class="p">)</span>
+
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span>
+        <span class="s2">&quot;Pos. Active material&quot;</span><span class="p">,</span> <span class="s2">&quot;A14&quot;</span><span class="p">,</span> <span class="n">positive_active_material</span>
+    <span class="p">)</span>
+
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">export_batpac_battery_to_brightway</span><span class="p">(</span>
+        <span class="n">batpac</span><span class="o">=</span><span class="n">batpac_excel</span><span class="p">,</span>
+        <span class="n">battery</span><span class="o">=</span><span class="n">battery</span><span class="p">,</span>
+        <span class="n">batpac_config</span><span class="o">=</span><span class="n">batpy_batpac_dataset</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">path_to_save</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">PATH_EXCEL_SAVE</span>
+        <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;BatPaC-Brightway_</span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2">_kWh.xlsx&quot;</span>
+    <span class="p">)</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path_to_save</span><span class="p">)</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># recycled</span>
+    <span class="n">database_name_recycled</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Battery pack production recycled </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="n">activity_name_recycled</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Battery pack assembly, recycled, </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="n">reference_product_recycled</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Battery system, recycled, </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+
+    <span class="n">path_to_recycled_copy</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">PATH_EXCEL_SAVE</span>
+        <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;BatPaC-Brightway_recycled_</span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2">_kWh.xlsx&quot;</span>
+    <span class="p">)</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">path_to_save</span><span class="p">,</span> <span class="n">path_to_recycled_copy</span><span class="p">)</span>
+    <span class="n">brightway_excel</span> <span class="o">=</span> <span class="n">BrightwayConnector</span><span class="p">(</span><span class="n">path_to_recycled_copy</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">load_batpac_to_brightway_configuration</span><span class="p">(</span><span class="n">BRIGHTWAY_CONFIG</span><span class="p">)</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span>
+        <span class="s2">&quot;Battery Pack&quot;</span><span class="p">,</span> <span class="s2">&quot;B2&quot;</span><span class="p">,</span> <span class="n">database_name_recycled</span>
+    <span class="p">)</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span>
+        <span class="s2">&quot;Battery Pack&quot;</span><span class="p">,</span> <span class="s2">&quot;B5&quot;</span><span class="p">,</span> <span class="n">activity_name_recycled</span>
+    <span class="p">)</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span>
+        <span class="s2">&quot;Battery Pack&quot;</span><span class="p">,</span> <span class="s2">&quot;B11&quot;</span><span class="p">,</span> <span class="n">reference_product_recycled</span>
+    <span class="p">)</span>
+
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">brightway_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rat_export_with_brightway</span><span class="p">(</span><span class="n">battery</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># Import from BatPaC</span>
+
+    <span class="n">battery_chemistry</span> <span class="o">=</span> <span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span>
+        <span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Electrode Couple&quot;</span>
+    <span class="p">)</span>
+    <span class="n">battery_capacity</span> <span class="o">=</span> <span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span>
+        <span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Total pack energy, 0-100% SOC (kWh)&quot;</span><span class="p">,</span> <span class="n">battery</span>
+    <span class="p">)</span>
+
+    <span class="c1"># positive_active_material = batpac_excel.read_value(</span>
+    <span class="c1">#     &quot;Chem&quot;,</span>
+    <span class="c1">#     &quot;Positive Electrode Active Material&quot;,</span>
+    <span class="c1">#     battery,</span>
+    <span class="c1">#     datasets.get_batpy_dataset(&quot;batpy_batpac_chem&quot;),</span>
+    <span class="c1"># )</span>
+
+    <span class="c1"># positive_active_material = (</span>
+    <span class="c1">#     f&quot;Positive Active Material {positive_active_material}&quot;</span>
+    <span class="c1"># )</span>
+
+    <span class="n">path_to_copy</span> <span class="o">=</span> <span class="n">PATH_EXCEL_SAVE</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;RAT_base.xlsx&quot;</span>
+
+    <span class="c1"># datasets.copy_integrated_rat_workbook(path_to_copy)</span>
+    <span class="n">rat_excel</span> <span class="o">=</span> <span class="n">RATConnector</span><span class="p">(</span><span class="n">path_to_copy</span><span class="p">,</span> <span class="n">RAT_EXCEL_CELLS_CONFIG</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">load_batpac_to_rat_configuration</span><span class="p">(</span><span class="n">RAT_BATPAC_EXPORT_CONFIG</span><span class="p">)</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">stop_automatic_calculation</span><span class="p">()</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span><span class="s2">&quot;Battery&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="n">battery_chemistry</span><span class="p">)</span>
+
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">export_batpac_battery_to_rat</span><span class="p">(</span>
+        <span class="n">batpac</span><span class="o">=</span><span class="n">batpac_excel</span><span class="p">,</span>
+        <span class="n">battery</span><span class="o">=</span><span class="n">battery</span><span class="p">,</span>
+        <span class="n">batpac_config</span><span class="o">=</span><span class="n">batpy_batpac_dataset</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Brightway</span>
+    <span class="n">path_to_copy</span> <span class="o">=</span> <span class="n">PATH_EXCEL_SAVE</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;RAT_brightway_base.xlsx&quot;</span>
+ 
+    <span class="n">database_name</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Battery pack recycling </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="p">)</span>
+    <span class="n">activity_name_disassembly</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Battery pack disassembly, </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="p">)</span>
+    <span class="n">activity_name_mechanical</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Battery mechanical processing, </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="p">)</span>
+    <span class="n">activity_name_hydro</span><span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Battery hydrometallurgy, </span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2"> kWh&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># datasets.copy_integrated_brightway_workbook(path_to_copy)</span>
+    <span class="n">rat_brightway_excel</span> <span class="o">=</span> <span class="n">BrightwayConnector</span><span class="p">(</span><span class="n">path_to_copy</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">rat_brightway_excel</span><span class="o">.</span><span class="n">stop_automatic_calculation</span><span class="p">()</span>
+    <span class="n">rat_brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span><span class="s2">&quot;Disassembly&quot;</span><span class="p">,</span> <span class="s2">&quot;B2&quot;</span><span class="p">,</span> <span class="n">database_name</span><span class="p">)</span>
+    <span class="n">rat_brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span><span class="s2">&quot;Disassembly&quot;</span><span class="p">,</span> <span class="s2">&quot;B5&quot;</span><span class="p">,</span> <span class="n">activity_name_disassembly</span><span class="p">)</span>
+    <span class="n">rat_brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span><span class="s2">&quot;Mechanical&quot;</span><span class="p">,</span> <span class="s2">&quot;B3&quot;</span><span class="p">,</span> <span class="n">activity_name_mechanical</span><span class="p">)</span>
+    <span class="n">rat_brightway_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span><span class="s2">&quot;Hydro&quot;</span><span class="p">,</span> <span class="s2">&quot;B3&quot;</span><span class="p">,</span> <span class="n">activity_name_hydro</span><span class="p">)</span>
+
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">load_rat_to_brightway_configuration</span><span class="p">(</span><span class="n">RAT_BRIGHTWAY_EXPORT_CONFIG</span><span class="p">)</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">export_rat_to_brightway</span><span class="p">(</span>
+        <span class="n">brightway</span><span class="o">=</span><span class="n">rat_brightway_excel</span><span class="p">,</span>
+        <span class="n">rat_config</span><span class="o">=</span><span class="n">RAT_EXCEL_CELLS_CONFIG</span>
+    <span class="p">)</span>
+
+    <span class="n">path_to_save_rat_brigthway</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">PATH_EXCEL_SAVE</span>
+        <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;RAT_brightway_</span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2">_kWh.xlsx&quot;</span>
+    <span class="p">)</span>
+    <span class="n">rat_brightway_excel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path_to_save_rat_brigthway</span><span class="p">)</span>
+    <span class="n">rat_brightway_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">path_to_save</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">PATH_EXCEL_SAVE</span>
+        <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;RAT_</span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2">_kWh.xlsx&quot;</span>
+    <span class="p">)</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path_to_save</span><span class="p">)</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rat_export</span><span class="p">(</span><span class="n">battery</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">battery_chemistry</span> <span class="o">=</span> <span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span>
+        <span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Electrode Couple&quot;</span>
+    <span class="p">)</span>
+    <span class="n">battery_capacity</span> <span class="o">=</span> <span class="n">batpac_excel</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span>
+        <span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;Total pack energy, 0-100% SOC (kWh)&quot;</span><span class="p">,</span> <span class="n">battery</span>
+    <span class="p">)</span>
+
+    <span class="c1"># positive_active_material = batpac_excel.read_value(</span>
+    <span class="c1">#     &quot;Chem&quot;,</span>
+    <span class="c1">#     &quot;Positive Electrode Active Material&quot;,</span>
+    <span class="c1">#     battery,</span>
+    <span class="c1">#     datasets.get_batpy_dataset(&quot;batpy_batpac_chem&quot;),</span>
+    <span class="c1"># )</span>
+
+    <span class="c1"># positive_active_material = (</span>
+    <span class="c1">#     f&quot;Positive Active Material {positive_active_material}&quot;</span>
+    <span class="c1"># )</span>
+
+    <span class="n">path_to_copy</span> <span class="o">=</span> <span class="n">PATH_EXCEL_SAVE</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;RAT_base.xlsx&quot;</span>
+
+    <span class="c1"># datasets.copy_integrated_rat_workbook(path_to_copy)</span>
+    <span class="n">rat_excel</span> <span class="o">=</span> <span class="n">RATConnector</span><span class="p">(</span><span class="n">path_to_copy</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">load_batpac_to_rat_configuration</span><span class="p">(</span><span class="n">RAT_BATPAC_EXPORT_CONFIG</span><span class="p">)</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">stop_automatic_calculation</span><span class="p">()</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">_write_value_direct</span><span class="p">(</span><span class="s2">&quot;Battery&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="n">battery_chemistry</span><span class="p">)</span>
+    <span class="c1"># rat_excel._write_value_direct(&quot;Battery Pack&quot;, &quot;B5&quot;, activity_name)</span>
+    <span class="c1"># rat_excel._write_value_direct(</span>
+    <span class="c1">#     &quot;Battery Pack&quot;, &quot;B11&quot;, reference_product</span>
+    <span class="c1"># )</span>
+    <span class="c1"># rat_excel._write_value_direct(</span>
+    <span class="c1">#     &quot;Pos. Active material&quot;, &quot;A14&quot;, positive_active_material</span>
+    <span class="c1"># )</span>
+
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">export_batpac_battery_to_rat</span><span class="p">(</span>
+        <span class="n">batpac</span><span class="o">=</span><span class="n">batpac_excel</span><span class="p">,</span>
+        <span class="n">battery</span><span class="o">=</span><span class="n">battery</span><span class="p">,</span>
+        <span class="n">batpac_config</span><span class="o">=</span><span class="n">batpy_batpac_dataset</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">path_to_save</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">PATH_EXCEL_SAVE</span>
+        <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;RAT_</span><span class="si">{</span><span class="n">battery_chemistry</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">battery_capacity</span><span class="si">}</span><span class="s2">_kWh.xlsx&quot;</span>
+    <span class="p">)</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path_to_save</span><span class="p">)</span>
+    <span class="n">rat_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">chemistry</span> <span class="ow">in</span> <span class="n">battery_cell_chemistries</span><span class="p">:</span>
+
+    <span class="n">create_batteries</span><span class="p">(</span><span class="n">chemistry</span><span class="p">,</span> <span class="n">battery_properties_to_change</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">battery</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">batpac_excel</span><span class="o">.</span><span class="n">batteries</span><span class="p">,</span>
+        <span class="s2">&quot;Export each battery&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">brightway2_export</span><span class="p">(</span><span class="n">battery</span><span class="p">)</span>
+        <span class="n">rat_export_with_brightway</span><span class="p">(</span><span class="n">battery</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing BatPaC configuration in each sheet: 100%|██████████| 1/1 [00:00&lt;00:00, 17.99it/s]
+Processing battery configuration in each sheet: 100%|██████████| 5/5 [00:07&lt;00:00,  1.55s/it]
+Export each battery: 100%|██████████| 7/7 [17:52&lt;00:00, 153.15s/it]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="close-batpac-file">
+<h2>Close BatPaC file<a class="headerlink" href="#close-batpac-file" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batpac_excel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Raphael Ginster.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

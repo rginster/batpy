@@ -1,0 +1,275 @@
+batpy.batpac_tool
+=================
+
+.. py:module:: batpy.batpac_tool
+
+.. autoapi-nested-parse::
+
+   Module, which includes the class BatpacTool
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   batpy.batpac_tool.BatpacTool
+
+
+Module Contents
+---------------
+
+.. py:class:: BatpacTool(batpac_workbook_path: pathlib.Path, cell_definition_user_input_toml_path: pathlib.Path | str, cell_definition_calculation_validation_results: pathlib.Path | str = None, workbook_visible: bool = False)
+
+   Bases: :py:obj:`batpy.batpy_workbook.BatpyWorkbook`
+
+
+   BatPaC class which interacts with the BatPaC Excel tool
+
+   This BatPaC class is used to interact directly with the BatPaC Excel tool
+   and can store individual batteries (class BatPaC_battery) and additional
+   parameters of the BatPaC Excel tool in the dictionary properties.
+
+
+   .. py:attribute:: excel_cells
+
+
+   .. py:attribute:: batteries
+      :value: []
+
+
+
+   .. py:attribute:: max_batteries
+      :value: 7
+
+
+
+   .. py:method:: load_batpac_file(path_to_batpac_file: pathlib.Path | str) -> None
+
+      Load BatPaC configuration
+
+      Load the properties for the BatPaC object from a TOML battery
+      configuration file.
+
+      :param path_to_batpac_file: Path to the TOML BatPaC configuration file.
+      :type path_to_batpac_file: Path | str
+
+
+
+   .. py:method:: add_battery(batteries: list[batpy.batpac_battery.BatpacBattery]) -> None
+
+      Add battery object to BatPaC object
+
+      Add multiple battery objects to the BatPaC object.
+
+      :param batteries: List of BatPaC_battery objects to include in the BatPaC object.
+      :type batteries: list[BatPaC_battery]
+
+
+
+   .. py:method:: set_new_property(sheet: str, name: str, value: any) -> None
+
+      Set a new property of the battery
+
+      Set an existing property of the BatPaC tool or create a new one in the
+      format {"sheet" : {"name" : value} }.
+
+      :param sheet: Name of the BatPaC Excel sheet.
+      :type sheet: str
+      :param name: Name of the BatPaC Excel cell description.
+      :type name: str
+      :param value: Value of the BatPaC Excel cell.
+      :type value: any
+
+
+
+   .. py:method:: load_batteries_file(path_to_batteries_file: pathlib.Path, batteries: list[batpy.batpac_battery.BatpacBattery]) -> None
+
+      Load batteries configuration
+
+      Load the configuration for the batteries from TOML configuration file
+      and add these batteries to the BatPaC object.
+      Beware: This will clear all previous assigned batteries of the BatPaC
+      object!
+
+      :param path_to_batteries_file: Path to the TOML batteries configuration file.
+      :type path_to_batteries_file: Path
+      :param batteries: List of BatPaC_battery objects to load battery properties from file
+                        and add to BatPaC object.
+      :type batteries: list[BatPaC_battery]
+
+
+
+   .. py:method:: _wb_helper_range(worksheet: str, name: str, battery: batpy.batpac_battery.BatpacBattery = None, additional_cell_config: pathlib.Path | dict | str = None) -> str
+
+      Helper function for workbook range
+
+      Function to find the cell range of a specified cell description.
+
+      :param worksheet: Name of the BatPaC Excel tool worksheet.
+      :type worksheet: str
+      :param name: Name of the BatPaC Excel cell description.
+      :type name: str
+      :param battery: BatPaC_battery object, if the returned cell is battery specific, by
+                      default None.
+      :type battery: BatPaC_battery, optional
+      :param additional_cell_config: Path to TOML file or dictionary or str (default dataset), which
+                                     contains additional cell configuration to consider,
+                                     by default None.
+      :type additional_cell_config: Path | dict | str, optional
+
+      :returns: Excel cell range.
+      :rtype: str
+
+      :raises KeyError: Raises KeyError, if worksheet name or cell description could not be
+          found.
+
+
+
+   .. py:method:: read_value(worksheet: str, name: str, battery: batpy.batpac_battery.BatpacBattery = None, additional_cell_config: pathlib.Path | dict | str = None) -> any
+
+      Read value from BatPaC Excel tool
+
+      Read (battery specific) value from BatPaC Excel tool without input the
+      exact cell range.
+
+      :param worksheet: Name of the BatPaC Excel tool worksheet.
+      :type worksheet: str
+      :param name: Name of the BatPaC Excel cell description.
+      :type name: str
+      :param battery: BatPaC_battery object, if the returned cell is battery specific, by
+                      default None.
+      :type battery: BatPaC_battery, optional
+      :param additional_cell_config: Path to TOML file or dictionary or string (default dataset), which
+                                     contains additional cell configuration to consider,
+                                     by default None.
+      :type additional_cell_config: Path | dict | str, optional
+
+      :returns: Value of the BatPaC Excel tool cell.
+      :rtype: any
+
+
+
+   .. py:method:: write_value(worksheet: str, name: str, value: any, battery: batpy.batpac_battery.BatpacBattery = None) -> None
+
+      Write value in BatPaC Excel tool
+
+      Write (specific battery) value in the BatPaC Excel tool without input
+      the exact cell range.
+
+      :param worksheet: Name of the BatPaC Excel tool worksheet.
+      :type worksheet: str
+      :param name: Name of the BatPaC Excel cell description.
+      :type name: str
+      :param value: Value to write in the BatPaC Excel tool.
+      :type value: any
+      :param battery: BatPaC_battery object, if the returned cell is battery specific,
+                      by default None.
+      :type battery: BatPaC_battery, optional
+
+
+
+   .. py:method:: stop_automatic_calculation() -> None
+
+      Stop automatic Excel calculation
+      Stop the automatic Excel and BatPaC calculation.
+
+
+
+   .. py:method:: start_automatic_calculation() -> None
+
+      Start automatic Excel calculation
+      Start the automatic Excel and BatPaC calculation.
+
+
+
+   .. py:method:: read_from_user_input(user_read_file: pathlib.Path | str) -> dict
+
+      Read user specified input from BatPaC Excel tool
+
+      Read additional cell values from BatPaC Excel tool specified by user
+      input.
+
+      :param user_read_file: Path to the TOML file or string (default dataset) containing
+                             additional cell ranges from which values are to be read.
+      :type user_read_file: Path | str
+
+      :returns: Dictionary in the format {"sheet" : {"name" : value} }
+      :rtype: dict
+
+
+
+   .. py:method:: read_calculation_and_validation_results(toml_file_calculation_validation_results: pathlib.Path | str = None) -> dict
+
+      Read calculation and validation results
+
+      Read the calculation and validation results from the BatPaC Excel tool.
+
+      :param toml_file_calculation_validation_results: Path to the TOML file or string (default dataset), containing the
+                                                       specified cell ranges of the calculation and validation results,
+                                                       by default None.
+      :type toml_file_calculation_validation_results: Path | str, optional
+
+      :returns: Returns a dictionary of the calculation and validation results.
+      :rtype: dict
+
+      :raises KeyError: If no configuration for calculation and validation found.
+
+
+
+   .. py:method:: calculate() -> None
+
+      Calculate the batteries in the BatPaC Excel tool
+
+      Read all BatPaC_tool properties and its included [BatPaC_battery]
+      properties, write these properties in the BatPaC Excel tool,
+      and calculate the batteries in the BatPaC Excel tool.
+
+
+
+   .. py:method:: _save_batpac_config(batpac_path: pathlib.Path = None) -> None
+
+      Save BatPaC_tool configuration
+
+      Read all BatPaC_tool properties from the BatPaC Excel tool, save
+      these properties in the BatPaC_tool object, and write them as TOML
+      file.
+
+      :param batpac_path: If specified, storage path to the TOML file for BatPaC_tool
+                          properties, by default None.
+      :type batpac_path: Path, optional
+
+
+
+   .. py:method:: _save_battery_config(battery_path: pathlib.Path = None) -> None
+
+      Save [BatPaC_battery] configuration
+
+      Read all BatPaC_tool included [BatPaC_battery] properties from the
+      BatPaC Excel tool, save these properties in the [BatPaC_battery]
+      objects, and write them as TOML file.
+
+      :param battery_path: If specified, storage path to the TOML file for [BatPaC_battery]
+                           properties, by default None.
+      :type battery_path: Path, optional
+
+
+
+   .. py:method:: save_config(batpac_path: pathlib.Path = None, battery_path: pathlib.Path = None) -> None
+
+      Save BatPaC_tool configuration
+
+      Read all BatPaC_tool properties and its included [BatPaC_battery]
+      properties from the BatPaC Excel tool, save these properties in the
+      BatPaC_tool and [BatPaC_battery] objects, and write them as TOML file.
+
+      :param batpac_path: If specified, storage path to the TOML file for BatPaC_tool
+                          properties, by default None.
+      :type batpac_path: Path, optional
+      :param battery_path: If specified, storage path to the TOML file for [BatPaC_battery]
+                           properties, by default None.
+      :type battery_path: Path, optional
+
+
+
