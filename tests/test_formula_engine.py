@@ -53,8 +53,8 @@ def test_evaluate_formula(
         ("und", {}, FormulaSyntaxError),
         ("and and", {}, FormulaSyntaxError),
         ("f(42)", {}, FormulaSyntaxError),
-        ("42" * 256, {}, FormulaSyntaxError),
-        ("lambda a:" * 42, {}, FormulaSyntaxError),
+        ("42" * 1025, {}, FormulaSyntaxError),
+        ("lambda a:" * 4242, {}, FormulaSyntaxError),
         ("42/0", {}, FormulaRuntimeError),
     ],
 )
